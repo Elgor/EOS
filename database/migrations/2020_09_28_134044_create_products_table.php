@@ -19,7 +19,7 @@ class CreateProductsTable extends Migration
             $table->integer('price');
             $table->longText('description');
             $table->string('image')->nullable();
-            $table->unsignedBigInteger('seller_id');
+            // $table->unsignedBigInteger('seller_id');
             $table->timestamps();
         });
     }
