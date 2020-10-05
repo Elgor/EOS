@@ -96,6 +96,9 @@
                             <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                 {{ Auth::user()->name }}
+                                @if(Auth::user()->image)
+                                <img src="{{asset('/storage/'.Auth::user()->image)}}" class="rounded-circle" alt="" width="30" height="30" />
+                                @endif
                             </a>
 
                             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
