@@ -82,4 +82,10 @@ class ProductController extends Controller
     {
         //
     }
+
+    public function detail($productId)
+    {
+        $product = Product::findOrFail($productId);
+        return view('product.product_detail', $product);
+    }
 }

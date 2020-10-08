@@ -83,7 +83,12 @@
                                 </svg>
                             </a>
                         </li>
-                        <li class="nav-item mr-2">
+                        <h6 style="padding-top: 11px">
+                            <span class="badge badge-danger" style="padding: 4px;">
+                                {{\Cart::session(auth()->id())->getContent()->count()}}
+                            </span>
+                        </h6>
+                        <li class="nav-item mr-2" style="display:inline-flex">
                             <a class="nav-link" href="{{ route('cart.index') }}" data-toggle="tooltip"
                                 data-placement="top" title="Cart">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24">
@@ -94,7 +99,8 @@
                         </li>
                         <li class="nav-item dropdown">
                             <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
-                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre
+                                style="padding-top: 11px">
                                 {{ Auth::user()->name }}
                             </a>
 

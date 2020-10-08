@@ -18,14 +18,25 @@ class CartController extends Controller
             'attributes' => array('date' => date('d-m-Y')),
             'associatedModel' => $product
         ));
-
         return redirect()->route('cart.index');
+    }
+
+    public function update()
+    {
     }
 
     public function index()
     {
         $cartItems = \Cart::session(auth()->id())->getContent();
-        return view('cart.index', compact('cartItems'));
+        $totalPrice = 0;
+        foreach ($cartItems as $cartItem) {
+            $totalPrice += $cartItem->price;
+        };
+        $data = [
+            'cartItems' => $cartItems,
+            'totalPrice' => $totalPrice
+        ];
+        return view('cart.index', $data);
     }
 
     public function destroy($itemId)
