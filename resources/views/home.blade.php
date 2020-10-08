@@ -13,7 +13,7 @@
     <div class="row">
         @foreach ($products as $product)
         <div class="col-3 d-flex p-2">
-            <div class="card mb-3">
+            <div class="card mb-4">
                 <a href=" {{ route('product.detail',$product->id) }}"><img class="card-img-top"
                         src="{{ asset('img/defaultProduct.jpg') }}" alt="Card image cap"></a>
                 <div class="card-body pb-0">
@@ -32,5 +32,6 @@
         </div>
         @endforeach
     </div>
+    {{ $products->links() }}
 </div>
 @endsection
