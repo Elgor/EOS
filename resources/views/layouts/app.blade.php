@@ -20,6 +20,7 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/styles.css') }}" rel="stylesheet">
     <script>
         $(function() {
             $('[data-toggle="tooltip"]').tooltip()
@@ -43,30 +44,57 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav mr-auto">
-
+                        <li class="nav-item pt-1">
+                            <a class="nav-link" href="{{ url('/') }}">Home</a>
+                        </li>
+                        <li class="nav-item pt-1">
+                            <a class="nav-link" href="{{ url('/') }}">Seller</a>
+                        </li>
+                        <li class="nav-item pt-1">
+                            <a class="nav-link" href="{{ url('/') }}">Compare</a>
+                        </li>
                     </ul>
-
-                    <form class="form-inline col-6 mr-auto">
-                        <input class="form-control col-10 mr-sm-2" type="search" placeholder="Search"
-                            aria-label="Search">
-                        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-                    </form>
-
 
                     <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ml-auto">
                         <!-- Authentication Links -->
+
+                        {{-- Seller Register --}}
+                        <li class="nav-item" style="padding:14px 2rem 0 0">
+                            <a href="">Seller Login</a>
+                        </li>
+                        <li class="nav-item" style="padding:14px 2rem 0 0">
+                            <a href="">Become a Seller?</a>
+                        </li>
+
                         @guest
-                        <li class="nav-item">
+                        <li class="nav-item pt-1">
                             <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
                         </li>
                         @if (Route::has('register'))
-                        <li class="nav-item">
+                        <li class="nav-item pt-1">
                             <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
                         </li>
                         @endif
                         @else
-                        <li class="nav-item mr-2">
+                        {{-- <li class="nav-item" style="padding-top: 11px">
+
+                        </li> --}}
+                        <li class="nav-item pt-1 mr-2">
+                            <div class="nav-link">
+                                <div class="badge badge-danger">
+                                    {{\Cart::session(auth()->id())->getContent()->count()}}
+                                </div>
+                                <a href="{{ route('cart.index') }}" data-toggle="tooltip" data-placement="top"
+                                    title="Cart">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24">
+                                        <path
+                                            d="M10 19.5c0 .829-.672 1.5-1.5 1.5s-1.5-.671-1.5-1.5c0-.828.672-1.5 1.5-1.5s1.5.672 1.5 1.5zm3.5-1.5c-.828 0-1.5.671-1.5 1.5s.672 1.5 1.5 1.5 1.5-.671 1.5-1.5c0-.828-.672-1.5-1.5-1.5zm1.336-5l1.977-7h-16.813l2.938 7h11.898zm4.969-10l-3.432 12h-12.597l.839 2h13.239l3.474-12h1.929l.743-2h-4.195z" />
+                                    </svg>
+                                </a>
+                            </div>
+                        </li>
+                        <li class="nav-item pt-1 mr-2">
                             <a class="nav-link" href="" data-toggle="tooltip" data-placement="top" title="Messages">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24">
                                     <path
@@ -74,26 +102,12 @@
                                 </svg>
                             </a>
                         </li>
-                        <li class="nav-item mr-2">
-                            <a class="nav-link" href="" data-toggle="tooltip" data-placement="top"
-                                title="Notifications">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24">
+                        <li class="nav-item pt-1 mr-2">
+                            <a class="nav-link" href="" data-toggle="tooltip" data-placement="top" title="Wishlist">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                    class="bi bi-heart" viewBox="0 0 16 16">
                                     <path
-                                        d="M15 21c0 1.598-1.392 3-2.971 3s-3.029-1.402-3.029-3h6zm.137-17.055c-.644-.374-1.042-1.07-1.041-1.82v-.003c.001-1.172-.938-2.122-2.096-2.122s-2.097.95-2.097 2.122v.003c.001.751-.396 1.446-1.041 1.82-4.668 2.709-1.985 11.715-6.862 13.306v1.749h20v-1.749c-4.877-1.591-2.193-10.598-6.863-13.306zm-3.137-2.945c.552 0 1 .449 1 1 0 .552-.448 1-1 1s-1-.448-1-1c0-.551.448-1 1-1zm-6.451 16c1.189-1.667 1.605-3.891 1.964-5.815.447-2.39.869-4.648 2.354-5.509 1.38-.801 2.956-.76 4.267 0 1.485.861 1.907 3.119 2.354 5.509.359 1.924.775 4.148 1.964 5.815h-12.903z" />
-                                </svg>
-                            </a>
-                        </li>
-                        <h6 style="padding-top: 11px">
-                            <span class="badge badge-danger" style="padding: 4px;">
-                                {{\Cart::session(auth()->id())->getContent()->count()}}
-                            </span>
-                        </h6>
-                        <li class="nav-item mr-2" style="display:inline-flex">
-                            <a class="nav-link" href="{{ route('cart.index') }}" data-toggle="tooltip"
-                                data-placement="top" title="Cart">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24">
-                                    <path
-                                        d="M10 19.5c0 .829-.672 1.5-1.5 1.5s-1.5-.671-1.5-1.5c0-.828.672-1.5 1.5-1.5s1.5.672 1.5 1.5zm3.5-1.5c-.828 0-1.5.671-1.5 1.5s.672 1.5 1.5 1.5 1.5-.671 1.5-1.5c0-.828-.672-1.5-1.5-1.5zm1.336-5l1.977-7h-16.813l2.938 7h11.898zm4.969-10l-3.432 12h-12.597l.839 2h13.239l3.474-12h1.929l.743-2h-4.195z" />
+                                        d="M8 2.748l-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01L8 2.748zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143c.06.055.119.112.176.171a3.12 3.12 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15z" />
                                 </svg>
                             </a>
                         </li>
@@ -103,7 +117,8 @@
                                 style="padding-top: 11px">
                                 {{ Auth::user()->name }}
                                 @if(Auth::user()->image)
-                                <img src="{{asset('/storage/'.Auth::user()->image)}}" class="rounded-circle" alt="" width="30" height="30" />
+                                <img src="{{asset('/storage/'.Auth::user()->image)}}" class="rounded-circle" alt=""
+                                    width="30" height="30" />
                                 @endif
                             </a>
 
