@@ -15,27 +15,29 @@
     <table class="table">
         <thead>
             <tr>
-                <th>Name</th>
+                <th>Seller</th>
+                <th>Packages</th>
                 <th>Price</th>
-                <th>Booking Date</th>
-
+                <th>Nego Price</th>
                 <th>Action</th>
             </tr>
         </thead>
         <tbody>
             @foreach ($cartItems as $cartItem)
             <tr>
-                <td scope="row">{{ $cartItem->name }}</td>
+                <td>Seller Name</td>
+                <td>{{ $cartItem->name }}</td>
                 <td>Rp {{ number_format($cartItem->price,0,',','.') }}</td>
-                <td>{{ $cartItem->attributes->date }}</td>
-                <td><a href="{{ route('cart.destroy', $cartItem->id) }}">Delete</a></td>
+                <td>Rp {{ number_format($cartItem->price,0,',','.') }}</td>
+                <td><a class=" btn btn-danger" href="{{ route('cart.destroy', $cartItem->id) }}" role="button">
+                        Delete</a>
+                </td>
             </tr>
             @endforeach
         </tbody>
     </table>
-    <h3>Total Price: Rp {{ number_format($totalPrice,0,',','.') }}</h3>
 
-    <a class="btn btn-outline-success my-2 my-sm-0" href="#" role="button">Checkout</a>
+    <a class="btn btn-success my-2 my-sm-0" href="{{ route('cart.eventPlan') }}" role="button">Save</a>
     @else
     <h4>No Item</h4>
     @endif
