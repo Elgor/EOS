@@ -23,4 +23,5 @@ Route::get('/product-detail/{productId}', 'ProductController@detail')->name('pro
 Route::get('/add-to-cart/{product}', 'CartController@add')->name('cart.add')->middleware('auth');
 
 Route::get('/cart', 'CartController@index')->name('cart.index')->middleware('auth');
+Route::get('/cart/request-event-plan', 'CartController@eventPlan')->name('cart.eventPlan')->middleware('auth');
 Route::get('/cart/destroy/{itemId}', 'CartController@destroy')->name('cart.destroy')->middleware('auth');

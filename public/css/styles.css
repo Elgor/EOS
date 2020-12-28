@@ -1,0 +1,13 @@
+.table > tbody > tr > td {
+    vertical-align: middle;
+}
+.line {
+    margin-bottom: 5px;
+    border-bottom: 1px solid #dee2e6;
+    display: block;
+}
+
+.form-group.required .control-label:after {
+    content: "*";
+    color: red;
+}

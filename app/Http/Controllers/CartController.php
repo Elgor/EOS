@@ -44,4 +44,9 @@ class CartController extends Controller
         $cartItems = \Cart::session(auth()->id())->remove($itemId);
         return back();
     }
+
+    public function eventPlan()
+    {
+        return view('eventPlan.index');
+    }
 }
