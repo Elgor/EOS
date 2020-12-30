@@ -20,6 +20,8 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/product-detail/{productId}', 'ProductController@detail')->name('product.detail');
 
+Route::get('/seller', 'SellerController@index')->name('seller');
+
 Route::get('/add-to-cart/{product}', 'CartController@add')->name('cart.add')->middleware('auth');
 
 Route::get('/cart', 'CartController@index')->name('cart.index')->middleware('auth');

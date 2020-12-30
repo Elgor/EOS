@@ -48,7 +48,7 @@
                             <a class="nav-link" href="{{ url('/') }}">Home</a>
                         </li>
                         <li class="nav-item pt-1">
-                            <a class="nav-link" href="{{ url('/') }}">Seller</a>
+                            <a class="nav-link" href="{{ url('/seller') }}">Seller</a>
                         </li>
                         <li class="nav-item pt-1">
                             <a class="nav-link" href="{{ url('/') }}">Compare</a>

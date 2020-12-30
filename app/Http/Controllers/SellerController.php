@@ -14,7 +14,8 @@ class SellerController extends Controller
      */
     public function index()
     {
-        //
+        $sellers = Seller::paginate(4);
+        return view('seller.index', ['sellers' => $sellers]);
     }
 
     /**
