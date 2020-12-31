@@ -27,7 +27,7 @@
         </form>
     </div>
     <h4 class="d-flex">PACKAGES</h4>
-    <div class="line"></div>
+    <hr>
     <div class="row">
         @foreach ($products as $product)
         <div class="col-3 d-flex">
@@ -48,7 +48,7 @@
                 <h6 class="card-text font-weight-bold text-center">Rp {{ number_format($product->price,0,',','.') }}
                 </h6>
                 <div class="card-link text-center bg-transparent pb-3">
-                    <a class="btn btn-outline-info" href="{{ route('cart.add',$product->id) }}" role="button">Add
+                    <a class="btn btn-outline-info" href="{{ route('product.detail',$product->id) }}" role="button">Add
                         to Cart</a>
                 </div>
             </div>

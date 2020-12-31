@@ -5,7 +5,7 @@
 <div class="container">
 
     <h4 class="d-flex">COMPARE</h4>
-    <div class="line"></div>
+    <hr>
     <table class="table table-bordered sm-header">
         <tbody>
             <tr>

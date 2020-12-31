@@ -33,7 +33,7 @@
         </form>
     </div>
     <h4 class="d-flex">SELLER</h4>
-    <div class="line"></div>
+    <hr>
     <div class="row">
         @if ($sellers->isEmpty()==false)
         @foreach ($sellers as $seller)

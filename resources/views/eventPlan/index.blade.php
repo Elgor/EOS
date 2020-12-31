@@ -28,7 +28,7 @@
                         <div class="form-group row required">
                             <label class="col-md-3 col-form-label text-md-right control-label" for="date">Date</label>
                             <div class="col-md-4">
-                                <input type="password" class="form-control" placeholder="Input date">
+                                <input type="text" class="form-control" placeholder="Input date">
                             </div>
                         </div>
                         <div class="form-group row required">

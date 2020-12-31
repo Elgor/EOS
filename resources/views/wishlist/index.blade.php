@@ -4,7 +4,7 @@
 
 <div class="container">
     <h4 class="d-flex">WISHLIST</h4>
-    <div class="line"></div>
+    <hr>
     {{-- @if () --}}
     <table class="table">
         <thead>

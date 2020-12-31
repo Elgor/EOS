@@ -1,11 +1,6 @@
 .table > tbody > tr > td {
     vertical-align: middle;
 }
-.line {
-    margin-bottom: 1rem;
-    border-bottom: 1px solid #dee2e6;
-    display: block;
-}
 
 .form-group.required .control-label:after {
     content: "*";
@@ -18,4 +13,9 @@
 
 .table.sm-header th {
     width: 20%;
+}
+
+.round-border {
+    border: 2px solid #9a99a2;
+    border-radius: 10px;
 }

@@ -11,7 +11,7 @@
     </nav>
 
     <h4 class="d-flex">CART</h4>
-    <div class="line"></div>
+    <hr>
     @if ($cartItems->isEmpty()==false)
     <table class="table">
         <thead>
