@@ -51,7 +51,7 @@
                             <a class="nav-link" href="{{ url('/seller') }}">Seller</a>
                         </li>
                         <li class="nav-item pt-1">
-                            <a class="nav-link" href="{{ url('/') }}">Compare</a>
+                            <a class="nav-link" href="{{ url('/compare') }}">Compare</a>
                         </li>
                     </ul>
 
@@ -60,12 +60,14 @@
                         <!-- Authentication Links -->
 
                         {{-- Seller Register --}}
+                        @guest
                         <li class="nav-item" style="padding:14px 2rem 0 0">
                             <a href="">Seller Login</a>
                         </li>
                         <li class="nav-item" style="padding:14px 2rem 0 0">
                             <a href="">Become a Seller?</a>
                         </li>
+                        @endguest
 
                         @guest
                         <li class="nav-item pt-1">

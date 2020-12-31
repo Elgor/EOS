@@ -2,7 +2,7 @@
     vertical-align: middle;
 }
 .line {
-    margin-bottom: 5px;
+    margin-bottom: 1rem;
     border-bottom: 1px solid #dee2e6;
     display: block;
 }
@@ -10,4 +10,12 @@
 .form-group.required .control-label:after {
     content: "*";
     color: red;
+}
+
+.th-borderless {
+    border-left: 1px solid Transparent !important;
+}
+
+.table.sm-header th {
+    width: 20%;
 }

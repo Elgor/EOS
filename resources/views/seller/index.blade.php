@@ -32,7 +32,7 @@
             <button class="btn btn-outline-success mt-2 mt-md-0" type="submit">Filter</button>
         </form>
     </div>
-    <h2 class="d-flex justify-content-center">SELLER</h2>
+    <h4 class="d-flex">SELLER</h4>
     <div class="line"></div>
     <div class="row">
         @if ($sellers->isEmpty()==false)

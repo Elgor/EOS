@@ -26,11 +26,11 @@
             <button class="btn btn-outline-success mt-2 mt-md-0" type="submit">Filter</button>
         </form>
     </div>
-    <h2 class="d-flex justify-content-center">PACKAGES</h2>
+    <h4 class="d-flex">PACKAGES</h4>
     <div class="line"></div>
     <div class="row">
         @foreach ($products as $product)
-        <div class="col-3 d-flex p-2">
+        <div class="col-3 d-flex">
             <div class="card mb-4">
                 <a href=" {{ route('product.detail',$product->id) }}"><img class="card-img-top"
                         src="{{ asset('img/defaultProduct.jpg') }}" alt="Card image cap"></a>

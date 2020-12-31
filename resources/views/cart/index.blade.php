@@ -10,7 +10,8 @@
         </ol>
     </nav>
 
-    <h2>Cart</h2>
+    <h4 class="d-flex">CART</h4>
+    <div class="line"></div>
     @if ($cartItems->isEmpty()==false)
     <table class="table">
         <thead>

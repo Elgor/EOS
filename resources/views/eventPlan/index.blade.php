@@ -12,7 +12,7 @@
 
     <div class="row justify-content-center">
         <div class="col-md-10">
-            <h2>EVENT PLAN</h2>
+            <h4>EVENT PLAN</h4>
             <div class="card">
                 <div class="card-body">
                     <form>
