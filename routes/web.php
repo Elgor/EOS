@@ -20,9 +20,11 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/product-detail/{productId}', 'ProductController@detail')->name('product.detail');
 
-Route::get('/seller', 'SellerController@index')->name('seller');
+Route::get('/seller', 'SellerController@index')->name('seller.index');
 
-Route::get('/compare', 'CompareController@index')->name('compare');
+Route::get('/compare', 'CompareController@index')->name('compare.index');
+
+Route::get('/wishlist', 'WishlistController@index')->name('wishlist.index');
 
 Route::get('/add-to-cart/{product}', 'CartController@add')->name('cart.add')->middleware('auth');
 

@@ -48,10 +48,10 @@
                             <a class="nav-link" href="{{ url('/') }}">Home</a>
                         </li>
                         <li class="nav-item pt-1">
-                            <a class="nav-link" href="{{ url('/seller') }}">Seller</a>
+                            <a class="nav-link" href="{{ route('seller.index') }}">Seller</a>
                         </li>
                         <li class="nav-item pt-1">
-                            <a class="nav-link" href="{{ url('/compare') }}">Compare</a>
+                            <a class="nav-link" href="{{ route('compare.index') }}">Compare</a>
                         </li>
                     </ul>
 
@@ -105,7 +105,8 @@
                             </a>
                         </li>
                         <li class="nav-item pt-1 mr-2">
-                            <a class="nav-link" href="" data-toggle="tooltip" data-placement="top" title="Wishlist">
+                            <a class="nav-link" href="{{ route('wishlist.index') }}" data-toggle="tooltip"
+                                data-placement="top" title="Wishlist">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                                     class="bi bi-heart" viewBox="0 0 16 16">
                                     <path
