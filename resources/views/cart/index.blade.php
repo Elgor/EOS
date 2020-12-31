@@ -27,7 +27,8 @@
             @foreach ($cartItems as $cartItem)
             <tr>
                 <td>Seller Name</td>
-                <td>{{ $cartItem->name }}</td>
+                <td><a style="color:#212529"
+                        href="{{ route('product.detail',$cartItem->id) }}">{{ $cartItem->name }}</a></td>
                 <td>Rp {{ number_format($cartItem->price,0,',','.') }}</td>
                 <td>Rp {{ number_format($cartItem->price,0,',','.') }}</td>
                 <td><a class=" btn btn-danger" href="{{ route('cart.destroy', $cartItem->id) }}" role="button">
