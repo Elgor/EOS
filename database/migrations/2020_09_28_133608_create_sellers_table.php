@@ -21,6 +21,10 @@ class CreateSellersTable extends Migration
             $table->string('password');
             $table->longText('description');
             $table->unsignedInteger('category_id');
+            $table->string('city');
+            $table->string('address');
+            $table->string('profile_picture');
+            $table->string('phone_number');
         });
     }
 

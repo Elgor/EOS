@@ -21,6 +21,7 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/product-detail/{productId}', 'ProductController@detail')->name('product.detail');
 
 Route::get('/seller', 'SellerController@index')->name('seller.index');
+Route::get('/seller-detail', 'SellerController@detail')->name('seller.detail');
 
 Route::get('/compare', 'CompareController@index')->name('compare.index');
 
