@@ -23,6 +23,8 @@ Route::get('/product-detail/{productId}', 'ProductController@detail')->name('pro
 Route::get('/seller', 'SellerController@index')->name('seller.index');
 Route::get('/seller-detail', 'SellerController@detail')->name('seller.detail');
 
+Route::get('/message', 'MessageController@index')->name('message.index');
+
 Route::get('/compare', 'CompareController@index')->name('compare.index');
 
 Route::get('/wishlist', 'WishlistController@index')->name('wishlist.index');

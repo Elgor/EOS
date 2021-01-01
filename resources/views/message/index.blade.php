@@ -42,37 +42,19 @@
         </div>
         <div class="row">
             <div class="col-sm-12">
-                <p class="mb-1 font-weight-bold">Packages</p>
-                <div class="row">
-                    <div class="col-3">
-                        <div class="view overlay rounded z-depth-1 gallery-item round-border">
-                            <img src="{{ asset('img/defaultProduct.jpg') }}" class="img-fluid">
-                            <div class="mask rgba-white-slight"></div>
+                <p class="mb-1 font-weight-bold">Message</p>
+                <form action="">
+                    <div class="form-group row">
+                        <div class="col-md-12">
+                            <textarea class="form-control" placeholder="Input Message" name="message"
+                                rows="3"></textarea>
                         </div>
                     </div>
-                    <div class="col-3">
-                        <div class="view overlay rounded z-depth-1 gallery-item round-border">
-                            <img src="{{ asset('img/defaultProduct.jpg') }}" class="img-fluid">
-                            <div class="mask rgba-white-slight"></div>
-                        </div>
-                    </div>
-                    <div class="col-3">
-                        <div class="view overlay rounded z-depth-1 gallery-item round-border">
-                            <img src="{{ asset('img/defaultProduct.jpg') }}" class="img-fluid">
-                            <div class="mask rgba-white-slight"></div>
-                        </div>
-                    </div>
-                    <div class="col-3">
-                        <div class="view overlay rounded z-depth-1 gallery-item round-border">
-                            <img src="{{ asset('img/defaultProduct.jpg') }}" class="img-fluid">
-                            <div class="mask rgba-white-slight"></div>
-                        </div>
-                    </div>
-                </div>
+                </form>
             </div>
         </div>
-        <div class="row m-auto pt-3">
-            <a class="btn btn-primary" href="{{ route('message.index') }}" role="button"> Message</a>
+        <div class="row m-auto">
+            <a class="btn btn-primary" href="" role="button">Send</a>
         </div>
     </section>
 </div>
