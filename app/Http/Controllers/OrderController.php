@@ -15,7 +15,7 @@ class OrderController extends Controller
      */
     public function index()
     {
-        //
+        return view('order.index');
     }
 
     /**
@@ -47,8 +47,8 @@ class OrderController extends Controller
      */
     public function show($itemId)
     {
-        $product = Product::findOrFail($itemId);
-        return view('order.order_detail', $product);
+        $order = Order::findOrFail($itemId);
+        return view('order.order_detail', $order);
     }
 
     /**

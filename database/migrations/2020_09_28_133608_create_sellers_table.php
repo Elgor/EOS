@@ -16,7 +16,7 @@ class CreateSellersTable extends Migration
         Schema::create('sellers', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->timestamps();
-            $table->string('name');
+            $table->string('bussiness_name');
             $table->string('email');
             $table->string('password');
             $table->longText('description');
@@ -25,6 +25,7 @@ class CreateSellersTable extends Migration
             $table->string('address');
             $table->string('profile_picture');
             $table->string('phone_number');
+            //note BE: sama ada attribute untuk package-package
         });
     }
 

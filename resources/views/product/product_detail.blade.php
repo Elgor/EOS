@@ -66,7 +66,7 @@
                     <li>Edited 20 Photos</li>
                 </ul>
             </div>
-            <h5 class="font-weight-bold">RP 5.000.000</h5>
+            <h5 class="font-weight-bold">Rp {{ number_format($price,0,',','.') }}</h5>
             <div class="border mt-3 m-1 p-2 row justify-content-center round-border">
                 <div class="col-md-4 pt-3">
                     <form>
@@ -74,7 +74,8 @@
                             <label class="text-md-right" for="date">Negotiation
                                 Price</label>
                             <div>
-                                <input style="border: 0" type="text" class="form-control" placeholder="#Normal Price">
+                                <input style="border: 0" type="text" class="form-control"
+                                    placeholder="Rp {{ number_format($price,0,',','.') }}">
                             </div>
                         </div>
                     </form>

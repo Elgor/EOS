@@ -30,7 +30,7 @@
     <hr>
     <div class="row">
         @foreach ($products as $product)
-        <div class="col-3 d-flex">
+        <div class="col-3 d-flex" style="min-height: 600px">
             <div class="card mb-4">
                 <a href=" {{ route('product.detail',$product->id) }}"><img class="card-img-top"
                         src="{{ asset('img/defaultProduct.jpg') }}" alt="Card image cap"></a>
@@ -42,7 +42,7 @@
                         </a>
                     </div>
                     <div class="card-text">
-                        <p>{{ $product->description }}</p>
+                        <p>{{\Illuminate\Support\Str::limit($product->description, 90, $end='...') }}</p>
                     </div>
                 </div>
                 <h6 class="card-text font-weight-bold text-center">Rp {{ number_format($product->price,0,',','.') }}

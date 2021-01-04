@@ -18,25 +18,22 @@
                 </figure>
             </div>
             <div class="col-md-6">
-                <h4 class="font-weight-bold">Seller name</h4>
+                <h4 class="font-weight-bold">{{ $bussiness_name }}</h4>
                 <div>
                     <p class="mb-1 font-weight-bold">City</p>
-                    <p>Jakarta Barat</p>
+                    <p>{{ $city }}</p>
                 </div>
                 <div>
                     <p class="mb-1 font-weight-bold">Address</p>
-                    <p>Jl MH Thamrin Kav 28-30 Plaza Indonesia Lt 3 56</p>
+                    <p>{{ $address }}</p>
                 </div>
                 <div>
                     <p class="mb-1 font-weight-bold">Phone Number</p>
-                    <p>021 3107201</p>
+                    <p>{{ $phone_number }}</p>
                 </div>
                 <div>
                     <p class="mb-1 font-weight-bold">Description</p>
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Officiis suscipit incidunt voluptate
-                        iure
-                        earum soluta saepe sint beatae explicabo, perferendis ipsa doloremque ex maiores nisi doloribus
-                        dolor error unde cum.</p>
+                    <p>{{ $description }}</p>
                 </div>
             </div>
         </div>

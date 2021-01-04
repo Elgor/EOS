@@ -28,21 +28,21 @@
                         <div class="form-group row required">
                             <label class="col-md-3 col-form-label text-md-right control-label" for="date">Date</label>
                             <div class="col-md-4">
-                                <input type="text" class="form-control" placeholder="Input date">
+                                <input class="form-control" type="date">
                             </div>
                         </div>
                         <div class="form-group row required">
                             <label class="col-md-3 col-form-label text-md-right control-label" for="startTime">Start
                                 Time</label>
                             <div class="col-md-4">
-                                <input type="text" class="form-control" placeholder="Input start time">
+                                <input class="form-control" type="time">
                             </div>
                         </div>
                         <div class="form-group row required">
                             <label class="col-md-3 col-form-label text-md-right control-label" for="endTime">End
                                 Time</label>
                             <div class="col-md-4">
-                                <input type="text" class="form-control" placeholder="Input end time">
+                                <input class="form-control" type="time">
                             </div>
                         </div>
                         <div class="form-group row required">
@@ -65,7 +65,7 @@
                             <label class="col-md-3 col-form-label text-md-right control-label"
                                 for="inputAddress">Description</label>
                             <div class="col-md-7">
-                                <textarea class="form-control" placeholder="Address" name="description"
+                                <textarea class="form-control" placeholder="Description" name="description"
                                     rows="3"></textarea>
                             </div>
                         </div>
@@ -82,4 +82,5 @@
         </div>
     </div>
 </div>
+
 @endsection
