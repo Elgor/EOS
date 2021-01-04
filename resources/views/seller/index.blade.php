@@ -39,7 +39,7 @@
         @foreach ($sellers as $seller)
         <div class="col-3 d-flex p-2">
             <div class="card mb-4" style="height: 450px">
-                <a href=""><img class="card-img-top" style="width: 100%; height:210px"
+                <a href="{{route('rating',$seller->id)}}"><img class="card-img-top" style="width: 100%; height:210px"
                         src="{{ asset('img/defaultProduct.jpg') }}" alt="Card image cap"></a>
                 <div class="card-body pb-0">
                     <div class="card-title">
