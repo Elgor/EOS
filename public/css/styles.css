@@ -1,0 +1,21 @@
+.table > tbody > tr > td {
+    vertical-align: middle;
+}
+
+.form-group.required .control-label:after {
+    content: "*";
+    color: red;
+}
+
+.th-borderless {
+    border-left: 1px solid Transparent !important;
+}
+
+.table.sm-header th {
+    width: 20%;
+}
+
+.round-border {
+    border: 2px solid #9a99a2;
+    border-radius: 10px;
+}
