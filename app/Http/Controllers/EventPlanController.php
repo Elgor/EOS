@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Cart;
+use App\EventPlan;
 use Illuminate\Http\Request;
 
-class CartController extends Controller
+class EventPlanController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,7 +14,7 @@ class CartController extends Controller
      */
     public function index()
     {
-        return view('cart.index');
+        return view('eventPlan.index');
     }
 
     /**
@@ -41,10 +41,10 @@ class CartController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Cart  $cart
+     * @param  \App\EventPlan  $eventPlan
      * @return \Illuminate\Http\Response
      */
-    public function show(Cart $cart)
+    public function show(EventPlan $eventPlan)
     {
         //
     }
@@ -52,10 +52,10 @@ class CartController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Cart  $cart
+     * @param  \App\EventPlan  $eventPlan
      * @return \Illuminate\Http\Response
      */
-    public function edit(Cart $cart)
+    public function edit(EventPlan $eventPlan)
     {
         //
     }
@@ -64,10 +64,10 @@ class CartController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Cart  $cart
+     * @param  \App\EventPlan  $eventPlan
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Cart $cart)
+    public function update(Request $request, EventPlan $eventPlan)
     {
         //
     }
@@ -75,10 +75,10 @@ class CartController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Cart  $cart
+     * @param  \App\EventPlan  $eventPlan
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Cart $cart)
+    public function destroy(EventPlan $eventPlan)
     {
         //
     }

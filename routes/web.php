@@ -32,8 +32,9 @@ Route::get('/wishlist', 'WishlistController@index')->name('wishlist.index');
 Route::get('/add-to-cart/{product}', 'CartController@add')->name('cart.add')->middleware('auth');
 
 Route::get('/cart', 'CartController@index')->name('cart.index')->middleware('auth');
-Route::get('/cart/request-event-plan', 'CartController@eventPlan')->name('cart.eventPlan')->middleware('auth'); //note: numpang di cart, klo controller event plannya udah ada pindahin ke eventplan@add
 Route::get('/cart/destroy/{itemId}', 'CartController@destroy')->name('cart.destroy')->middleware('auth');
+
+Route::get('/request-event-plan', 'EventPlanController@index')->name('eventplan.index')->middleware('auth'); //note: numpang di cart, klo controller event plannya udah ada pindahin ke eventplan@add
 
 
 Route::get('/order', 'OrderController@index')->name('order.index')->middleware('auth');

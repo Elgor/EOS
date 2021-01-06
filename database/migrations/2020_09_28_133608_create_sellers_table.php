@@ -22,8 +22,6 @@ class CreateSellersTable extends Migration
             $table->longText('description');
             $table->unsignedInteger('category_id');
             $table->unsignedInteger('city_id');
-            $table->unsignedInteger('product_id');
-            $table->unsignedInteger('order_id');
             $table->string('address');
             $table->string('profile_picture');
             $table->string('phone_number');

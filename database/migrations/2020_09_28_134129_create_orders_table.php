@@ -20,7 +20,7 @@ class CreateOrdersTable extends Migration
             $table->unsignedInteger('user_id');
             $table->unsignedInteger('seller_id');
             $table->unsignedInteger('product_id');
-            $table->int('status');
+            $table->integer('status');
             $table->timestamps();
         });
     }
