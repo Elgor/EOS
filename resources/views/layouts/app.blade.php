@@ -67,6 +67,9 @@
                         <li class="nav-item pt-1">
                             <a class="nav-link" href="{{ route('compare.index') }}">Compare</a>
                         </li>
+                        <li class="nav-item pt-1">
+                            <a class="nav-link" href="{{ route('eventplan.index') }}">Event Plan</a>
+                        </li>
                     </ul>
 
                     <!-- Right Side Of Navbar -->

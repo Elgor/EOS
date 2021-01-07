@@ -49,7 +49,7 @@
                 </h6>
                 <div class="card-link text-center bg-transparent pb-3">
                     <a class="btn btn-outline-info" href="{{ route('product.detail',$product->id) }}" role="button">Add
-                        to Cart</a>
+                        to Order</a>
                 </div>
             </div>
         </div>

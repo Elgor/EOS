@@ -68,20 +68,28 @@
                 </ul>
             </div>
             <h5 class="font-weight-bold">Rp {{ number_format($price,0,',','.') }}</h5>
-            <div class="border mt-3 m-1 p-2 row justify-content-center round-border">
+            <div class="border mt-3 m-1 p-2 row  round-border">
                 <div class="col-md-12 pt-2 pb-2">
-                    <form class="form-inline" method="POST">
-                        <div class="form-group">
+                    <form class="form" method="POST">
+                        <div class="form-group mb-3">
                             <label class="text-md-right pr-1" for="negotiation_price">Negotiation
                                 Price</label>
-                            <div style="width: 10%">
+                            <div style="width: 100%">
                                 <input name="negotiation_price" type="text" class="form-control" maxlength="15"
                                     placeholder="Rp {{ number_format($price,0,',','.') }}">
                             </div>
                         </div>
-                        <div class="pt-2">
-                            <a class="btn btn-outline-info" href="{{ route('cart.add',$id) }}" role="button">Add to
-                                Cart</a>
+
+                        <div class="form-group">
+                            <label class="text-md-right pr-1" for="negotiation_price">Event Plan</label>
+                            <select class="form-control" style="width: 100%">
+                                <option>Default select</option>
+                            </select>
+                        </div>
+
+                        <div class="mt-3">
+                            <a class="btn btn-outline-info" href="{{ route('order.index') }}" role="button">Add to
+                                Order</a>
                             <a class="ml-3 btn btn-outline-info" href="" role="button">Compare</a>
                             <a class="ml-3 pt-2" href=" {{ route('wishlist.index') }}" data-toggle="tooltip"
                                 data-placement="top" title="Wishlist">
