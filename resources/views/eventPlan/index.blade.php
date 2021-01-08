@@ -35,6 +35,13 @@
         <div class="col-md-10">
             <form>
                 <div class="form-group row required">
+                    <label class="col-md-3 col-form-label text-md-left control-label" for="eventName">Event
+                        Name</label>
+                    <div class="col-md-4">
+                        <input class="form-control" type="text">
+                    </div>
+                </div>
+                <div class="form-group row required">
                     <label class="col-md-3 col-form-label text-md-left control-label" for="eventType">Event
                         Type</label>
                     <div class="col-md-4">
