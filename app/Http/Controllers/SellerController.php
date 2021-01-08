@@ -89,10 +89,4 @@ class SellerController extends Controller
         $seller = Seller::findOrFail($sellerId);
         return view('seller.seller_detail',$seller);
     }
-
-    public function rating($sellerId)
-    {
-        $seller = Seller::findOrFail($sellerId);
-        return view('seller.rating', $seller);
-    }
 }
