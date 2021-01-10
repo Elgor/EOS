@@ -5,9 +5,11 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use App\User;
+use App\Seller;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Http\Request;
 
 class RegisterController extends Controller
 {
@@ -39,6 +41,7 @@ class RegisterController extends Controller
     public function __construct()
     {
         $this->middleware('guest');
+        $this->middleware('guest:seller');
     }
 
     /**
@@ -67,6 +70,7 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
+        dd($data["image"]);
         return User::create([
             'name' => $data['name'],
             'email' => $data['email'],
@@ -75,5 +79,27 @@ class RegisterController extends Controller
             'address' => $data['address'],
             'image' => $data['image']->store('avatar','public'),
         ]);
+    }
+
+    public function showSellerRegisterForm()
+    {
+        return view('auth.seller.register', ['url' => 'seller']);
+        //return view('auth.seller.register');
+
+    }
+
+    protected function createSeller(Request $request)
+    {
+        $this->validator($request->all())->validate();
+        Seller::create([
+            'bussiness_name' => $request->bussiness_name,
+            'email' => $request->email,
+            'password' => Hash::make($request->password),
+            'description' => $request->description,
+            'address' => $request->addres,
+            'profile_picture' => $request->profile_picture,
+            'phone_number' => $request->phone_number,
+        ]);
+        return redirect()->intended('login/seller');
     }
 }

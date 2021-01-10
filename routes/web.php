@@ -40,3 +40,11 @@ Route::get('/order-detail', 'OrderController@show')->name('order.show')->middlew
 
 Route::get('/customer/profile/{customerId}', 'CustomerController@show')->name('customer.show')->middleware('auth');
 Route::get('/rating', 'RatingController@index')->name('rating.index')->middleware('auth');
+
+//SELLER LOGIN 
+Route::get('/login/seller', 'SellerController@showSellerLoginForm')->name('login.seller');
+Route::post('/login/seller', 'SellerController@authenticate')->name('login.seller');
+
+//SELLER REGISTER
+Route::get('/register/seller', 'SellerController@showSellerRegisterForm')->name('register.seller');
+Route::post('/register/seller', 'SellerController@store')->name('register.seller');

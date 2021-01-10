@@ -87,10 +87,10 @@
                         {{-- Seller Register --}}
                         @guest
                         <li class="nav-item" style="padding:14px 2rem 0 0">
-                            <a href="">Seller Login</a>
+                            <a href="{{route('login.seller')}}">Seller Login</a>
                         </li>
                         <li class="nav-item" style="padding:14px 2rem 0 0">
-                            <a href="">Become a Seller?</a>
+                            <a href="{{route('register.seller')}}">Become a Seller?</a>
                         </li>
                         @endguest
 
@@ -140,8 +140,13 @@
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre
                                 style="padding-top: 11px">
                                 {{ Auth::user()->name }}
+                                {{ Auth::user()->business_name }}
+
                                 @if(Auth::user()->image)
                                 <img src="{{asset('/storage/'.Auth::user()->image)}}" class="rounded-circle" alt=""
+                                    width="30" height="30" />
+                                @elseif(Auth::user()->profile_picture)
+                                <img src="{{asset('/storage/'.Auth::user()->profile_picture)}}" class="rounded-circle" alt=""
                                     width="30" height="30" />
                                 @endif
                             </a>

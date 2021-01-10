@@ -9,11 +9,11 @@
 
                 <div class="card-body">
                     <!-- <form method="POST" action="{{ route('register') }}" enctype="multipart/form-data"> -->
-                    <form method="POST" action='{{ url("seller/register") }}' aria-label="{{ __('Register') }}">   
+                    <form method="POST" action='{{ route("register.seller") }}' aria-label="{{ __('Register') }}" enctype="multipart/form-data">   
                     @csrf
 
                         <div class="form-group row">
-                            <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Business Name') }}</label>
+                            <label for="business_name" class="col-md-4 col-form-label text-md-right">{{ __('Business Name') }}</label>
 
                             <div class="col-md-6">
                                 <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="business_name" value="{{ old('name') }}" required autocomplete="name" autofocus>
@@ -124,7 +124,7 @@
                             <label class="col-md-4 col-form-label text-md-right">{{ __('Profile Picture') }}</label>
 
                             <div class="col-md-6 ml-3">
-                                <input type="file" class="custom-file-input" name="image">
+                                <input type="file" class="custom-file-input" name="profile_picture">
                                 <label class="custom-file-label" for="image">Browse</label>
                             </div>
                         </div>

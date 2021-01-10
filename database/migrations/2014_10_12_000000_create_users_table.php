@@ -22,7 +22,7 @@ class CreateUsersTable extends Migration
             $table->string('address');
             $table->unsignedInteger('city_id')->nullable();;
             $table->string('phone_number');
-            $table->integer('role');
+            $table->integer('role')->nullable();
             $table->string('image')->nullable();
             $table->rememberToken();
             $table->timestamps();

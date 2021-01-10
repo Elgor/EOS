@@ -3,7 +3,15 @@
 namespace App\Http\Controllers;
 
 use App\Seller;
+use App\Product;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use App\Providers\RouteServiceProvider;
+use Illuminate\Foundation\Auth\RegistersUsers;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\DB;
 
 class SellerController extends Controller
 {
@@ -25,7 +33,7 @@ class SellerController extends Controller
      */
     public function create()
     {
-        //
+        return view('auth.seller.register');
     }
 
     /**
@@ -36,7 +44,17 @@ class SellerController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $seller = new Seller;
+        $seller->business_name = $request->input('business_name');
+        $seller->email = $request->input('email');
+        $seller->password = Hash::make($request->input('password'));
+        $seller->category_id = $request->input('category_id');
+        $seller->city_id = $request->input('city_id');
+        $seller->description = $request->input('description');
+        $seller->address = $request->input('address');
+        $seller->profile_picture = $request->file('profile_picture')->store('avatar', 'public');
+        $seller->phone_number = $request->input('phone_number');
+        $seller->save();
     }
 
     /**
@@ -88,5 +106,29 @@ class SellerController extends Controller
     {
         $seller = Seller::findOrFail($sellerId);
         return view('seller.seller_detail',$seller);
+    }
+
+    public function showSellerLoginForm(){
+        return view('auth.seller.login');
+    }
+
+    public function showSellerRegisterForm(){
+        return view('auth.seller.register');
+    }
+
+    public function authenticate(Request $request)
+    {
+        //$findUser = Seller::select('select * from sellers where email = ')
+        $findSeller = Seller::where('email', $request->email)->first();
+        if ($findSeller) {
+            // Authentication passed...
+            Auth::login($findSeller, true);
+
+            $products = Product::paginate(4);
+            return view('home', ['products' => $products]);
+        }
+        else{
+            return view('welcome');
+        }
     }
 }
