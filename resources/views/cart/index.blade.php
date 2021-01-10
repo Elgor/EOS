@@ -12,7 +12,7 @@
 
     <h4 class="d-flex">CART</h4>
     <hr>
-    @if ($cartItems->isEmpty()==false)
+    {{-- @if ($cartItems->isEmpty()==false) --}}
     <table class="table">
         <thead>
             <tr>
@@ -24,26 +24,26 @@
             </tr>
         </thead>
         <tbody>
-            @foreach ($cartItems as $cartItem)
+            {{-- @foreach ($cartItems as $cartItem) --}}
             <tr>
                 <td>Seller Name</td>
-                <td><a style="color:#212529"
-                        href="{{ route('product.detail',$cartItem->id) }}">{{ $cartItem->name }}</a></td>
-                <td>Rp {{ number_format($cartItem->price,0,',','.') }}</td>
-                <td>Rp {{ number_format($cartItem->price,0,',','.') }}</td>
-                <td><a class=" btn btn-danger" href="{{ route('cart.destroy', $cartItem->id) }}" role="button">
+                <td><a style="color:#212529" href="route('product.detail',$cartItem->id)"> $cartItem->name</a>
+                </td>
+                <td>Rp number_format($cartItem->price,0,',','.')</td>
+                <td>Rp number_format($cartItem->price,0,',','.')</td>
+                <td><a class=" btn btn-danger" href=" route('cart.destroy', $cartItem->id)" role="button">
                         Delete</a>
                     <a class=" btn btn-info" href="" role="button">
                         Show</a>
                 </td>
             </tr>
-            @endforeach
+            {{-- @endforeach --}}
         </tbody>
     </table>
 
-    <a class="btn btn-success my-2 my-sm-0" href="{{ route('cart.eventPlan') }}" role="button">Save</a>
-    @else
+    <a class="btn btn-success my-2 my-sm-0" href="{{ route('eventplan.index') }}" role="button">Save</a>
+    {{-- @else
     <h4>No Item</h4>
-    @endif
+    @endif --}}
 </div>
 @endsection

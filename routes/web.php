@@ -31,12 +31,12 @@ Route::get('/wishlist', 'WishlistController@index')->name('wishlist.index');
 
 Route::get('/add-to-cart/{product}', 'CartController@add')->name('cart.add')->middleware('auth');
 
-Route::get('/cart', 'CartController@index')->name('cart.index')->middleware('auth');
-Route::get('/cart/request-event-plan', 'CartController@eventPlan')->name('cart.eventPlan')->middleware('auth'); //note: numpang di cart, klo controller event plannya udah ada pindahin ke eventplan@add
-Route::get('/cart/destroy/{itemId}', 'CartController@destroy')->name('cart.destroy')->middleware('auth');
+Route::get('/event-plan', 'EventPlanController@index')->name('eventplan.index')->middleware('auth');
 
 
 Route::get('/order', 'OrderController@index')->name('order.index')->middleware('auth');
-Route::get('/order/show/{itemId}', 'OrderController@show')->name('order.show')->middleware('auth');
+Route::get('/order-detail', 'OrderController@show')->name('order.show')->middleware('auth');
+
+
 Route::get('/customer/profile/{customerId}', 'CustomerController@show')->name('customer.show')->middleware('auth');
-Route::get('/rating/{sellerId}', 'SellerController@rating')->name('rating')->middleware('auth');
+Route::get('/rating', 'RatingController@index')->name('rating.index')->middleware('auth');

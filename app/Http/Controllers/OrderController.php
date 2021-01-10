@@ -45,10 +45,10 @@ class OrderController extends Controller
      * @param  \App\Order  $order
      * @return \Illuminate\Http\Response
      */
-    public function show($itemId)
+    public function show()
     {
-        $order = Order::findOrFail($itemId);
-        return view('order.order_detail', $order);
+        // $order = Order::findOrFail($itemId);
+        return view('order.order_detail');
     }
 
     /**

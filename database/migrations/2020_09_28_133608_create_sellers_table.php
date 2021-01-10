@@ -21,11 +21,11 @@ class CreateSellersTable extends Migration
             $table->string('password');
             $table->longText('description');
             $table->unsignedInteger('category_id');
-            $table->string('city');
+            $table->unsignedInteger('city_id');
             $table->string('address');
             $table->string('profile_picture');
             $table->string('phone_number');
-            //note BE: sama ada attribute untuk package-package
+            $table->double('final_rating');
         });
     }
 

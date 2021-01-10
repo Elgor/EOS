@@ -33,7 +33,7 @@
         </tbody>
     </table>
 
-    <a class="btn btn-success my-2 my-sm-0" href="" role="button">Add All to Cart</a>
+    <a class="btn btn-success my-2 my-sm-0" href="" role="button">Add All to Order</a>
     {{-- @else --}}
     {{-- <h4>No Item</h4> --}}
     {{-- @endif --}}

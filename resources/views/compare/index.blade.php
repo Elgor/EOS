@@ -65,7 +65,7 @@
                         <a class="btn btn-danger" href="" role="button">
                             Delete</a>
                         <a class="btn btn-success" href="" role="button">
-                            Add to Cart</a>
+                            Add to Order</a>
                     </div>
                 </td>
                 {{-- @endforeach --}}
