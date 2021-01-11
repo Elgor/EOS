@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Product;
+use App\Seller;
 use Auth;
 use App\ImageList;
 use Illuminate\Http\Request;
@@ -17,7 +18,12 @@ class ProductController extends Controller
      */
     public function index()
     {
+        // $allProducts=Product::all();
         $products = Product::paginate(4);
+        // foreach ($allProducts as $pro) {
+        //     $seller = Seller::all()->where('id', '=', $pro->seller_id);
+        // }
+        // dd($sellerName);
         return view('home', ['products' => $products]);
     }
 
@@ -39,8 +45,6 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
-        Auth::login()
-
         $product = new Product;
         $product->name = $request->input('packageName');
         $product->price = $request->input('price');
@@ -51,15 +55,16 @@ class ProductController extends Controller
         $product->save();
 
         $files= $request->file('imageList');
-        foreach($files as $file){
+        foreach ($files as $file) {
             $file=ImageList::create([
                 'path'=>$file->store('images/public'),
                 'image'=>$file->getClientOriginalName(),
                 'product_id'=>$product->id,
             ]);
-        }    
+        }
 
-        return $this->sellerProducts();
+        $products = Product::where('seller_id', '=', Auth::id())->get();
+        return view('seller.my_package', compact('products'));
     }
 
     /**
@@ -102,9 +107,11 @@ class ProductController extends Controller
      * @param  \App\Product  $product
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Product $product)
+    public function destroy($productId)
     {
-        //
+        $product = Product::find($productId);
+        $product->delete();
+        return back();
     }
 
     public function detail($productId)
@@ -132,8 +139,10 @@ class ProductController extends Controller
         }
     }
 
-    public function sellerProducts(){
-        $products = Product::where('seller_id', '=',Auth::id())->get();
+    public function sellerProducts()
+    {
+        $products = Product::where('seller_id', '=', Auth::id())->get();
+        // dd($products->count());
         return view('seller.my_package', compact('products'));
     }
 }

@@ -45,8 +45,9 @@ Route::get('/customer/profile/{customerId}', 'CustomerController@show')->name('c
 Route::get('/rating', 'RatingController@index')->name('rating.index')->middleware('auth');
 
 //PRODUCT
-Route::post('/product', 'ProductController@store')->name('product.store')->middleware('auth:seller');
+Route::post('/product', 'ProductController@store')->name('product.store');
 Route::get('/product', 'ProductController@sellerProducts')->name('products.seller');
+Route::get('/product/delete/{productId}', 'ProductController@destroy')->name('product.delete');
 //SELLER LOGIN
 Route::get('/login/seller', 'SellerController@showSellerLoginForm')->name('login.seller');
 Route::post('/login/seller', 'SellerController@authenticate')->name('login.seller');

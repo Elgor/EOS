@@ -16,8 +16,8 @@
             <div class="row">
                 <div class="col-12 mb-0">
                     <figure class="text-center">
-                        <img class="round-border" src="{{ asset('img/defaultProduct.jpg') }}"
-                            class="img-fluid z-depth-1">
+                        <img class="round-border" src="{{ asset('/storage/'.$image) }}"
+                            style="max-height: 250px; max-width: 300px;">
                     </figure>
                 </div>
                 <div class="col-12">
@@ -51,20 +51,18 @@
             </div>
         </div>
         <div class="col-md-6">
-            <h4 class="font-weight-bold">Fantasy T-shirt</h4>
+            <h4 class="font-weight-bold">{{ $name }}</h4>
             <p class="mb-2 text-muted">by <a href="">Seller Name</a></p>
             <div>
                 <p class="mb-1 font-weight-bold">Description</p>
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Numquam, sapiente illo. Sit
-                    error voluptas repellat rerum quidem, soluta enim perferendis voluptates laboriosam. Distinctio,
-                    officia quis dolore quos sapiente tempore alias.</p>
+                <p>{{ $description }}</p>
             </div>
             <div>
                 <p class="mb-1 font-weight-bold">Features</p>
                 <ul class="pl-4">
-                    <li>2 Hours Photoshoot</li>
-                    <li>Unlimited Shoot</li>
-                    <li>Edited 20 Photos</li>
+                    @foreach($features as $feature)
+                    <li>{{ $feature }}</li>
+                    @endforeach
                 </ul>
             </div>
             <h5 class="font-weight-bold">Rp {{ number_format($price,0,',','.') }}</h5>

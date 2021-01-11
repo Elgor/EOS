@@ -3,11 +3,11 @@
 <div class="container">
     <h4>My Package</h4>
     <hr>
-    
+    @if($products->count()>0)
     <table class="table">
         <thead>
             <tr>
-                <th>Image</th>
+                <th>Picture</th>
                 <th>Name</th>
                 <th>Price</th>
                 <th>Feature</th>
@@ -15,25 +15,26 @@
             </tr>
         </thead>
         <tbody>
-        @if(empty($products))
-        <h2>empty</h2>
-        @else
             @foreach ($products as $product)
             <tr>
                 <td>
-                <img src="" alt="" heigt=30 width=30>
-                <td>name</td>
-                <td>price</td>
-                <td>feature</td>
-                <td><a class=" btn btn-danger" href="" role="button">
+                    <img src="{{ asset('/storage/'.$product->image) }}" alt="" heigt=100 width=100>
+                <td>{{ $product->name }}</td>
+                <td>{{ $product->price }}</td>
+                <td>@foreach($product->features as $feature)
+                    <p>{{ $feature }}</p>
+                    @endforeach</td>
+                <td><a class=" btn btn-danger" href="{{ route('product.delete',$product->id) }}" role="button">
                         Delete</a>
                 </td>
             </tr>
             @endforeach
-            @endif
         </tbody>
     </table>
-    
+    @else
+    <h2>NO PACKAGE</h2>
+    @endif
+    <hr>
     <h5>Create Package</h5>
     <hr>
     <div class="col-md-10">
@@ -64,12 +65,12 @@
                 </label>
                 <div class="col-md-7">
                     <select class="selectpicker" multiple data-width="fit" data-live-search="true" name="features[]">
-                        <option value="Mustard">Mustard</option>
-                        <option value="Ketchup">Ketchup</option>
-                        <option value="Relish">Relish</option>
-                        <option>Mustard</option>
-                        <option>Ketchup</option>
-                        <option>Relish</option>
+                        <option value="1 Hour Photoshoot">1 Hour Photoshoot</option>
+                        <option value="2 Hour Photoshoot">2 Hour Photoshoot</option>
+                        <option value="3 Hour Photoshoot">3 Hour Photoshoot</option>
+                        <option value="4 Hour Photoshoot">4 Hour Photoshoot</option>
+                        <option value="5 Hour Photoshoot">5 Hour Photoshoot</option>
+                        <option value="6 Hour Photoshoot">6 Hour Photoshoot</option>
                     </select>
                 </div>
             </div>

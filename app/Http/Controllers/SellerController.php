@@ -135,13 +135,11 @@ class SellerController extends Controller
     {
         //$findUser = Seller::select('select * from sellers where email = ')
         $findSeller = Seller::where('email', $request->email)->first();
+        // dd($findSeller);
         if ($findSeller) {
             // Authentication passed...
             Auth::login($findSeller, true);
-            //$products = Product::where('seller_id', '=',Auth::id())->get();
-            $products = Product::find(Auth::id());
-            return view('seller.my_package', compact('products'));
-            //return redirect('/product');
+            return redirect()->route('products.seller');
         } else {
             return $this->loginFailed();
         }
@@ -157,12 +155,16 @@ class SellerController extends Controller
 
     public function search(Request $request)
     {
-        $search= $request->search;
-        $sellers= DB::table('sellers')->where('business_name', 'like', '%'.$search.'%')->paginate(4);
-        if ($sellers->isEmpty()) {
-            return $this->noDataSearch();
+        if (Auth::user()) {
+            $search= $request->search;
+            $sellers= DB::table('sellers')->where('business_name', 'like', '%'.$search.'%')->paginate(4);
+            if ($sellers->isEmpty()) {
+                return $this->noDataSearch();
+            } else {
+                return view('seller.index', ['sellers' => $sellers]);
+            }
         } else {
-            return view('seller.index', ['sellers' => $sellers]);
+            return view('auth.login');
         }
     }
 }

@@ -33,12 +33,13 @@
         <div class="col-3 d-flex" style="min-height: 600px">
             <div class="card mb-4">
                 <a href=" {{ route('product.detail',$product->id) }}"><img class="card-img-top"
-                        src="{{ asset('img/defaultProduct.jpg') }}" alt="Card image cap"></a>
+                        style="max-height: 250px" src="{{ asset('/storage/'.$product->image) }}"
+                        alt="Card image cap"></a>
                 <div class="card-body pb-0">
                     <div class="card-title">
                         <h4>{{ $product->name }}</h4>
                         <a href="{{ url('/') }}">
-                            seller name
+                            {{ $product->seller_id }}
                         </a>
                     </div>
                     <div class="card-text">
