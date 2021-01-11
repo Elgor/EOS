@@ -3,7 +3,7 @@
 <div class="container">
     <h4>My Package</h4>
     <hr>
-    {{-- @if ($cartItems->isEmpty()==false) --}}
+    @if (Auth::user()->package_id)
     <table class="table">
         <thead>
             <tr>
@@ -15,7 +15,7 @@
             </tr>
         </thead>
         <tbody>
-            {{-- @foreach ($cartItems as $cartItem) --}}
+            {{-- @foreach ( as $cartItem) --}}
             <tr>
                 <td>Image</td>
                 <td>name</td>
@@ -28,6 +28,9 @@
             {{-- @endforeach --}}
         </tbody>
     </table>
+    @else
+    <h2>Empty package</h2>
+    @endif
     <h5>Create Package</h5>
     <hr>
     <div class="col-md-10">
@@ -89,5 +92,6 @@
             </div>
         </form>
     </div>
+
 </div>
 @endsection

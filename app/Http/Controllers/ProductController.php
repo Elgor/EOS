@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Product;
 use Illuminate\Http\Request;
+use DB;
 
 class ProductController extends Controller
 {
@@ -14,7 +15,8 @@ class ProductController extends Controller
      */
     public function index()
     {
-        //
+        $products = Product::paginate(4);
+        return view('home', ['products' => $products]);
     }
 
     /**
@@ -87,5 +89,24 @@ class ProductController extends Controller
     {
         $product = Product::findOrFail($productId);
         return view('product.product_detail', $product);
+    }
+
+    private function noDataSearch()
+    {
+        return redirect()
+            ->back()
+            ->withInput()
+            ->with('error', 'No Search Package');
+    }
+
+    public function search(Request $request)
+    {
+        $search= $request->search;
+        $products= DB::table('products')->where('name', 'like', '%'.$search.'%')->paginate(4);
+        if ($products->isEmpty()) {
+            return $this->noDataSearch();
+        } else {
+            return view('home', ['products' => $products]);
+        }
     }
 }

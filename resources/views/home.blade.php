@@ -4,8 +4,8 @@
 
 <div class="container">
     <div class="d-flex flex-row-reverse mr-3">
-        <form class="form-inline">
-            <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+        <form class="form-inline" action="{{ route('product-search') }}" method="GET">
+            <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" name="search">
             <button class="btn btn-outline-success my-2 my-md-0" type="submit">Search</button>
         </form>
     </div>

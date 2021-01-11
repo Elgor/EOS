@@ -55,6 +55,9 @@ class SellerController extends Controller
         $seller->profile_picture = $request->file('profile_picture')->store('avatar', 'public');
         $seller->phone_number = $request->input('phone_number');
         $seller->save();
+
+        Auth::login($seller, true);
+        return view('seller.my_package', );
     }
 
     /**
@@ -105,15 +108,25 @@ class SellerController extends Controller
     public function detail($sellerId)
     {
         $seller = Seller::findOrFail($sellerId);
-        return view('seller.seller_detail',$seller);
+        return view('seller.seller_detail', $seller);
     }
 
-    public function showSellerLoginForm(){
+    public function showSellerLoginForm()
+    {
         return view('auth.seller.login');
     }
 
-    public function showSellerRegisterForm(){
+    public function showSellerRegisterForm()
+    {
         return view('auth.seller.register');
+    }
+
+    private function loginFailed()
+    {
+        return redirect()
+            ->back()
+            ->withInput()
+            ->with('error', 'Login failed, please try again!');
     }
 
     public function authenticate(Request $request)
@@ -123,12 +136,9 @@ class SellerController extends Controller
         if ($findSeller) {
             // Authentication passed...
             Auth::login($findSeller, true);
-
-            $products = Product::paginate(4);
-            return view('home', ['products' => $products]);
-        }
-        else{
-            return view('welcome');
+            return view('seller.my_package', );
+        } else {
+            return $this->loginFailed();
         }
     }
 }

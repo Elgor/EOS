@@ -146,8 +146,8 @@
                                 <img src="{{asset('/storage/'.Auth::user()->image)}}" class="rounded-circle" alt=""
                                     width="30" height="30" />
                                 @elseif(Auth::user()->profile_picture)
-                                <img src="{{asset('/storage/'.Auth::user()->profile_picture)}}" class="rounded-circle" alt=""
-                                    width="30" height="30" />
+                                <img src="{{asset('/storage/'.Auth::user()->profile_picture)}}" class="rounded-circle"
+                                    alt="" width="30" height="30" />
                                 @endif
                             </a>
 
@@ -173,6 +173,14 @@
                 </div>
             </div>
         </nav>
+        @if(session('error'))
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            {{session('error')}}
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        @endif
         <main class="py-4 container">
             @yield('content')
         </main>

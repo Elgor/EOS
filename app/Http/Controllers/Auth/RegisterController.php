@@ -70,14 +70,13 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        dd($data["image"]);
         return User::create([
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
             'phone_number' => $data['phone_number'],
             'address' => $data['address'],
-            'image' => $data['image']->store('avatar','public'),
+            'image' => $data['image']->store('avatar', 'public'),
         ]);
     }
 
@@ -85,7 +84,6 @@ class RegisterController extends Controller
     {
         return view('auth.seller.register', ['url' => 'seller']);
         //return view('auth.seller.register');
-
     }
 
     protected function createSeller(Request $request)
