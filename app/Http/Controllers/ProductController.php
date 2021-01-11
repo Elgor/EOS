@@ -96,7 +96,7 @@ class ProductController extends Controller
         return redirect()
             ->back()
             ->withInput()
-            ->with('error', 'No Search Package');
+            ->with('error', 'No Searched Package');
     }
 
     public function search(Request $request)

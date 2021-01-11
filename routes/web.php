@@ -23,6 +23,8 @@ Route::get('/home/search', 'ProductController@search')->name('product-search');
 
 Route::get('/seller', 'SellerController@index')->name('seller.index');
 Route::get('/seller-detail/{sellerId}', 'SellerController@detail')->name('seller.detail');
+Route::get('/seller/search', 'SellerController@search')->name('seller-search');
+
 
 Route::get('/message', 'MessageController@index')->name('message.index');
 

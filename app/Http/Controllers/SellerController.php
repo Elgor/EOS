@@ -141,4 +141,23 @@ class SellerController extends Controller
             return $this->loginFailed();
         }
     }
+
+    private function noDataSearch()
+    {
+        return redirect()
+            ->back()
+            ->withInput()
+            ->with('error', 'No Searched Seller');
+    }
+
+    public function search(Request $request)
+    {
+        $search= $request->search;
+        $sellers= DB::table('sellers')->where('business_name', 'like', '%'.$search.'%')->paginate(4);
+        if ($sellers->isEmpty()) {
+            return $this->noDataSearch();
+        } else {
+            return view('seller.index', ['sellers' => $sellers]);
+        }
+    }
 }
