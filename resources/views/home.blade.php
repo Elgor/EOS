@@ -15,12 +15,22 @@
                 <label class="form-group mr-2" for="price">Price</label>
                 <select style="width:150px" class="form-control" id="price" name="price">
                     <option>All</option>
+                    <option value="<10">
+                        < 10 Jt</option> <option value="10-50">10 - 50 Jt
+                    </option>
+                    <option value="50-100">50-100 Jt</option>
+                    <option value="100>">> 100 Jt</option>
                 </select>
             </div>
             <div class="form-group mr-sm-2">
                 <label class="form-group mr-2" for="city">City</label>
                 <select style="width:150px" class="form-control" id="city" name="city">
                     <option>All</option>
+                    <option value="Jakarta">Jakarta</option>
+                    <option value="Tanggerang">Tanggerang</option>
+                    <option value="Bekasi">Bekasi</option>
+                    <option value="Bogor">Bogor</option>
+                    <option value="Depok">Depok</option>
                 </select>
             </div>
             <button class="btn btn-outline-success mt-2 mt-md-0" type="submit">Filter</button>
@@ -30,15 +40,14 @@
     <hr>
     <div class="row">
         @foreach ($products as $product)
-        <div class="col-3 d-flex" style="min-height: 600px">
+        <div class="col-3 d-flex" style="min-height: 400px">
             <div class="card mb-4">
-                <a href=" {{ route('product.detail',$product->id) }}"><img class="card-img-top"
-                        style="max-height: 250px" src="{{ asset('/storage/'.$product->image) }}"
-                        alt="Card image cap"></a>
+                <a href=" {{ route('product.detail',$product->id) }}"><img class="card-img-top" style="height: 200px;"
+                        src="{{ asset('/storage/'.$product->image) }}" alt="Card image cap"></a>
                 <div class="card-body pb-0">
                     <div class="card-title">
                         <h4>{{ $product->name }}</h4>
-                        <a href="{{ url('/') }}">
+                        <a href="{{route('seller.detail',$product->seller_id) }}">
                             {{ $product->seller_id }}
                         </a>
                     </div>

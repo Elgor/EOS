@@ -35,6 +35,7 @@ Route::get('/wishlist', 'WishlistController@index')->name('wishlist.index');
 Route::get('/add-to-cart/{product}', 'CartController@add')->name('cart.add')->middleware('auth');
 
 Route::get('/event-plan', 'EventPlanController@index')->name('eventplan.index')->middleware('auth');
+Route::post('/event-plan', 'EventPlanController@store')->name('eventplan.store')->middleware('auth');
 
 
 Route::get('/order', 'OrderController@index')->name('order.index')->middleware('auth');

@@ -38,43 +38,52 @@
                     <label class="col-md-3 col-form-label text-md-left control-label" for="eventName">Event
                         Name</label>
                     <div class="col-md-4">
-                        <input class="form-control" type="text">
+                        <input class="form-control" type="text" name="eventName">
                     </div>
                 </div>
                 <div class="form-group row required">
                     <label class="col-md-3 col-form-label text-md-left control-label" for="eventType">Event
                         Type</label>
                     <div class="col-md-4">
-                        <select class="form-control">
-                            <option>Default select</option>
+                        <select class="form-control" name="eventType">
+                            <option selected>Select event type</option>
+                            <option value="Business">Business</option>
+                            <option value="Pentas Seni">Pentas Seni</option>
+                            <option value="Inagurasi">Inagurasi</option>
+                            <option value="Birthday Party">Birthday Party</option>
                         </select>
                     </div>
                 </div>
                 <div class="form-group row required">
                     <label class="col-md-3 col-form-label text-md-left control-label" for="date">Date</label>
                     <div class="col-md-4">
-                        <input class="form-control" type="date">
+                        <input class="form-control" type="date" name='date'>
                     </div>
                 </div>
                 <div class="form-group row required">
                     <label class="col-md-3 col-form-label text-md-left control-label" for="startTime">Start
                         Time</label>
                     <div class="col-md-4">
-                        <input class="form-control" type="time">
+                        <input class="form-control" type="time" name="startTime">
                     </div>
                 </div>
                 <div class="form-group row required">
                     <label class="col-md-3 col-form-label text-md-left control-label" for="endTime">End
                         Time</label>
                     <div class="col-md-4">
-                        <input class="form-control" type="time">
+                        <input class="form-control" type="time" name="endTime">
                     </div>
                 </div>
                 <div class="form-group row required">
                     <label class="col-md-3 col-form-label text-md-left control-label" for="city">City</label>
                     <div class="col-md-4">
-                        <select class="form-control">
-                            <option>Default select</option>
+                        <select class="form-control" name="city">
+                            <option selected>Select city</option>
+                            <option value="Jakarta">Jakarta</option>
+                            <option value="Tanggerang">Tanggerang</option>
+                            <option value="Bekasi">Bekasi</option>
+                            <option value="Bogor">Bogor</option>
+                            <option value="Depok">Depok</option>
                         </select>
                     </div>
                 </div>

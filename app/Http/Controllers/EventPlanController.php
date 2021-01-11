@@ -35,7 +35,7 @@ class EventPlanController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $eventPlan= new Eventplan;
     }
 
     /**

@@ -65,6 +65,7 @@
                 </label>
                 <div class="col-md-7">
                     <select class="selectpicker" multiple data-width="fit" data-live-search="true" name="features[]">
+                        <option selected>Select Features</option>
                         <option value="1 Hour Photoshoot">1 Hour Photoshoot</option>
                         <option value="2 Hour Photoshoot">2 Hour Photoshoot</option>
                         <option value="3 Hour Photoshoot">3 Hour Photoshoot</option>

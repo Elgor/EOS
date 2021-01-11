@@ -4,7 +4,7 @@
     <nav aria-label="breadcrumb">
         <ol class="breadcrumb bg-transparent p-0">
             <li class="breadcrumb-item"><a href="{{ url('/') }}">Home</a></li>
-            <li class="breadcrumb-item active" aria-current="page">Seller Name</li>
+            <li class="breadcrumb-item active" aria-current="page">{{ $business_name }}</li>
         </ol>
     </nav>
 </div>
@@ -18,10 +18,10 @@
                 </figure>
             </div>
             <div class="col-md-6">
-                <h4 class="font-weight-bold">{{ $bussiness_name }}</h4>
+                <h4 class="font-weight-bold">{{ $business_name }}</h4>
                 <div>
                     <p class="mb-1 font-weight-bold">City</p>
-                    <p>{{ $city }}</p>
+                    <p>{{ $city_id }}</p>
                 </div>
                 <div>
                     <p class="mb-1 font-weight-bold">Address</p>
