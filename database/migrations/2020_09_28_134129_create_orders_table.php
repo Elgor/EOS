@@ -17,10 +17,10 @@ class CreateOrdersTable extends Migration
             $table->bigInteger('id');
             $table->date('date');
             $table->string('invoice');
-            $table->unsignedInteger('user_id');
-            $table->unsignedInteger('seller_id');
-            $table->unsignedInteger('product_id');
-            $table->integer('status');
+            $table->unsignedInteger('user_id')->nullable();
+            $table->unsignedInteger('seller_id')->nullalbe();
+            $table->unsignedInteger('product_id')->nullable();
+            $table->integer('status')->nullable();
             $table->timestamps();
         });
     }

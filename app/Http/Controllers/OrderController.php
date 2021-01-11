@@ -36,7 +36,12 @@ class OrderController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $order = new Order;
+        $order->date = $request->input('date');
+        $order->invoice = $request->input('invoice');
+        $order->user_id = Auth::User()->id(); 
+        $order->status = 0;
+        $order->save();
     }
 
     /**

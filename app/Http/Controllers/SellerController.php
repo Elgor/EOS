@@ -57,7 +57,9 @@ class SellerController extends Controller
         $seller->save();
 
         Auth::login($seller, true);
-        return view('seller.my_package', );
+
+        $products = Product::find(Auth::id());
+        return view('seller.my_package', compact('products'));
     }
 
     /**
@@ -136,7 +138,10 @@ class SellerController extends Controller
         if ($findSeller) {
             // Authentication passed...
             Auth::login($findSeller, true);
-            return view('seller.my_package', );
+            //$products = Product::where('seller_id', '=',Auth::id())->get();
+            $products = Product::find(Auth::id());
+            return view('seller.my_package', compact('products'));
+            //return redirect('/product');
         } else {
             return $this->loginFailed();
         }

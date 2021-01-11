@@ -3,7 +3,7 @@
 <div class="container">
     <h4>My Package</h4>
     <hr>
-    @if (Auth::user()->package_id)
+    
     <table class="table">
         <thead>
             <tr>
@@ -15,26 +15,29 @@
             </tr>
         </thead>
         <tbody>
-            {{-- @foreach ( as $cartItem) --}}
+        @if(empty($products))
+        <h2>empty</h2>
+        @else
+            @foreach ($products as $product)
             <tr>
-                <td>Image</td>
+                <td>
+                <img src="" alt="" heigt=30 width=30>
                 <td>name</td>
                 <td>price</td>
                 <td>feature</td>
-                <td><a class=" btn btn-danger" href=" route('cart.destroy', $cartItem->id)" role="button">
+                <td><a class=" btn btn-danger" href="" role="button">
                         Delete</a>
                 </td>
             </tr>
-            {{-- @endforeach --}}
+            @endforeach
+            @endif
         </tbody>
     </table>
-    @else
-    <h2>Empty package</h2>
-    @endif
+    
     <h5>Create Package</h5>
     <hr>
     <div class="col-md-10">
-        <form method="POST" action="" enctype="multipart/form-data">
+        <form method="POST" action="{{route('product.store')}}" enctype="multipart/form-data">
             @csrf
             <div class="form-group row required">
                 <label class="col-md-3 col-form-label text-md-left control-label" for="packageName">Package
@@ -60,10 +63,10 @@
                 <label class="col-md-3 col-form-label text-md-left control-label" for="price">Feature
                 </label>
                 <div class="col-md-7">
-                    <select class="selectpicker" multiple data-width="fit" data-live-search="true" name="contoh[]">
-                        <option>Mustard</option>
-                        <option>Ketchup</option>
-                        <option>Relish</option>
+                    <select class="selectpicker" multiple data-width="fit" data-live-search="true" name="features[]">
+                        <option value="Mustard">Mustard</option>
+                        <option value="Ketchup">Ketchup</option>
+                        <option value="Relish">Relish</option>
                         <option>Mustard</option>
                         <option>Ketchup</option>
                         <option>Relish</option>
@@ -73,7 +76,7 @@
             <div class="form-group row">
                 <label class="col-md-3 col-form-label text-md-left">Package Picture</label>
                 <div class="col-md-7">
-                    <input type="file" name="picture">
+                    <input type="file" name="image">
                 </div>
             </div>
             <div class="form-group row">

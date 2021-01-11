@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Product;
+use Auth;
+use App\ImageList;
 use Illuminate\Http\Request;
 use DB;
 
@@ -37,7 +39,27 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        Auth::login()
+
+        $product = new Product;
+        $product->name = $request->input('packageName');
+        $product->price = $request->input('price');
+        $product->description = $request->input('description');
+        $product->image = $request->file('image')->store('product', 'public');
+        $product->features = $request->input('features');
+        $product->seller_id = Auth::id();
+        $product->save();
+
+        $files= $request->file('imageList');
+        foreach($files as $file){
+            $file=ImageList::create([
+                'path'=>$file->store('images/public'),
+                'image'=>$file->getClientOriginalName(),
+                'product_id'=>$product->id,
+            ]);
+        }    
+
+        return $this->sellerProducts();
     }
 
     /**
@@ -108,5 +130,10 @@ class ProductController extends Controller
         } else {
             return view('home', ['products' => $products]);
         }
+    }
+
+    public function sellerProducts(){
+        $products = Product::where('seller_id', '=',Auth::id())->get();
+        return view('seller.my_package', compact('products'));
     }
 }
