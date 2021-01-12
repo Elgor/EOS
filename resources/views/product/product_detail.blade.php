@@ -1,5 +1,9 @@
 @extends('layouts.app')
 
+@section('title')
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.8.2/css/lightbox.min.css">
+@endsection
 @section('content')
 <div class="container">
     <nav aria-label="breadcrumb">
@@ -23,10 +27,12 @@
                 <div class="col-12">
                     <div class="row">
                         @foreach($product->imageList as $image)
-                        <div class="col-3">
+                        <div class="col-4">
                             <div class="view overlay rounded z-depth-1 gallery-item round-border">
-                                <img src="{{ asset('/storage/'.$image->path) }}" class="img-fluid">
-                                <div class="mask rgba-white-slight"></div>
+                                <a href="{{ asset('/storage/'.$image->path) }}" data-lightbox="photos">
+                                    <img src="{{ asset('/storage/'.$image->path) }}" class="img-fluid"
+                                        style="min-height: 115px">
+                                </a>
                             </div>
                         </div>
                         @endforeach
