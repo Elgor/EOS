@@ -26,18 +26,31 @@ class Seller extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    public function city()
-    {
-        return $this ->belongsTo(City::class, 'city_id');
-    }
 
     public function comments()
     {
         return $this->morphMany('App\Rating', 'commentable');
     }
 
+
+
+    //HAS MANY
+    public function messages(){
+        return $this->hasMany('App\Message');
+    }
+
     public function product()
     {
-        return $this ->hasMany(Product::class);
+        return $this ->hasMany('App\Product');
+    }    
+
+    public function sellers(){
+        return $this->hasMany('App\Order');
+    }
+
+    //BELONGS TO
+    public function city()
+    {
+        return $this ->belongsTo('App\City');
     }
 }

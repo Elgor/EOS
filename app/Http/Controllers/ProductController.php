@@ -117,8 +117,6 @@ class ProductController extends Controller
     public function detail($productId)
     {
         $product = Product::findOrFail($productId);
-
-        // dd($product->imageList()->path);
         return view('product.product_detail', compact('product'));
     }
 
