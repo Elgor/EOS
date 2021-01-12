@@ -25,4 +25,14 @@ class Seller extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function city()
+    {
+        return $this ->belongsTo(City::class, 'city_id');
+    }
+
+    public function comments()
+    {
+        return $this->morphMany('App\Rating', 'commentable');
+    }
 }

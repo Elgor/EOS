@@ -117,7 +117,9 @@ class ProductController extends Controller
     public function detail($productId)
     {
         $product = Product::findOrFail($productId);
-        return view('product.product_detail', $product);
+
+        // dd($product->imageList()->path);
+        return view('product.product_detail', compact('product'));
     }
 
     private function noDataSearch()
@@ -141,7 +143,7 @@ class ProductController extends Controller
 
     public function sellerProducts()
     {
-        $products = Product::where('seller_id', '=', Auth::id())->get();
+        $products = Product::where('seller_id', '=', Auth::guard('seller')->id())->get();
         // dd($products->count());
         return view('seller.my_package', compact('products'));
     }

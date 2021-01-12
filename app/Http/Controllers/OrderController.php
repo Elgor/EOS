@@ -15,7 +15,8 @@ class OrderController extends Controller
      */
     public function index()
     {
-        return view('order.index');
+        $orderItems = Order::paginate(5);
+        return view('order.index', compact('orderItems'));
     }
 
     /**
@@ -39,7 +40,7 @@ class OrderController extends Controller
         $order = new Order;
         $order->date = $request->input('date');
         $order->invoice = $request->input('invoice');
-        $order->user_id = Auth::User()->id(); 
+        $order->user_id = Auth::User()->id();
         $order->status = 0;
         $order->save();
     }

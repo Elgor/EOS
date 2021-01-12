@@ -44,6 +44,8 @@ Route::get('/order-detail', 'OrderController@show')->name('order.show')->middlew
 
 Route::get('/customer/profile/{customerId}', 'CustomerController@show')->name('customer.show')->middleware('auth');
 Route::get('/rating', 'RatingController@index')->name('rating.index')->middleware('auth');
+Route::get('/rating/{sellerId}', 'RatingController@index')->name('rating.index')->middleware('auth');
+Route::post('/rating/{sellerId}', 'RatingController@store')->name('rating.store')->middleware('auth');
 
 //PRODUCT
 Route::post('/product', 'ProductController@store')->name('product.store');

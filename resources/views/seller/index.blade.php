@@ -1,4 +1,9 @@
 @extends('layouts.app')
+@section('title')
+<link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"
+    integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+
+@endsection
 
 @section('content')
 
@@ -40,7 +45,7 @@
         <div class="col-3 d-flex p-2">
             <div class="card mb-4" style="height: 450px">
                 <a href="{{route('seller.detail',$seller->id)}}"><img class="card-img-top"
-                        style="width: 100%; height:210px" src="{{ asset('img/defaultProduct.jpg') }}"
+                        style="width: 100%; height:210px" src="{{ asset('/storage/'.$seller->profile_picture) }}"
                         alt="Card image cap"></a>
                 <div class="card-body pb-0">
                     <div class="card-title">
@@ -60,7 +65,8 @@
                     </div>
                 </div>
                 <div class="card-footer">
-                    {{ $seller->final_rating }}
+                    <span class="float-left pr-2"><i class="text-warning fa fa-star"
+                            style="font-size: 20px;"></i></span>{{ $seller->final_rating }}
                 </div>
             </div>
         </div>

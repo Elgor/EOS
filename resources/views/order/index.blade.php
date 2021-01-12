@@ -4,7 +4,16 @@
 <div class="container">
     <h4 class="d-flex">ORDER</h4>
     <hr>
-
+    @if(session('message'))
+    <div class="alert alert-success alert-dismissible show fade">
+        <div class="alert-body">
+            <button class="close" data-dismiss="alert">
+                <span>×</span>
+            </button>
+            {{session('message')}}
+        </div>
+    </div>
+    @endif
     <table class="table">
         <thead>
             <tr>
@@ -19,7 +28,7 @@
             </tr>
         </thead>
         <tbody>
-            {{-- @foreach ($orderItems as $orderItem) --}}
+            @foreach ($orderItems as $orderItem)
             {{-- 0->waiting
             1->Request
             2->Accept
@@ -35,11 +44,13 @@
                 <td class="text-center">
                     <button type="button" class="btn btn-success" data-toggle="modal" data-target="#dpModal">
                         Pay
-                    </button></td>
+                    </button>
+                </td>
                 <td class="text-center">
                     <button type="button" class="btn btn-success" data-toggle="modal" data-target="#fpModal">
                         Pay
-                    </button></td>
+                    </button>
+                </td>
                 <td class="text-center">
                     {{-- @if() --}}
                     {{-- {{ route('order.show', 1) }} --}}
@@ -47,12 +58,12 @@
                         View</a>
                     <a class="btn btn-danger" href="" role="button">
                         Delete</a>
-                    <a class="btn btn-success" href="{{ route('rating.index') }}" role="button">
+                    <a class="btn btn-success" href="{{ route('rating.index',$orderItem->seller_id) }}" role="button">
                         Rate</a>
                     {{-- @endif --}}
                 </td>
             </tr>
-            {{-- @endforeach --}}
+            @endforeach
         </tbody>
     </table>
 </div>

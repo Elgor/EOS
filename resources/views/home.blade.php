@@ -48,7 +48,7 @@
                     <div class="card-title">
                         <h4>{{ $product->name }}</h4>
                         <a href="{{route('seller.detail',$product->seller_id) }}">
-                            {{ $product->seller_id }}
+                            {{ $product->seller->business_name }}
                         </a>
                     </div>
                     <div class="card-text">

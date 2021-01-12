@@ -115,9 +115,36 @@ class SellerController extends Controller
 
     public function detail($sellerId)
     {
-        $seller = Seller::findOrFail($sellerId);
-        return view('seller.seller_detail', $seller);
+        $seller = Seller::find($sellerId);
+        $comments = $seller->comments()->paginate(5);
+        $starAll = DB::table('ratings')
+            ->where('seller_id', $sellerId)
+            ->count();
+        $star5 = DB::table('ratings')
+            ->where('seller_id', $sellerId)
+            ->where('rating', 5)->count();
+        $star4 = DB::table('ratings')
+            ->where('seller_id', $sellerId)
+            ->where('rating', 4)->count();
+        $star3 = DB::table('ratings')
+            ->where('seller_id', $sellerId)
+            ->where('rating', 3)->count();
+        $star2 = DB::table('ratings')
+            ->where('seller_id', $sellerId)
+            ->where('rating', 2)->count();
+        $star1 = DB::table('ratings')
+            ->where('seller_id', $sellerId)
+            ->where('rating', 1)->count();
+        if ($starAll == 0) {
+            $starAll = 1;
+            $reviews = 0;
+        } else {
+            $reviews = $starAll;
+        }
+        return view('seller.seller_detail', compact('seller', 'comments', 'starAll', 'star5', 'star4', 'star3', 'star2', 'star1', 'reviews'));
     }
+
+
 
     public function showSellerLoginForm()
     {

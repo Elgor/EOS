@@ -5,7 +5,7 @@
     <nav aria-label="breadcrumb">
         <ol class="breadcrumb bg-transparent p-0">
             <li class="breadcrumb-item"><a href="{{ url('/') }}">Home</a></li>
-            <li class="breadcrumb-item active" aria-current="page">{{ $name }}</li>
+            <li class="breadcrumb-item active" aria-current="page">{{ $product->name }}</li>
         </ol>
     </nav>
 </div>
@@ -16,56 +16,40 @@
             <div class="row">
                 <div class="col-12 mb-0">
                     <figure class="text-center">
-                        <img class="round-border" src="{{ asset('/storage/'.$image) }}"
+                        <img class="round-border" src="{{ asset('/storage/'.$product->image) }}"
                             style="max-height: 250px; max-width: 300px;">
                     </figure>
                 </div>
                 <div class="col-12">
                     <div class="row">
+                        @foreach($product->imageList as $image)
                         <div class="col-3">
                             <div class="view overlay rounded z-depth-1 gallery-item round-border">
-                                <img src="{{ asset('img/defaultProduct.jpg') }}" class="img-fluid">
+                                <img src="{{ asset('/storage/'.$image->path) }}" class="img-fluid">
                                 <div class="mask rgba-white-slight"></div>
                             </div>
                         </div>
-                        <div class="col-3">
-                            <div class="view overlay rounded z-depth-1 gallery-item round-border">
-                                <img src="{{ asset('img/defaultProduct.jpg') }}" class="img-fluid">
-                                <div class="mask rgba-white-slight"></div>
-                            </div>
-                        </div>
-                        <div class="col-3">
-                            <div class="view overlay rounded z-depth-1 gallery-item round-border">
-                                <img src="{{ asset('img/defaultProduct.jpg') }}" class="img-fluid">
-                                <div class="mask rgba-white-slight"></div>
-                            </div>
-                        </div>
-                        <div class="col-3">
-                            <div class="view overlay rounded z-depth-1 gallery-item round-border">
-                                <img src="{{ asset('img/defaultProduct.jpg') }}" class="img-fluid">
-                                <div class="mask rgba-white-slight"></div>
-                            </div>
-                        </div>
+                        @endforeach
                     </div>
                 </div>
             </div>
         </div>
         <div class="col-md-6">
-            <h4 class="font-weight-bold">{{ $name }}</h4>
+            <h4 class="font-weight-bold">{{ $product->name }}</h4>
             <p class="mb-2 text-muted">by <a href="">Seller Name</a></p>
             <div>
                 <p class="mb-1 font-weight-bold">Description</p>
-                <p>{{ $description }}</p>
+                <p>{{ $product->description }}</p>
             </div>
             <div>
                 <p class="mb-1 font-weight-bold">Features</p>
                 <ul class="pl-4">
-                    @foreach($features as $feature)
-                    <li>{{ $feature }}</li>
+                    @foreach($product->features as $feature)
+                    <li>{{ $product->feature }}</li>
                     @endforeach
                 </ul>
             </div>
-            <h5 class="font-weight-bold">Rp {{ number_format($price,0,',','.') }}</h5>
+            <h5 class="font-weight-bold">Rp {{ number_format($product->price,0,',','.') }}</h5>
             <div class="border mt-3 m-1 p-2 row  round-border">
                 <div class="col-md-12 pt-2 pb-2">
                     <form class="form" method="POST">
@@ -74,7 +58,7 @@
                                 Price</label>
                             <div style="width: 100%">
                                 <input name="negotiation_price" type="text" class="form-control" maxlength="15"
-                                    placeholder="Rp {{ number_format($price,0,',','.') }}">
+                                    placeholder="Rp {{ number_format($product->price,0,',','.') }}">
                             </div>
                         </div>
 
