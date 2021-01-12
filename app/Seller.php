@@ -35,4 +35,9 @@ class Seller extends Authenticatable
     {
         return $this->morphMany('App\Rating', 'commentable');
     }
+
+    public function product()
+    {
+        return $this ->hasMany(Product::class);
+    }
 }
