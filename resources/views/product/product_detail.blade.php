@@ -36,7 +36,9 @@
         </div>
         <div class="col-md-6">
             <h4 class="font-weight-bold">{{ $product->name }}</h4>
-            <p class="mb-2 text-muted">by <a href="">Seller Name</a></p>
+            <p class="mb-2 text-muted">by <a
+                    href="{{ route('seller.detail',$product->seller->id) }}">{{ $product->seller->business_name }}</a>
+            </p>
             <div>
                 <p class="mb-1 font-weight-bold">Description</p>
                 <p>{{ $product->description }}</p>
@@ -45,7 +47,7 @@
                 <p class="mb-1 font-weight-bold">Features</p>
                 <ul class="pl-4">
                     @foreach($product->features as $feature)
-                    <li>{{ $product->feature }}</li>
+                    <li>{{ $feature }}</li>
                     @endforeach
                 </ul>
             </div>
