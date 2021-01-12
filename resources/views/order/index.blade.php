@@ -36,11 +36,23 @@
             4->Full Payment
             5->Complete --}}
             <tr>
-                <td>Seller Name</td>
-                <td><a style="color:#212529" href="">Name</a></td>
-                <td>Rp Price</td>
-                <td>Category</td>
-                <td>Status</td>
+                <td>{{$orderItem->seller->business_name}}</td>
+                <td><a style="color:#212529" href="">Packages {{$orderItem->product->name}}</a></td>
+                <td>{{$orderItem->product->price}}</td>
+                <td>{{$orderItem->negotiation_price}}</td>
+                @if($orderItem->status == 0)
+                    <td>Waiting</td>
+                @elseif($orderItem->status == 1)
+                    <td>Request</td>
+                @elseif($orderItem->status == 2)
+                    <td>Accept</td>    
+                @elseif($orderItem->status == 3)
+                    <td>Down Payment</td>
+                @elseif($orderItem->status == 4)
+                    <td>Full Payment</td>
+                @elseif($orderItem->status == 5)
+                    <td>Complete</td>
+                @endif
                 <td class="text-center">
                     <button type="button" class="btn btn-success" data-toggle="modal" data-target="#dpModal">
                         Pay
@@ -56,7 +68,7 @@
                     {{-- {{ route('order.show', 1) }} --}}
                     <a class="btn btn-warning" href="{{ route('order.show') }}" role="button">
                         View</a>
-                    <a class="btn btn-danger" href="" role="button">
+                    <a class="btn btn-danger" href="{{route('order.delete', $orderItem->id) }}" role="button" >
                         Delete</a>
                     <a class="btn btn-success" href="{{ route('rating.index',$orderItem->seller_id) }}" role="button">
                         Rate</a>

@@ -18,7 +18,7 @@ Route::redirect('/', '/home');
 Auth::routes();
 
 Route::get('/home', 'ProductController@index')->name('home');
-Route::get('/product-detail/{productId}', 'ProductController@detail')->name('product.detail');
+Route::get('/product-detail/{productId}', 'ProductController@detail')->name('product.detail')->middleware('auth');
 Route::get('/home/search', 'ProductController@search')->name('product-search');
 
 Route::get('/seller', 'SellerController@index')->name('seller.index');
@@ -38,9 +38,6 @@ Route::get('/event-plan', 'EventPlanController@index')->name('eventplan.index')-
 Route::post('/event-plan', 'EventPlanController@store')->name('eventplan.store')->middleware('auth');
 Route::get('/event-plan/delete/{eventPlanId}', 'EventPlanController@destroy')->name('eventPlan.delete');
 
-Route::get('/order', 'OrderController@index')->name('order.index')->middleware('auth');
-Route::get('/order-detail', 'OrderController@show')->name('order.show')->middleware('auth');
-
 
 Route::get('/customer/profile/{customerId}', 'CustomerController@show')->name('customer.show')->middleware('auth');
 Route::get('/rating', 'RatingController@index')->name('rating.index')->middleware('auth');
@@ -49,7 +46,10 @@ Route::post('/rating/{sellerId}', 'RatingController@store')->name('rating.store'
 
 //ORDER
 Route::get('/orders', 'OrderController@sellerOrders')->name('orders.seller');
-
+Route::post('/orders', 'OrderController@store')->name('orders.store');
+Route::get('/order', 'OrderController@index')->name('order.index')->middleware('auth');
+Route::get('/order-detail', 'OrderController@show')->name('order.show')->middleware('auth');
+Route::get('/order/delete/{orderId}', 'OrderController@destroy')->name('order.delete');
 
 //PRODUCT
 Route::post('/product', 'ProductController@store')->name('product.store');

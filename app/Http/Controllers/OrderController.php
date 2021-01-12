@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Order;
 use App\Product;
+use Auth;
 use Illuminate\Http\Request;
+use Carbon\Carbon;
 
 class OrderController extends Controller
 {
@@ -15,7 +17,7 @@ class OrderController extends Controller
      */
     public function index()
     {
-        $orderItems = Order::paginate(5);
+        $orderItems = Order::where('user_id', '=', Auth::id())->get();
         return view('order.index', compact('orderItems'));
     }
 
@@ -38,11 +40,15 @@ class OrderController extends Controller
     public function store(Request $request)
     {
         $order = new Order;
-        $order->date = $request->input('date');
-        $order->invoice = $request->input('invoice');
-        $order->user_id = Auth::User()->id();
+        $order->date = Carbon::now();
+        $order->negotiation_price = $request->input('negotiation_price');
+        $order->product_id = $request->input('product_id');
+        $order->seller_id = $request->input('seller_id');
+        $order->user_id = Auth::id();
         $order->status = 0;
         $order->save();
+
+        return redirect()->route('order.index');
     }
 
     /**
@@ -86,8 +92,15 @@ class OrderController extends Controller
      * @param  \App\Order  $order
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Order $order)
+    public function destroy($orderId)
     {
-        //
+        $order = Order::find($orderId);
+        $order->delete();
+        return back();
+    }
+
+    public function sellerOrders()
+    {
+        return view('seller.my_order');
     }
 }

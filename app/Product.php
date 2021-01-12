@@ -19,4 +19,9 @@ class Product extends Model
     {
         return $this->hasMany('App\ImageList');
     }
+
+    public function order()
+    {
+        return $this->hasOne('App\Order');
+    }
 }
