@@ -57,7 +57,7 @@ class ProductController extends Controller
         $files= $request->file('imageList');
         foreach ($files as $file) {
             $file=ImageList::create([
-                'path'=>$file->store('images/public'),
+                'path'=>$file->store('imageList','public'),
                 'image'=>$file->getClientOriginalName(),
                 'product_id'=>$product->id,
             ]);
