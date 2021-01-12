@@ -1,9 +1,9 @@
-@extends('layouts.app')
+@extends('layouts.seller')
 @section('content')
 <div class="container">
     <h4>My Package</h4>
     <hr>
-    @if($products->count()>0)
+
     <table class="table">
         <thead>
             <tr>
@@ -14,6 +14,7 @@
                 <th>Action</th>
             </tr>
         </thead>
+        @if($products->count()>0)
         <tbody>
             @foreach ($products as $product)
             <tr>
@@ -30,10 +31,10 @@
             </tr>
             @endforeach
         </tbody>
+        @else
+        <h2>NO PACKAGE</h2>
+        @endif
     </table>
-    @else
-    <h2>NO PACKAGE</h2>
-    @endif
     <hr>
     <h5>Create Package</h5>
     <hr>

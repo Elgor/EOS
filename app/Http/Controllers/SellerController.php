@@ -51,15 +51,21 @@ class SellerController extends Controller
         $seller->category_id = $request->input('category_id');
         $seller->city_id = $request->input('city_id');
         $seller->description = $request->input('description');
+        $seller->phone_number = $request->input('phone_number');
         $seller->address = $request->input('address');
         $seller->profile_picture = $request->file('profile_picture')->store('avatar', 'public');
         $seller->phone_number = $request->input('phone_number');
         $seller->save();
 
-        Auth::login($seller, true);
+        Auth::guard('seller')->login($seller);
 
-        $products = Product::find(Auth::id());
-        return view('seller.my_package', compact('products'));
+        $products = Product::find(Auth::guard('seller')->id());
+        if ($products===null) {
+            return redirect('/product');
+        } else {
+            return view('seller.my_package', compact('products'));
+        }
+        // return redirect('/product');
     }
 
     /**
@@ -133,13 +139,17 @@ class SellerController extends Controller
 
     public function authenticate(Request $request)
     {
-        //$findUser = Seller::select('select * from sellers where email = ')
         $findSeller = Seller::where('email', $request->email)->first();
-        // dd($findSeller);
         if ($findSeller) {
             // Authentication passed...
-            Auth::login($findSeller, true);
-            return redirect()->route('products.seller');
+            Auth::guard('seller')->login($findSeller);
+
+            $products = Product::where('seller_id', $findSeller->id)->get();
+            if ($products===null) {
+                return redirect('/product');
+            } else {
+                return view('seller.my_package', compact('products'));
+            }
         } else {
             return $this->loginFailed();
         }

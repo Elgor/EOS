@@ -51,7 +51,7 @@ class ProductController extends Controller
         $product->description = $request->input('description');
         $product->image = $request->file('image')->store('product', 'public');
         $product->features = $request->input('features');
-        $product->seller_id = Auth::id();
+        $product->seller_id = Auth::guard('seller')->id();
         $product->save();
 
         $files= $request->file('imageList');
@@ -63,7 +63,7 @@ class ProductController extends Controller
             ]);
         }
 
-        $products = Product::where('seller_id', '=', Auth::id())->get();
+        $products = Product::where('seller_id', '=', Auth::guard('seller')->id())->get();
         return view('seller.my_package', compact('products'));
     }
 

@@ -9,14 +9,18 @@
 
                 <div class="card-body">
                     <!-- <form method="POST" action="{{ route('register') }}" enctype="multipart/form-data"> -->
-                    <form method="POST" action='{{ route("register.seller") }}' aria-label="{{ __('Register') }}" enctype="multipart/form-data">   
-                    @csrf
+                    <form method="POST" action='{{ route("register.seller") }}' aria-label="{{ __('Register') }}"
+                        enctype="multipart/form-data">
+                        @csrf
 
                         <div class="form-group row">
-                            <label for="business_name" class="col-md-4 col-form-label text-md-right">{{ __('Business Name') }}</label>
+                            <label for="business_name"
+                                class="col-md-4 col-form-label text-md-right">{{ __('Business Name') }}</label>
 
                             <div class="col-md-6">
-                                <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="business_name" value="{{ old('name') }}" required autocomplete="name" autofocus>
+                                <input id="name" type="text" class="form-control @error('name') is-invalid @enderror"
+                                    name="business_name" value="{{ old('name') }}" required autocomplete="name"
+                                    autofocus>
 
                                 @error('name')
                                 <span class="invalid-feedback" role="alert">
@@ -27,11 +31,13 @@
                         </div>
 
                         <div class="form-group row">
-                            <label for="category_id" class="col-md-4 col-form-label text-md-right">{{ __('Category') }}</label>
+                            <label for="category_id"
+                                class="col-md-4 col-form-label text-md-right">{{ __('Category') }}</label>
 
                             <div class="col-md-6">
-                                <select class="form-select form-control" name="category_id" aria-label="Default select example">
-                                    <option selected>Select category</option>
+                                <select class="form-select form-control" name="category_id"
+                                    aria-label="Default select example">
+                                    <option>Select category</option>
                                     <option value="1">Event Organizer</option>
                                     <option value="2">Hall</option>
                                     <option value="3">MC</option>
@@ -42,10 +48,12 @@
                         </div>
 
                         <div class="form-group row">
-                            <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('E-Mail Address') }}</label>
+                            <label for="email"
+                                class="col-md-4 col-form-label text-md-right">{{ __('E-Mail Address') }}</label>
 
                             <div class="col-md-6">
-                                <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email">
+                                <input id="email" type="email" class="form-control @error('email') is-invalid @enderror"
+                                    name="email" value="{{ old('email') }}" required autocomplete="email">
 
                                 @error('email')
                                 <span class="invalid-feedback" role="alert">
@@ -56,10 +64,13 @@
                         </div>
 
                         <div class="form-group row">
-                            <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('Password') }}</label>
+                            <label for="password"
+                                class="col-md-4 col-form-label text-md-right">{{ __('Password') }}</label>
 
                             <div class="col-md-6">
-                                <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password">
+                                <input id="password" type="password"
+                                    class="form-control @error('password') is-invalid @enderror" name="password"
+                                    required autocomplete="new-password">
 
                                 @error('password')
                                 <span class="invalid-feedback" role="alert">
@@ -70,10 +81,12 @@
                         </div>
 
                         <div class="form-group row">
-                            <label for="password-confirm" class="col-md-4 col-form-label text-md-right">{{ __('Confirm Password') }}</label>
+                            <label for="password-confirm"
+                                class="col-md-4 col-form-label text-md-right">{{ __('Confirm Password') }}</label>
 
                             <div class="col-md-6">
-                                <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password">
+                                <input id="password-confirm" type="password" class="form-control"
+                                    name="password_confirmation" required autocomplete="new-password">
                             </div>
                         </div>
 
@@ -81,13 +94,14 @@
                             <label for="city" class="col-md-4 col-form-label text-md-right">{{ __('City') }}</label>
 
                             <div class="col-md-6">
-                                <select class="form-select form-control" name="city" aria-label="Default select example">
-                                    <option selected>Select city</option>
-                                    <option value="Jakarta">Jakarta</option>
-                                    <option value="Tanggerang">Tanggerang</option>
-                                    <option value="Bekasi">Bekasi</option>
-                                    <option value="Bogor">Bogor</option>
-                                    <option value="Depok">Depok</option>
+                                <select class="form-select form-control" name="city_id"
+                                    aria-label="Default select example">
+                                    <option>Select city</option>
+                                    <option value="1">Jakarta</option>
+                                    <option value="2">Tanggerang</option>
+                                    <option value="3">Bekasi</option>
+                                    <option value="4">Bogor</option>
+                                    <option value="5">Depok</option>
                                 </select>
                             </div>
                         </div>
@@ -106,17 +120,18 @@
                             <label class="col-md-4 col-form-label text-md-right">{{ __('Description') }}</label>
 
                             <div class="col-md-6">
-                                <textarea class="form-control" placeholder="Description" name="description" rows="3"></textarea>
+                                <textarea class="form-control" placeholder="Description" name="description"
+                                    rows="3"></textarea>
                             </div>
                         </div>
 
-                        <!-- <div class="form-group row">
+                        <div class="form-group row">
                             <label class="col-md-4 col-form-label text-md-right">{{ __('Phone Number') }}</label>
 
                             <div class="col-md-6">
                                 <input id="phone_number" class="form-control" name="phone_number">
                             </div>
-                        </div> -->
+                        </div>
 
 
 

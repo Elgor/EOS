@@ -11,15 +11,6 @@
     @yield('title')
     <!-- <title>{{ config('app.name', 'Carveo') }}</title> -->
 
-    <!-- Scripts -->
-    {{-- <script src="{{ asset('js/app.js') }}" defer></script>
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
-        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous">
-    </script> --}}
-    {{-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous">
-    </script> --}}
-    <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
 
@@ -67,33 +58,25 @@
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav mr-auto">
                         <li class="nav-item pt-1">
-                            <a class="nav-link" href="{{ url('/') }}">Home</a>
-                        </li>
-                        <li class="nav-item pt-1">
-                            <a class="nav-link" href="{{ route('seller.index') }}">Seller</a>
-                        </li>
-                        <li class="nav-item pt-1">
-                            <a class="nav-link" href="{{ route('compare.index') }}">Compare</a>
-                        </li>
-                        <li class="nav-item pt-1">
-                            <a class="nav-link" href="{{ route('eventplan.index') }}">Event Plan</a>
+                            <a class="nav-link" href="{{ url('/product') }}">My Packages</a>
                         </li>
                     </ul>
 
                     <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ml-auto">
                         <!-- Authentication Links -->
+                        {{-- {{ Auth::guard('seller')->user() }} --}}
                         {{-- Seller Register --}}
-                        @guest
+                        @if(empty(Auth::guard('seller')->user()))
                         <li class="nav-item" style="padding:14px 2rem 0 0">
                             <a href="{{route('login.seller')}}">Seller Login</a>
                         </li>
                         <li class="nav-item" style="padding:14px 2rem 0 0">
                             <a href="{{route('register.seller')}}">Become a Seller?</a>
                         </li>
-                        @endguest
+                        @endif
 
-                        @guest
+                        @if(empty(Auth::guard('seller')->user()))
                         <li class="nav-item pt-1">
                             <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
                         </li>
@@ -138,25 +121,13 @@
                             <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre
                                 style="padding-top: 11px">
-                                {{ Auth::user()->name }}
-                                {{ Auth::user()->business_name }}
+                                {{ Auth::guard('seller')->user()->business_name }}
 
-                                @if(Auth::user()->image)
-                                <img src="{{asset('/storage/'.Auth::user()->image)}}" class="rounded-circle" alt=""
-                                    width="30" height="30" />
-                                @elseif(Auth::user()->profile_picture)
-                                <img src="{{asset('/storage/'.Auth::user()->profile_picture)}}" class="rounded-circle"
-                                    alt="" width="30" height="30" />
-                                @endif
+                                <img src="{{asset('/storage/'.Auth::guard('seller')->user()->profile_picture)}}"
+                                    class="rounded-circle" alt="" width="30" height="30" />
                             </a>
 
                             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                                <a class="dropdown-item" href="{{ route('customer.show', Auth::user()->id) }}">
-                                    {{ __('Profile') }}
-                                </a>
-                                <a class="dropdown-item" href="{{ route('order.index') }}">
-                                    Order
-                                </a>
                                 <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
                                     {{ __('Logout') }}
@@ -167,7 +138,7 @@
                                 </form>
                             </div>
                         </li>
-                        @endguest
+                        @endif
                     </ul>
                 </div>
             </div>
