@@ -78,8 +78,6 @@
                         </div>
 
                         <div class="mt-3">
-                            <a class="btn btn-outline-info" type="submit" role="button">Add to
-                                Order</a>
                             <button type="submit" class="btn btn-outline-info">Add to Order</button>
                             <a class="ml-3 btn btn-outline-info" href="" role="button">Compare</a>
                             <a class="ml-3 pt-2" href=" {{ route('wishlist.index') }}" data-toggle="tooltip"
