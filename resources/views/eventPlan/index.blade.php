@@ -4,7 +4,7 @@
 <div class="container">
     <h4>EVENT PLAN</h4>
     <hr>
-    {{-- @if ($cartItems->isEmpty()==false) --}}
+
     <table class="table">
         <thead>
             <tr>
@@ -16,24 +16,29 @@
                 <th>Action</th>
             </tr>
         </thead>
+        @if($eventPlans->count()>0)
         <tbody>
-            {{-- @foreach ($cartItems as $cartItem) --}}
+            @foreach ($eventPlans as $eventPlan)
             <tr>
-                <td>Event Plan Name</td>
-                <td>type</td>
-                <td>Date</td>
-                <td>Time</td>
-                <td>Time</td>
-                <td><a class=" btn btn-danger" href=" route('cart.destroy', $cartItem->id)" role="button">
+                <td>{{ $eventPlan->eventName }}</td>
+                <td>{{ $eventPlan->eventType }}</td>
+                <td>{{ $eventPlan->date }}</td>
+                <td>{{ $eventPlan->startTime }}</td>
+                <td>{{ $eventPlan->endTime }}</td>
+                <td><a class=" btn btn-danger" href="{{ route('eventPlan.delete',$eventPlan->id) }}" role="button">
                         Delete</a>
                 </td>
             </tr>
-            {{-- @endforeach --}}
+            @endforeach
         </tbody>
+        @else
+        <h2>NO EventPlans</h2>
+        @endif
     </table>
     <div class="row ">
         <div class="col-md-10">
-            <form>
+            <form method="POST" action="{{route('eventplan.store')}}">
+                @csrf
                 <div class="form-group row required">
                     <label class="col-md-3 col-form-label text-md-left control-label" for="eventName">Event
                         Name</label>
@@ -47,10 +52,10 @@
                     <div class="col-md-4">
                         <select class="form-control" name="eventType">
                             <option selected>Select event type</option>
-                            <option value="Business">Business</option>
-                            <option value="Pentas Seni">Pentas Seni</option>
-                            <option value="Inagurasi">Inagurasi</option>
-                            <option value="Birthday Party">Birthday Party</option>
+                            <option value="1">Business</option>
+                            <option value="2">Pentas Seni</option>
+                            <option value="3">Inagurasi</option>
+                            <option value="4">Birthday Party</option>
                         </select>
                     </div>
                 </div>
@@ -79,11 +84,11 @@
                     <div class="col-md-4">
                         <select class="form-control" name="city">
                             <option selected>Select city</option>
-                            <option value="Jakarta">Jakarta</option>
-                            <option value="Tanggerang">Tanggerang</option>
-                            <option value="Bekasi">Bekasi</option>
-                            <option value="Bogor">Bogor</option>
-                            <option value="Depok">Depok</option>
+                            <option value="1">Jakarta</option>
+                            <option value="2">Tanggerang</option>
+                            <option value="3">Bekasi</option>
+                            <option value="4">Bogor</option>
+                            <option value="5">Depok</option>
                         </select>
                     </div>
                 </div>

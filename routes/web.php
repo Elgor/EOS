@@ -36,7 +36,7 @@ Route::get('/add-to-cart/{product}', 'CartController@add')->name('cart.add')->mi
 
 Route::get('/event-plan', 'EventPlanController@index')->name('eventplan.index')->middleware('auth');
 Route::post('/event-plan', 'EventPlanController@store')->name('eventplan.store')->middleware('auth');
-
+Route::get('/event-plan/delete/{eventPlanId}', 'EventPlanController@destroy')->name('eventPlan.delete');
 
 Route::get('/order', 'OrderController@index')->name('order.index')->middleware('auth');
 Route::get('/order-detail', 'OrderController@show')->name('order.show')->middleware('auth');

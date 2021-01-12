@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\EventPlan;
+use Auth;
 use Illuminate\Http\Request;
 
 class EventPlanController extends Controller
@@ -14,7 +15,8 @@ class EventPlanController extends Controller
      */
     public function index()
     {
-        return view('eventPlan.index');
+        $eventPlans = EventPlan::where('user_id', '=', Auth::id())->get();
+        return view('eventPlan.index', compact('eventPlans'));
     }
 
     /**
@@ -35,7 +37,22 @@ class EventPlanController extends Controller
      */
     public function store(Request $request)
     {
+        // dd($request);
         $eventPlan= new Eventplan;
+        $eventPlan->eventname=$request->input('eventName');
+        $eventPlan->eventType=$request->input('eventType');
+        $eventPlan->date=$request->input('date');
+        $eventPlan->startTime=$request->input('startTime');
+        $eventPlan->endTime=$request->input('endTime');
+        $eventPlan->city_id=$request->input('city');
+        $eventPlan->buildingAddress=$request->input('buildingAddress');
+        $eventPlan->description=$request->input('description');
+        $eventPlan->user_id=Auth::id();
+        $eventPlan->save();
+
+        $eventPlans = EventPlan::where('user_id', '=', Auth::id())->get();
+        // dd($eventPlans);
+        return view('eventPlan.index', compact('eventPlans'));
     }
 
     /**
@@ -78,8 +95,10 @@ class EventPlanController extends Controller
      * @param  \App\EventPlan  $eventPlan
      * @return \Illuminate\Http\Response
      */
-    public function destroy(EventPlan $eventPlan)
+    public function destroy($eventPlanId)
     {
-        //
+        $eventPlan = EventPlan::find($eventPlanId);
+        $eventPlan->delete();
+        return back();
     }
 }
