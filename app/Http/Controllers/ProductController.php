@@ -57,14 +57,14 @@ class ProductController extends Controller
         $files= $request->file('imageList');
         foreach ($files as $file) {
             $file=ImageList::create([
-                'path'=>$file->store('imageList','public'),
+                'path'=>$file->store('imageList', 'public'),
                 'image'=>$file->getClientOriginalName(),
                 'product_id'=>$product->id,
             ]);
         }
 
-        $products = Product::where('seller_id', '=', Auth::guard('seller')->id())->get();
-        return view('seller.my_package', compact('products'));
+        // $products = Product::where('seller_id', '=', Auth::guard('seller')->id())->get();
+        return redirect()->route('products.seller');
     }
 
     /**
@@ -133,11 +133,12 @@ class ProductController extends Controller
     public function search(Request $request)
     {
         $search= $request->search;
-        $products= DB::table('products')->where('name', 'like', '%'.$search.'%')->paginate(4);
+        $products=Product::where('name', 'like', '%'.$search.'%')->paginate(4);
+        // dd($products);
         if ($products->isEmpty()) {
             return $this->noDataSearch();
         } else {
-            return view('home', ['products' => $products]);
+            return view('home', compact('products'));
         }
     }
 
