@@ -60,10 +60,8 @@
                         <li class="nav-item pt-1">
                             <a class="nav-link" href="{{ route('products.seller') }}">My Packages</a>
                         </li>
-                    </ul>
-                    <ul class="navbar-nav mr-auto">
                         <li class="nav-item pt-1">
-                            <a class="nav-link" href="{{ route('products.seller') }}">My Orders</a>
+                            <a class="nav-link" href="{{ route('orders.seller') }}">Orders</a>
                         </li>
                     </ul>
                     <!-- Right Side Of Navbar -->

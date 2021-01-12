@@ -47,6 +47,10 @@ Route::get('/rating', 'RatingController@index')->name('rating.index')->middlewar
 Route::get('/rating/{sellerId}', 'RatingController@index')->name('rating.index')->middleware('auth');
 Route::post('/rating/{sellerId}', 'RatingController@store')->name('rating.store')->middleware('auth');
 
+//ORDER
+Route::get('/orders', 'OrderController@sellerOrders')->name('orders.seller');
+
+
 //PRODUCT
 Route::post('/product', 'ProductController@store')->name('product.store');
 Route::get('/product', 'ProductController@sellerProducts')->name('products.seller');
