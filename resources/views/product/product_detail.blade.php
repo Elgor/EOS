@@ -74,7 +74,7 @@
                         </div>
 
                         <div class="form-group">
-                            <label class="text-md-right pr-1 font-weight-bold" for="negotiation_price">Event
+                            <label class="text-md-right pr-1 font-weight-bold" for="event_plan">Event
                                 Plan</label>
                             @if(Auth::user() && Auth::user()->eventPlans->count() !==0)
                             <select class="form-control" style="width: 100%" name="event_plan_id">
@@ -92,7 +92,7 @@
                         <div class="mt-3">
                             <button type="submit" class="btn btn-outline-info">Add to Order</button>
                             <a class="ml-3 btn btn-outline-info" href="" role="button">Compare</a>
-                            <a class="ml-3 pt-2" href=" {{ route('wishlist.index') }}" data-toggle="tooltip"
+                            <a class="ml-3 pt-2" href="{{ route('wishlist.store',$product->id) }}" data-toggle="tooltip"
                                 data-placement="top" title="Wishlist">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor"
                                     class="bi bi-heart" viewBox="0 0 16 16">

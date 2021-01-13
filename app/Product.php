@@ -24,4 +24,9 @@ class Product extends Model
     {
         return $this->hasOne('App\Order');
     }
+
+    public function wishlist()
+    {
+        return $this->hasOne('App\Wishlist');
+    }
 }

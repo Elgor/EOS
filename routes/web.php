@@ -31,6 +31,8 @@ Route::get('/message', 'MessageController@index')->name('message.index');
 Route::get('/compare', 'CompareController@index')->name('compare.index');
 
 Route::get('/wishlist', 'WishlistController@index')->name('wishlist.index');
+Route::get('/wishlist/{productId}', 'WishlistController@store')->name('wishlist.store')->middleware('auth');
+Route::get('/wishlist/delete/{productId}', 'WishlistController@destroy')->name('wishlist.delete')->middleware('auth');
 
 Route::get('/add-to-cart/{product}', 'CartController@add')->name('cart.add')->middleware('auth');
 
