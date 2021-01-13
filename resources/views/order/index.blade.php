@@ -38,7 +38,11 @@
                         {{$orderItem->product->name}}</a>
                 </td>
                 <td>Rp {{number_format($orderItem->product->price,0,',','.')}}</td>
-                <td>{{number_format($orderItem->negotiation_price,0,',','.')}}</td>
+                <td>
+                    @if(!is_null($orderItem->negotiation_price))
+                    Rp {{number_format($orderItem->negotiation_price,0,',','.')}}
+                    @endif  
+                </td>
                 <td>{{$orderItem->status}}</td>
                 <td class="text-center">
                     {{-- <input type="button" value="Pay" <?php if ($orderItem->status != 'Accepted'){ ?> disabled
@@ -55,7 +59,7 @@
                     </button>
                 </td>
                 <td class="text-center">
-                    <a class="btn btn-warning" href="{{ route('order.show') }}" role="button">
+                    <a class="btn btn-warning" href="{{ route('order.show',$orderItem->id) }}" role="button">
                         View</a>
                     @if($orderItem->status != 'Accepted')
                     <a class="btn btn-danger" href="{{route('order.delete', $orderItem->id) }}" role="button">
@@ -85,8 +89,7 @@
 
 </div>
 
-<div class="modal fade" id="dpModal" tabindex="-1" role="dialog" aria-labelledby="paymentModalCenterTitle"
-    aria-hidden="true">
+<div class="modal fade" id="dpModal" tabindex="-1" role="dialog" aria-labelledby="paymentModalCenterTitle" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -127,8 +130,7 @@
     </div>
 </div>
 
-<div class="modal fade" id="fpModal" tabindex="-1" role="dialog" aria-labelledby="paymentModalCenterTitle"
-    aria-hidden="true">
+<div class="modal fade" id="fpModal" tabindex="-1" role="dialog" aria-labelledby="paymentModalCenterTitle" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="modal-header">
