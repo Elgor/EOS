@@ -130,7 +130,44 @@ class OrderController extends Controller
         }
     }
 
-    public function acceptorder()
+    public function rejectOrder($orderId)
     {
+        $order = Order::find($orderId);
+        if($order->status == 'Requested')
+            $order->status = 'Rejected';
+        else
+            return back();
+        $order->save();
+        return back();
+    }
+
+    public function acceptOrder($orderId){
+        $order = Order::find($orderId);
+        if($order->status == 'Requested')
+            $order->status = 'Accepted';
+        else
+            return back();
+        $order->save();
+        return back();
+    }
+
+    public function downPayment($orderId){
+        $order = Order::find($orderId);
+        if($order->status == 'Accepted')
+            $order->status = 'Down Payment';
+        else
+            return back();
+        $order->save();
+        return back();
+    }
+
+    public function fullPayment($orderId){
+        $order = Order::find($orderId);
+        if($order->status == 'Down Payment')
+            $order->status = 'Full Payment';
+        else
+            return back();
+        $order->save();
+        return back();
     }
 }
