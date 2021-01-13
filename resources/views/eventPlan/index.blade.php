@@ -5,6 +5,7 @@
     <hr>
 
     <table class="table">
+        @if($eventPlans->count()>0)
         <thead>
             <tr>
                 <th>Name</th>
@@ -15,7 +16,6 @@
                 <th>Action</th>
             </tr>
         </thead>
-        @if($eventPlans->count()>0)
         <tbody>
             @foreach ($eventPlans as $eventPlan)
             <tr>
@@ -31,7 +31,7 @@
             @endforeach
         </tbody>
         @else
-        <h2>NO EventPlans</h2>
+        <h4>No EventPlan</h4>
         @endif
     </table>
     <hr>

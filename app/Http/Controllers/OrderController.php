@@ -102,7 +102,8 @@ class OrderController extends Controller
 
     public function sellerOrders()
     {
-        return view('seller.my_order');
+        $orderItems = Order::where('seller_id', '=', Auth::guard('seller')->id())->get();
+        return view('seller.my_order', compact('orderItems'));
     }
 
 

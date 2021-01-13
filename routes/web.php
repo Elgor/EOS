@@ -46,7 +46,7 @@ Route::post('/rating/{sellerId}', 'RatingController@store')->name('rating.store'
 
 //ORDER
 Route::get('/orders', 'OrderController@sellerOrders')->name('orders.seller');
-Route::post('/orders', 'OrderController@store')->name('orders.store');
+Route::post('/order', 'OrderController@store')->name('order.store');
 Route::get('/order', 'OrderController@index')->name('order.index')->middleware('auth');
 Route::get('/order-detail', 'OrderController@show')->name('order.show')->middleware('auth');
 Route::get('/order/delete/{orderId}', 'OrderController@destroy')->name('order.delete');

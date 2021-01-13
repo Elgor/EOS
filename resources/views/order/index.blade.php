@@ -27,42 +27,48 @@
                 <th class="text-center">Action</th>
             </tr>
         </thead>
+        @if($orderItems->count() >0)
         <tbody>
-            {{-- @if(count($orderItems)) --}}
             @foreach ($orderItems as $orderItem)
             <tr>
                 <td>{{$orderItem->seller->business_name}}</td>
                 <td><a style="color:#212529" href="">{{$orderItem->product->name}}</a></td>
-                <td>{{$orderItem->product->price}}</td>
-                <td>{{$orderItem->negotiation_price}}</td>
+                <td>Rp {{number_format($orderItem->product->price,0,',','.')}}</td>
+                <td>{{number_format($orderItem->negotiation_price,0,',','.')}}</td>
                 <td>{{$orderItem->status}}</td>
                 <td class="text-center">
+                    {{-- <input type="button" value="Pay" <?php if ($orderItem->status != 'Accepted'){ ?> disabled
+                        <?php   } ?> class="btn btn-success" data-toggle="modal" data-target="#dpModal" /> --}}
                     <button type="button" class="btn btn-success" data-toggle="modal" data-target="#dpModal">
                         Pay
                     </button>
                 </td>
                 <td class="text-center">
+                    {{-- <input type="button" value="Pay" <?php if ($orderItem->status != 'Down Payment'){ ?> disabled
+                        <?php   } ?> class="btn btn-success" data-toggle="modal" data-target="#fpModal" /> --}}
                     <button type="button" class="btn btn-success" data-toggle="modal" data-target="#fpModal">
                         Pay
                     </button>
                 </td>
                 <td class="text-center">
-                    {{-- @if() --}}
-                    {{-- {{ route('order.show', 1) }} --}}
                     <a class="btn btn-warning" href="{{ route('order.show') }}" role="button">
                         View</a>
+                    @if($orderItem->status != 'Accepted')
                     <a class="btn btn-danger" href="{{route('order.delete', $orderItem->id) }}" role="button">
                         Delete</a>
+                    @endif
+                    {{-- <input type="button" value="Rate" <?php if ($orderItem->status != 'Completed'){ ?> disabled
+                        <?php   } ?> class="btn btn-success" href="{{ route('rating.index',$orderItem->seller_id) }}"
+                    /> --}}
                     <a class="btn btn-success" href="{{ route('rating.index',$orderItem->seller_id) }}" role="button">
                         Rate</a>
-                    {{-- @endif --}}
                 </td>
             </tr>
             @endforeach
-            {{-- @else
-            <h2>No Order</h2>
-            @endif --}}
         </tbody>
+        @else
+        <h4>No Order</h4>
+        @endif
     </table>
     <form method="POST" action="{{route('order.request', Auth::user()->id) }}">
         @csrf

@@ -5,6 +5,7 @@
     <hr>
 
     <table class="table">
+        @if($products->count()>0)
         <thead>
             <tr>
                 <th>Picture</th>
@@ -14,7 +15,6 @@
                 <th>Action</th>
             </tr>
         </thead>
-        @if($products->count()>0)
         <tbody>
             @foreach ($products as $product)
             <tr>
@@ -32,7 +32,7 @@
             @endforeach
         </tbody>
         @else
-        <h2>NO PACKAGE</h2>
+        <h4>No Package</h4>
         @endif
     </table>
     <hr>
@@ -62,11 +62,9 @@
                 </div>
             </div>
             <div class="form-group row required">
-                <label class="col-md-3 col-form-label text-md-left control-label" for="price">Feature
-                </label>
-                <div class="col-md-7">
+                <label class="col-md-3 col-form-label text-md-left control-label" for="price">Feature</label>
+                <div class="col-md-7 ">
                     <select class="selectpicker" multiple data-width="fit" data-live-search="true" name="features[]">
-                        <option selected>Select Features</option>
                         <option value="1 Hour Photoshoot">1 Hour Photoshoot</option>
                         <option value="2 Hour Photoshoot">2 Hour Photoshoot</option>
                         <option value="3 Hour Photoshoot">3 Hour Photoshoot</option>
@@ -76,14 +74,14 @@
                     </select>
                 </div>
             </div>
-            <div class="form-group row">
-                <label class="col-md-3 col-form-label text-md-left">Package Picture</label>
+            <div class="form-group row required">
+                <label class="col-md-3 col-form-label text-md-left control-label">Package Picture</label>
                 <div class="col-md-7">
                     <input type="file" name="image">
                 </div>
             </div>
-            <div class="form-group row">
-                <label class="col-md-3 col-form-label text-md-left">Upload Images</label>
+            <div class="form-group row required">
+                <label class="col-md-3 col-form-label text-md-left control-label">Upload Images</label>
                 <div class="col-md-7">
                     <input type="file" name="imageList[]" id="images" multiple="multiple">
                 </div>

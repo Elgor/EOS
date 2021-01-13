@@ -215,15 +215,9 @@
 
                                     </div>
                                 </div>
-                                <!-- <div class="col-3">
-                                <div class="view overlay rounded z-depth-1 gallery-item round-border">
-                                    <img src="{{ asset('/storage/'.$package->image)}}" class="img-fluid">
-                                    <div class="mask rgba-white-slight"></div>
-                                </div>
-                            </div> -->
                                 @empty
                                 <div class="d-flex justify-content-center">
-                                    <h2>No Package</h2>
+                                    <h4>No Package</h4>
                                 </div>
                                 @endforelse
                             </div>

@@ -15,6 +15,7 @@
     </div>
     @endif
     <table class="table">
+        @if($orderItems->count() >0)
         <thead>
             <tr>
                 <th>Package Name</th>
@@ -28,15 +29,16 @@
         <tbody>
             {{-- 0->waiting
             1->Request
-            2->Accept
+            2->Accepted
             3->Down Payment
             4->Full Payment
             5->Complete --}}
+            @foreach ($orderItems as $orderItem)
             <tr>
-                <td>Name</td>
-                <td>Rp Price</td>
-                <td>Rp Price</td>
-                <td>Status</td>
+                <td>{{$orderItem->product->name}}</td>
+                <td>{{$orderItem->product->price}}</td>
+                <td class="font-weight-bold">{{number_format($orderItem->negotiation_price,0,',','.')??'-'}}</td>
+                <td>{{$orderItem->status}}</td>
                 <td class="text-center"><a class="btn btn-warning" href="" role="button">
                         View Event Plan</a></td>
                 <td class="text-center">
@@ -46,7 +48,11 @@
                         Accept</a>
                 </td>
             </tr>
+            @endforeach
         </tbody>
+        @else
+        <h4>No Order</h4>
+        @endif
     </table>
 </div>
 @endsection

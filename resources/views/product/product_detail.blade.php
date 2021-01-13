@@ -60,7 +60,7 @@
             <h5 class="font-weight-bold">Rp {{ number_format($product->price,0,',','.') }}</h5>
             <div class="border mt-3 m-1 p-2 row  round-border border border-info">
                 <div class="col-md-12 pt-2 pb-2">
-                    <form class="form" method="POST" action="{{route('orders.store')}}">
+                    <form class="form" method="POST" action="{{route('order.store')}}">
                         @csrf
                         <input type="hidden" name="product_id" value="{{$product->id}}">
                         <input type="hidden" name="seller_id" value="{{$product->seller->id}}">
