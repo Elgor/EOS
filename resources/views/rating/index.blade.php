@@ -56,7 +56,7 @@
         <div class="row">
             <div class="col-md-4 text-center m-auto">
                 <figure>
-                    <img class="round-border" src="{{ asset('img/defaultProduct.jpg') }}">
+                    <img class="round-border" src="{{ asset('/storage/'.$seller->profile_picture) }}">
                 </figure>
                 <!-- <h5 class="font-weight-bold">{{ number_format((float)$seller->final_rating,1,'.','') }} / 5.0 <i class="text-warning fa fa-star" style="font-size: 1.5rem;"></i></h5> -->
                 <div class="col-12">
@@ -101,7 +101,7 @@
                         id="1"><label for="1">✯</label>
                 </div>
                 <div class="form-group">
-                    <textarea name="comment" id="" cols="100" rows="5"></textarea>
+                    <textarea name="comment" id="" cols="100" rows="5" placeholder="Input Review"></textarea>
                 </div>
                 <div class="form-group ">
                     <button type="submit" class="btn btn-primary">
