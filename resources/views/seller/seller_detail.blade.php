@@ -8,13 +8,13 @@
 <div class="container">
     <nav aria-label="breadcrumb">
         <ol class="breadcrumb bg-transparent p-0">
-            <li class="breadcrumb-item"><a href="{{ url('/') }}">Home</a></li>
+            <li class="breadcrumb-item"><a href="{{ url('/seller') }}">Seller</a></li>
             <li class="breadcrumb-item active" aria-current="page">{{ $seller->business_name }}</li>
         </ol>
     </nav>
 </div>
 <div class="col-10 mx-auto">
-    <section class="mb-5 p-4 round-border " style="background:#e3f2fd">
+    <section class="mb-5 p-4 round-border ">
         <div class="row">
             <div class="col-md-6 text-center m-auto">
                 <figure>
@@ -47,7 +47,7 @@
                 </div>
             </div>
         </div>
-        <div class="border border-info round-border p-1">
+        <div class="border round-border p-1">
             <ul class="nav nav-tabs" id="myTab" role="tablist">
                 <li class="nav-item" role="presentation">
                     <a class="nav-link active" id="review-tab" data-toggle="tab" href="#review" role="tab"

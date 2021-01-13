@@ -70,3 +70,5 @@ Route::post('/login/seller', 'SellerController@authenticate')->name('login.selle
 //SELLER REGISTER
 Route::get('/register/seller', 'SellerController@showSellerRegisterForm')->name('register.seller');
 Route::post('/register/seller', 'SellerController@store')->name('register.seller');
+//TRANSACTION
+Route::get('/transaction', 'TransactionController@index')->name('transaction.index');

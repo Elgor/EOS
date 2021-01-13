@@ -31,21 +31,25 @@
         <tbody>
             @foreach ($orderItems as $orderItem)
             <tr>
-                <td>{{$orderItem->seller->business_name}}</td>
-                <td><a style="color:#212529" href="">{{$orderItem->product->name}}</a></td>
+                <td><a style=" color:#212529"
+                        href="{{ route('seller.detail',$orderItem->seller->id) }}">{{$orderItem->seller->business_name}}</a>
+                </td>
+                <td><a style=" color:#212529" href="{{ route('product.detail',$orderItem->product->id) }}">
+                        {{$orderItem->product->name}}</a>
+                </td>
                 <td>Rp {{number_format($orderItem->product->price,0,',','.')}}</td>
                 <td>{{number_format($orderItem->negotiation_price,0,',','.')}}</td>
                 <td>{{$orderItem->status}}</td>
                 <td class="text-center">
                     {{-- <input type="button" value="Pay" <?php if ($orderItem->status != 'Accepted'){ ?> disabled
-                        <?php   } ?> class="btn btn-success" data-toggle="modal" data-target="#dpModal" /> --}}
+                            <?php   } ?> class="btn btn-success" data-toggle="modal" data-target="#dpModal" /> --}}
                     <button type="button" class="btn btn-success" data-toggle="modal" data-target="#dpModal">
                         Pay
                     </button>
                 </td>
                 <td class="text-center">
                     {{-- <input type="button" value="Pay" <?php if ($orderItem->status != 'Down Payment'){ ?> disabled
-                        <?php   } ?> class="btn btn-success" data-toggle="modal" data-target="#fpModal" /> --}}
+                            <?php   } ?> class="btn btn-success" data-toggle="modal" data-target="#fpModal" /> --}}
                     <button type="button" class="btn btn-success" data-toggle="modal" data-target="#fpModal">
                         Pay
                     </button>
@@ -58,7 +62,7 @@
                         Delete</a>
                     @endif
                     {{-- <input type="button" value="Rate" <?php if ($orderItem->status != 'Completed'){ ?> disabled
-                        <?php   } ?> class="btn btn-success" href="{{ route('rating.index',$orderItem->seller_id) }}"
+                            <?php   } ?> class="btn btn-success" href="{{ route('rating.index',$orderItem->seller_id) }}"
                     /> --}}
                     <a class="btn btn-success" href="{{ route('rating.index',$orderItem->seller_id) }}" role="button">
                         Rate</a>

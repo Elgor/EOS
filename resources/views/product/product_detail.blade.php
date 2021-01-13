@@ -14,7 +14,7 @@
     </nav>
 </div>
 <!--Section: Block Content-->
-<section style="background:#e3f2fd" class="mb-5 p-4 round-border">
+<section class="mb-5 p-4 round-border">
     <div class="row">
         <div class="col-md-6 mb-4 mb-md-0">
             <div class="row">
@@ -58,7 +58,7 @@
                 </ul>
             </div>
             <h5 class="font-weight-bold">Rp {{ number_format($product->price,0,',','.') }}</h5>
-            <div class="border mt-3 m-1 p-2 row  round-border border border-info">
+            <div class="border mt-3 m-1 p-2 row  round-border border">
                 <div class="col-md-12 pt-2 pb-2">
                     <form class="form" method="POST" action="{{route('order.store')}}">
                         @csrf

@@ -154,8 +154,8 @@
                                 <a class="dropdown-item" href="{{ route('customer.show', Auth::user()->id) }}">
                                     {{ __('Profile') }}
                                 </a>
-                                <a class="dropdown-item" href="{{ route('order.index') }}">
-                                    Order
+                                <a class="dropdown-item" href="{{ route('transaction.index') }}">
+                                    Transaction
                                 </a>
                                 <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
