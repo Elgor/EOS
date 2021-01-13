@@ -1,4 +1,4 @@
-@extends('seller.app')
+@extends('layouts.seller')
 @section('content')
 <div class="container">
     <nav aria-label="breadcrumb">
@@ -86,29 +86,7 @@
                     <p></p>
                 </div>
             </section>
-            {{-- Klo bisa dapat informasi transaction, klo tdk di hapus --}}
-            <section class=" round-border p-2 " style="height: fit-content">
-                <h4 class="font-weight-bold">Transaction Detail</h4>
-                <hr>
-                <div>
-                    <p class="mb-1 font-weight-bold">Invoice</p>
-                    <p></p>
-                </div>
-                <div>
-                    <p class="mb-1 font-weight-bold">Transaction Date</p>
-                    <p></p>
-                </div>
-                <div>
-                    <p class="mb-1 font-weight-bold">Bank</p>
-                    <p></p>
-                </div>
-                <div>
-                    <p class="mb-1 font-weight-bold">Type</p>
-                    <p></p>
-                </div>
-            </section>
         </div>
     </div>
-
-
-    @endsection
+</div>
+@endsection

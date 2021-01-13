@@ -177,4 +177,10 @@ class OrderController extends Controller
         $order->save();
         return back();
     }
+
+    public function sellerShow()
+    {
+        // $order = Order::findOrFail($itemId);
+        return view('seller.event_plan_detail');
+    }
 }
