@@ -52,6 +52,7 @@ class SellerController extends Controller
         $seller->city_id = $request->input('city_id');
         $seller->description = $request->input('description');
         $seller->phone_number = $request->input('phone_number');
+        $seller->no_rekening = $request->input('no_rekening');
         $seller->address = $request->input('address');
         $seller->profile_picture = $request->file('profile_picture')->store('avatar', 'public');
         $seller->phone_number = $request->input('phone_number');
@@ -175,7 +176,7 @@ class SellerController extends Controller
             if ($products===null) {
                 return redirect('/product');
             } else {
-                return view('seller.my_package', compact('products'));
+                return redirect()->route('products.seller');
             }
         } else {
             return $this->loginFailed();
@@ -192,16 +193,12 @@ class SellerController extends Controller
 
     public function search(Request $request)
     {
-        if (Auth::user()) {
-            $search= $request->search;
-            $sellers= DB::table('sellers')->where('business_name', 'like', '%'.$search.'%')->paginate(4);
-            if ($sellers->isEmpty()) {
-                return $this->noDataSearch();
-            } else {
-                return view('seller.index', ['sellers' => $sellers]);
-            }
+        $search= $request->search;
+        $sellers= Seller::where('business_name', 'like', '%'.$search.'%')->paginate(4);
+        if ($sellers->isEmpty()) {
+            return $this->noDataSearch();
         } else {
-            return view('auth.login');
+            return view('seller.index', compact('sellers'));
         }
     }
 }

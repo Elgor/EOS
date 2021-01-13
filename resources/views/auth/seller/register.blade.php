@@ -132,9 +132,13 @@
                                 <input id="phone_number" class="form-control" name="phone_number">
                             </div>
                         </div>
+                        <div class="form-group row">
+                            <label class="col-md-4 col-form-label text-md-right">{{ __('Account Number') }}</label>
 
-
-
+                            <div class="col-md-6">
+                                <input id="no_rekening" class="form-control" name="no_rekening">
+                            </div>
+                        </div>
                         <div class="form-group row">
                             <label class="col-md-4 col-form-label text-md-right">{{ __('Profile Picture') }}</label>
 

@@ -26,6 +26,7 @@ class CreateSellersTable extends Migration
             $table->string('profile_picture')->nullable();
             $table->string('phone_number')->nullable();
             $table->double('final_rating')->default(0.0);
+            $table->string('no_rekening');
             $table->rememberToken();
         });
     }

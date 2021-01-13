@@ -14,7 +14,7 @@
     </nav>
 </div>
 <!--Section: Block Content-->
-<section class="mb-5 p-4 round-border">
+<section style="background:#e3f2fd" class="mb-5 p-4 round-border">
     <div class="row">
         <div class="col-md-6 mb-4 mb-md-0">
             <div class="row">
@@ -28,7 +28,7 @@
                     <div class="row">
                         @foreach($product->imageList as $image)
                         <div class="col-4">
-                            <div class="view overlay rounded z-depth-1 gallery-item round-border">
+                            <div class="view overlay rounded z-depth-1 gallery-item round-border mb-2">
                                 <a href="{{ asset('/storage/'.$image->path) }}" data-lightbox="photos">
                                     <img src="{{ asset('/storage/'.$image->path) }}" class="img-fluid"
                                         style="min-height: 115px">
@@ -58,14 +58,14 @@
                 </ul>
             </div>
             <h5 class="font-weight-bold">Rp {{ number_format($product->price,0,',','.') }}</h5>
-            <div class="border mt-3 m-1 p-2 row  round-border">
+            <div class="border mt-3 m-1 p-2 row  round-border border border-info">
                 <div class="col-md-12 pt-2 pb-2">
                     <form class="form" method="POST" action="{{route('orders.store')}}">
-                    @csrf
+                        @csrf
                         <input type="hidden" name="product_id" value="{{$product->id}}">
                         <input type="hidden" name="seller_id" value="{{$product->seller->id}}">
                         <div class="form-group mb-3">
-                            <label class="text-md-right pr-1" for="negotiation_price">Negotiation
+                            <label class="text-md-right pr-1 font-weight-bold" for="negotiation_price">Negotiation
                                 Price</label>
                             <div style="width: 100%">
                                 <input name="negotiation_price" type="text" class="form-control" maxlength="15"
@@ -74,13 +74,18 @@
                         </div>
 
                         <div class="form-group">
-                            <label class="text-md-right pr-1" for="negotiation_price">Event Plan</label>
+                            <label class="text-md-right pr-1 font-weight-bold" for="negotiation_price">Event
+                                Plan</label>
+                            @if(Auth::user() && Auth::user()->eventPlans->count() !==0)
                             <select class="form-control" style="width: 100%">
-                            @foreach(Auth::user()->eventPlans as $e)                         
-                                    <option value="{{$e->id}}">{{$e->eventName}}</option>
-                            @endforeach
+                                @foreach(Auth::user()->eventPlans as $e)
+                                <option value="{{$e->id}}">{{$e->eventName}}</option>
+                                @endforeach
                             </select>
-                           
+                            @else
+                            <a class="ml-3 btn btn-outline-info" href="{{ route('eventplan.index') }}"
+                                role="button">Create Event Plan</a>
+                            @endIf
                         </div>
 
                         <div class="mt-3">
@@ -102,5 +107,4 @@
         </div>
     </div>
 </section>
-<!--Section: Block Content-->
 @endsection

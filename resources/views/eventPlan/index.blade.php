@@ -1,5 +1,4 @@
 @extends('layouts.app')
-
 @section('content')
 <div class="container">
     <h4>EVENT PLAN</h4>
@@ -22,9 +21,9 @@
             <tr>
                 <td>{{ $eventPlan->eventName }}</td>
                 <td>{{ $eventPlan->eventType }}</td>
-                <td>{{ $eventPlan->date }}</td>
-                <td>{{ $eventPlan->startTime }}</td>
-                <td>{{ $eventPlan->endTime }}</td>
+                <td>{{ date('d-m-Y', strtotime($eventPlan->date)) }}</td>
+                <td>{{ date('H:i',strtotime($eventPlan->startTime)) }}</td>
+                <td>{{ date('H:i',strtotime($eventPlan->endTime)) }}</td>
                 <td><a class=" btn btn-danger" href="{{ route('eventPlan.delete',$eventPlan->id) }}" role="button">
                         Delete</a>
                 </td>
@@ -35,6 +34,8 @@
         <h2>NO EventPlans</h2>
         @endif
     </table>
+    <hr>
+    <h4>Create Event Plan</h4>
     <div class="row ">
         <div class="col-md-10">
             <form method="POST" action="{{route('eventplan.store')}}">
@@ -52,10 +53,10 @@
                     <div class="col-md-4">
                         <select class="form-control" name="eventType">
                             <option selected>Select event type</option>
-                            <option value="1">Business</option>
-                            <option value="2">Pentas Seni</option>
-                            <option value="3">Inagurasi</option>
-                            <option value="4">Birthday Party</option>
+                            <option value="Business">Business</option>
+                            <option value="Pentas Seni">Pentas Seni</option>
+                            <option value="Inagurasi">Inagurasi</option>
+                            <option value="Birthday Party">Birthday Party</option>
                         </select>
                     </div>
                 </div>

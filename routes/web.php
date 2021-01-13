@@ -18,7 +18,7 @@ Route::redirect('/', '/home');
 Auth::routes();
 
 Route::get('/home', 'ProductController@index')->name('home');
-Route::get('/product-detail/{productId}', 'ProductController@detail')->name('product.detail')->middleware('auth');
+Route::get('/product-detail/{productId}', 'ProductController@detail')->name('product.detail');
 Route::get('/home/search', 'ProductController@search')->name('product-search');
 
 Route::get('/seller', 'SellerController@index')->name('seller.index');

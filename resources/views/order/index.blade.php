@@ -28,16 +28,11 @@
             </tr>
         </thead>
         <tbody>
+            {{-- @if(count($orderItems)) --}}
             @foreach ($orderItems as $orderItem)
-            {{-- 0->waiting
-            1->Request
-            2->Accept
-            3->Down Payment
-            4->Full Payment
-            5->Complete --}}
             <tr>
                 <td>{{$orderItem->seller->business_name}}</td>
-                <td><a style="color:#212529" href="">Packages {{$orderItem->product->name}}</a></td>
+                <td><a style="color:#212529" href="">{{$orderItem->product->name}}</a></td>
                 <td>{{$orderItem->product->price}}</td>
                 <td>{{$orderItem->negotiation_price}}</td>
                 <td>{{$orderItem->status}}</td>
@@ -64,6 +59,9 @@
                 </td>
             </tr>
             @endforeach
+            {{-- @else
+            <h2>No Order</h2>
+            @endif --}}
         </tbody>
     </table>
     <form method="POST" action="{{route('order.request', Auth::user()->id) }}">
@@ -77,7 +75,8 @@
 
 </div>
 
-<div class="modal fade" id="dpModal" tabindex="-1" role="dialog" aria-labelledby="paymentModalCenterTitle" aria-hidden="true">
+<div class="modal fade" id="dpModal" tabindex="-1" role="dialog" aria-labelledby="paymentModalCenterTitle"
+    aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -118,7 +117,8 @@
     </div>
 </div>
 
-<div class="modal fade" id="fpModal" tabindex="-1" role="dialog" aria-labelledby="paymentModalCenterTitle" aria-hidden="true">
+<div class="modal fade" id="fpModal" tabindex="-1" role="dialog" aria-labelledby="paymentModalCenterTitle"
+    aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="modal-header">
