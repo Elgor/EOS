@@ -57,7 +57,7 @@ Route::post('/orders/full-payment/{orderId}', 'OrderController@fullPaymentOrder'
 //ORDER USER
 Route::post('/order', 'OrderController@store')->name('order.store');
 Route::get('/order', 'OrderController@index')->name('order.index')->middleware('auth');
-Route::get('/order-detail', 'OrderController@show')->name('order.show')->middleware('auth');
+Route::get('/order-detail/{orderId}', 'OrderController@show')->name('order.show')->middleware('auth');
 Route::get('/order/delete/{orderId}', 'OrderController@destroy')->name('order.delete');
 Route::post('/order/request/{userId}', 'OrderController@requestAllOrder')->name('order.request');
 //PRODUCT
