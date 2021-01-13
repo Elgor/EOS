@@ -45,6 +45,7 @@ class OrderController extends Controller
         $order->date = Carbon::now();
         $order->negotiation_price = $request->input('negotiation_price');
         $order->product_id = $request->input('product_id');
+        $order->event_plan_id =$request->input('event_plan_id');
         $order->seller_id = $request->input('seller_id');
         $order->user_id = Auth::id();
         $order->save();
@@ -102,7 +103,9 @@ class OrderController extends Controller
 
     public function sellerOrders()
     {
-        $orderItems = Order::where('seller_id', '=', Auth::guard('seller')->id())->get();
+        $orderItems = Order::where('seller_id', '=', Auth::guard('seller')->id())
+        ->where('status', '!=', 'Waiting')
+        ->get();
         return view('seller.my_order', compact('orderItems'));
     }
 
@@ -125,5 +128,9 @@ class OrderController extends Controller
         } else {
             return redirect('/order')->with('message', 'No Order to Request !');
         }
+    }
+
+    public function acceptorder()
+    {
     }
 }

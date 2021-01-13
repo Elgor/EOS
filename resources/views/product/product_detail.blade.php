@@ -77,8 +77,9 @@
                             <label class="text-md-right pr-1 font-weight-bold" for="negotiation_price">Event
                                 Plan</label>
                             @if(Auth::user() && Auth::user()->eventPlans->count() !==0)
-                            <select class="form-control" style="width: 100%">
+                            <select class="form-control" style="width: 100%" name="event_plan_id">
                                 @foreach(Auth::user()->eventPlans as $e)
+                                <option>Select Event Plan</option>
                                 <option value="{{$e->id}}">{{$e->eventName}}</option>
                                 @endforeach
                             </select>

@@ -18,9 +18,10 @@ class CreateOrdersTable extends Migration
             $table->id();
             $table->date('date');
             $table->integer('negotiation_price')->nullable();
-            $table->unsignedInteger('user_id')->nullable();
-            $table->unsignedInteger('seller_id')->nullalbe();
-            $table->unsignedInteger('product_id')->nullable();
+            $table->unsignedInteger('user_id');
+            $table->unsignedInteger('seller_id');
+            $table->unsignedInteger('product_id');
+            $table->unsignedInteger('event_plan_id');
             $table->string('status')->default('Waiting');
             $table->timestamps();
         });
