@@ -21,7 +21,7 @@ class CreateOrdersTable extends Migration
             $table->unsignedInteger('user_id')->nullable();
             $table->unsignedInteger('seller_id')->nullalbe();
             $table->unsignedInteger('product_id')->nullable();
-            $table->integer('status')->nullable();
+            $table->string('status')->default('Waiting');
             $table->timestamps();
         });
     }

@@ -7,6 +7,7 @@ use App\Product;
 use Auth;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\DB;
 
 class OrderController extends Controller
 {
@@ -45,7 +46,6 @@ class OrderController extends Controller
         $order->product_id = $request->input('product_id');
         $order->seller_id = $request->input('seller_id');
         $order->user_id = Auth::id();
-        $order->status = 0;
         $order->save();
 
         return redirect()->route('order.index');
@@ -102,5 +102,26 @@ class OrderController extends Controller
     public function sellerOrders()
     {
         return view('seller.my_order');
+    }
+
+
+    public function requestAllOrder($userId)
+    {
+        $requestCount = DB::table('orders')
+            ->where('user_id', $userId)
+            ->where('status', 'Waiting')
+            ->count();
+
+        if ($requestCount > 0) {
+            DB::table('orders')
+                ->where('user_id', $userId)
+                ->where('status', 'Waiting')
+                ->update([
+                    'status' => 'Requested'
+                ]);
+            return redirect('/order')->with('message', 'Successfully Request All Order !');
+        } else {
+            return redirect('/order')->with('message', 'No Order to Request !');
+        }
     }
 }
