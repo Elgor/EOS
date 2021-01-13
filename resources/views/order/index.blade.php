@@ -5,7 +5,7 @@
     <h4 class="d-flex">ORDER</h4>
     <hr>
     @if(session('message'))
-    <div class="alert alert-success alert-dismissible show fade">
+    <div class="alert alert-warning alert-dismissible show fade">
         <div class="alert-body">
             <button class="close" data-dismiss="alert">
                 <span>×</span>
@@ -40,19 +40,7 @@
                 <td><a style="color:#212529" href="">Packages {{$orderItem->product->name}}</a></td>
                 <td>{{$orderItem->product->price}}</td>
                 <td>{{$orderItem->negotiation_price}}</td>
-                @if($orderItem->status == 0)
-                    <td>Waiting</td>
-                @elseif($orderItem->status == 1)
-                    <td>Request</td>
-                @elseif($orderItem->status == 2)
-                    <td>Accept</td>    
-                @elseif($orderItem->status == 3)
-                    <td>Down Payment</td>
-                @elseif($orderItem->status == 4)
-                    <td>Full Payment</td>
-                @elseif($orderItem->status == 5)
-                    <td>Complete</td>
-                @endif
+                <td>{{$orderItem->status}}</td>
                 <td class="text-center">
                     <button type="button" class="btn btn-success" data-toggle="modal" data-target="#dpModal">
                         Pay
@@ -68,7 +56,7 @@
                     {{-- {{ route('order.show', 1) }} --}}
                     <a class="btn btn-warning" href="{{ route('order.show') }}" role="button">
                         View</a>
-                    <a class="btn btn-danger" href="{{route('order.delete', $orderItem->id) }}" role="button" >
+                    <a class="btn btn-danger" href="{{route('order.delete', $orderItem->id) }}" role="button">
                         Delete</a>
                     <a class="btn btn-success" href="{{ route('rating.index',$orderItem->seller_id) }}" role="button">
                         Rate</a>
@@ -78,10 +66,18 @@
             @endforeach
         </tbody>
     </table>
+    <form method="POST" action="{{route('order.request', Auth::user()->id) }}">
+        @csrf
+
+        <button type="submit" class="btn btn-warning">
+            Send All Request Order
+        </button>
+
+    </form>
+
 </div>
 
-<div class="modal fade" id="dpModal" tabindex="-1" role="dialog" aria-labelledby="paymentModalCenterTitle"
-    aria-hidden="true">
+<div class="modal fade" id="dpModal" tabindex="-1" role="dialog" aria-labelledby="paymentModalCenterTitle" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -122,8 +118,7 @@
     </div>
 </div>
 
-<div class="modal fade" id="fpModal" tabindex="-1" role="dialog" aria-labelledby="paymentModalCenterTitle"
-    aria-hidden="true">
+<div class="modal fade" id="fpModal" tabindex="-1" role="dialog" aria-labelledby="paymentModalCenterTitle" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="modal-header">
