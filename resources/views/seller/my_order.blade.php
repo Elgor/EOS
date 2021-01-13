@@ -23,7 +23,7 @@
                 <th>Negotiation Price</th>
                 <th>Status</th>
                 <th class="text-center">Event Plan</th>
-                <th class="text-center">Action</th>
+                <th>Action</th>
             </tr>
         </thead>
         <tbody>
@@ -39,13 +39,23 @@
                 <td>{{$orderItem->product->price}}</td>
                 <td class="font-weight-bold">{{number_format($orderItem->negotiation_price,0,',','.')??'-'}}</td>
                 <td>{{$orderItem->status}}</td>
-                <td class="text-center"><a class="btn btn-warning" href="" role="button">
+                <td class="text-center"><a class="btn btn-warning"  role="button">
                         View Event Plan</a></td>
-                <td class="text-center">
-                    <a class="btn btn-danger" href="" role="button">
-                        Reject</a>
-                    <a class="btn btn-success" href="" role="button">
-                        Accept</a>
+                <td>
+                    <div class="row">
+                        <form method="POST" action="{{route('orders.seller.reject', $orderItem->id)}}">
+                            @csrf
+                            <button type="submit" class="btn btn-danger">
+                                Reject
+                            </button>
+                        </form>
+                        <form method="POST" action="{{route('orders.seller.accept', $orderItem->id)}}">
+                            @csrf
+                            <button type="submit" class="btn btn-success">
+                                Accept
+                            </button>
+                        </form>
+                    </div>
                 </td>
             </tr>
             @endforeach

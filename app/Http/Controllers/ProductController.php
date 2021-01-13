@@ -7,7 +7,8 @@ use App\Seller;
 use Auth;
 use App\ImageList;
 use Illuminate\Http\Request;
-use DB;
+use Illuminate\Support\Facades\DB;
+use phpDocumentor\Reflection\Types\Null_;
 
 class ProductController extends Controller
 {
@@ -54,12 +55,12 @@ class ProductController extends Controller
         $product->seller_id = Auth::guard('seller')->id();
         $product->save();
 
-        $files= $request->file('imageList');
+        $files = $request->file('imageList');
         foreach ($files as $file) {
-            $file=ImageList::create([
-                'path'=>$file->store('imageList', 'public'),
-                'image'=>$file->getClientOriginalName(),
-                'product_id'=>$product->id,
+            $file = ImageList::create([
+                'path' => $file->store('imageList', 'public'),
+                'image' => $file->getClientOriginalName(),
+                'product_id' => $product->id,
             ]);
         }
 
@@ -130,8 +131,8 @@ class ProductController extends Controller
 
     public function search(Request $request)
     {
-        $search= $request->search;
-        $products=Product::where('name', 'like', '%'.$search.'%')->paginate(4);
+        $search = $request->search;
+        $products = Product::where('name', 'like', '%' . $search . '%')->paginate(4);
         // dd($products);
         if ($products->isEmpty()) {
             return $this->noDataSearch();
@@ -145,5 +146,45 @@ class ProductController extends Controller
         $products = Product::where('seller_id', '=', Auth::guard('seller')->id())->get();
         // dd($products->count());
         return view('seller.my_package', compact('products'));
+    }
+
+    public function filter(Request $request)
+    {
+        $min = $request->min;
+        $max = $request->max;
+
+        if (is_null($min) && !is_null($max)) {
+            $min = 0;
+            $max += 1;
+
+            $products = Product::where('price', '<', $max)->paginate(4);
+
+        } elseif (is_null($max) && !is_null($min)) {
+            $min -= 1;
+            $max = 0;
+
+            $products = Product::where('price', '>', $min)->paginate(4);
+
+        } elseif (!is_null($min) && !is_null($max)) {
+            $min -= 1;
+            $max += 1;
+            
+            $products = Product::where([['price', '>', $min], ['price', '<', $max]])->paginate(4);
+        }else{
+            return $this->noDataSearch();
+        }
+
+
+
+        // $products = DB::table('products')
+        // ->where('price','>',$min)
+        // ->where('price','<',$max)->paginate(4);
+
+
+        if ($products->isEmpty()) {
+            return $this->noDataSearch();
+        } else {
+            return view('home', compact('products'));
+        }
     }
 }
