@@ -45,16 +45,28 @@
                 <td>
                     <div class="row">
                         <form method="POST" action="{{route('orders.seller.reject', $orderItem->id)}}">
+                            @if($orderItem->status == "Requested")
                             @csrf
-                            <button type="submit" class="btn btn-danger">
+                            <button type=" submit" class="btn btn-danger">
                                 Reject
                             </button>
+                            @else
+                            <button type=" submit" class="btn btn-danger" disabled>
+                                Reject
+                            </button>
+                            @endif
                         </form>
                         <form method="POST" action="{{route('orders.seller.accept', $orderItem->id)}}">
+                            @if($orderItem->status == "Requested")
                             @csrf
                             <button type="submit" class="btn btn-success">
                                 Accept
                             </button>
+                            @else
+                            <button type="submit" class="btn btn-success" disabled>
+                                Accept
+                            </button>
+                            @endif
                         </form>
                     </div>
                 </td>

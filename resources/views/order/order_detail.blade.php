@@ -16,14 +16,15 @@
                 <div class="col-12 mb-0">
                     <figure class="text-center">
                         <img class="round-border" src="{{ asset('/storage/'.$order->product->image) }}"
-                            class="img-fluid z-depth-1">
+                            class="img-fluid z-depth-1" style="max-height: 250px; max-width: 300px;">
                     </figure>
                 </div>
             </div>
         </div>
         <div class="col-md-6">
             <h4 class="font-weight-bold">{{$order->product->name}}</h4>
-            <p class="mb-2 text-muted">by <a href="">{{$order->seller->business_name}}</a></p>
+            <p class="mb-2 text-muted">by <a
+                    href="{{ route('seller.detail',$order->seller->id) }}">{{$order->seller->business_name}}</a></p>
             <div>
                 <p class="mb-1 font-weight-bold">Description</p>
                 <p>{{$order->product->description}}</p>
@@ -89,20 +90,22 @@
                 <hr>
                 <div>
                     <p class="mb-1 font-weight-bold">Invoice</p>
-                    <p></p>
+                    <p>{{$order->transaction->invoice}}</p>
                 </div>
                 <div>
                     <p class="mb-1 font-weight-bold">Transaction Date</p>
-                    <p></p>
+                    <p>{{$order->transaction->updated_at}}</p>
                 </div>
                 <div>
                     <p class="mb-1 font-weight-bold">Bank</p>
-                    <p></p>
+                    <p>{{$order->transaction->bank}}</p>
                 </div>
-                <div>
+                <!-- <div>
                     <p class="mb-1 font-weight-bold">Type</p>
-                    <p></p>
-                </div>
+                    <p>
+
+                    </p>
+                </div> -->
             </section>
         </div>
     </div>
