@@ -42,9 +42,9 @@ class Seller extends Authenticatable
     public function product()
     {
         return $this ->hasMany('App\Product');
-    }    
+    }
 
-    public function sellers(){
+    public function orders(){
         return $this->hasMany('App\Order');
     }
 

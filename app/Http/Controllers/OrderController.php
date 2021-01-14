@@ -62,7 +62,7 @@ class OrderController extends Controller
     public function show($orderId)
     {
         $order = Order::findOrFail($orderId);
-        return view('order.order_detail',compact('order'));
+        return view('order.order_detail', compact('order'));
     }
 
     /**
@@ -178,9 +178,10 @@ class OrderController extends Controller
         return back();
     }
 
-    public function sellerShow()
+    public function sellerShow($orderId)
     {
-        // $order = Order::findOrFail($itemId);
-        return view('seller.event_plan_detail');
+        $order = Order::findOrFail($orderId);
+        // dd($order);
+        return view('seller.event_plan_detail', compact('order'));
     }
 }

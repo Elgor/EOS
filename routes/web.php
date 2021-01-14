@@ -49,7 +49,7 @@ Route::post('/rating/{sellerId}', 'RatingController@store')->name('rating.store'
 
 //ORDER SELLER
 Route::get('/orders', 'OrderController@sellerOrders')->name('orders.seller');
-Route::get('/orders-detail', 'OrderController@sellershow')->name('orders.show');
+Route::get('/orders-detail/{orderId}', 'OrderController@sellershow')->name('orders.show');
 Route::post('/orders/reject/{orderId}', 'OrderController@rejectOrder')->name('orders.seller.reject');
 Route::post('/orders/accept/{orderId}', 'OrderController@acceptOrder')->name('orders.seller.accept');
 Route::post('/orders/down-payment/{orderId}', 'OrderController@downPaymentOrder')->name('orders.seller.downPayment');

@@ -39,7 +39,8 @@
                 <td>Rp {{number_format($orderItem->product->price,0,',','.')??'-'}}</td>
                 <td class="font-weight-bold">Rp {{number_format($orderItem->negotiation_price,0,',','.')??'-'}}</td>
                 <td>{{$orderItem->status}}</td>
-                <td class="text-center"><a href="{{ route('orders.show') }}" class="btn btn-warning" role="button">
+                <td class="text-center"><a href="{{ route('orders.show',$orderItem->id) }}" class="btn btn-warning"
+                        role="button">
                         View Event Plan</a></td>
                 <td>
                     <div class="row">
