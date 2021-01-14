@@ -2,11 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Message;
-use Auth;
+use App\MessageDetail;
 use Illuminate\Http\Request;
 
-class MessageController extends Controller
+class MessageDetailController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,13 +14,7 @@ class MessageController extends Controller
      */
     public function index()
     {
-        if(Auth::user())
-            $messages = Message::where('user_id', Auth::id())->get();
-        elseif(Auth::guard('seller'))
-            $messages = Message::where('seller_id', Auth::guard('seller')->id())->get();
-        
-        return view( 'message.messageList', compact('messages'));
-
+        //
     }
 
     /**
@@ -42,40 +35,45 @@ class MessageController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $messageDetail = new MessageDetail;
+        $messageDetail->text = $request->input('text');
+        $messageDetail->sender = $request->input('sender');
+        $messageDetail->message_id = $request->input('message_id');
+        $messageDetail->save();
+
+        return back();
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Message  $message
+     * @param  \App\MessageDetail  $messageDetail
      * @return \Illuminate\Http\Response
      */
-    public function show($messageId)
+    public function show(MessageDetail $messageDetail, $id)
     {
-        $message = Message::find($messageId);
-        return view('message.chat', compact("message"));       
+    
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Message  $message
+     * @param  \App\MessageDetail  $messageDetail
      * @return \Illuminate\Http\Response
      */
-    public function edit(Message $message)
+    public function edit($id)
     {
-        //
+
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Message  $message
+     * @param  \App\MessageDetail  $messageDetail
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Message $message)
+    public function update(Request $request, MessageDetail $messageDetail)
     {
         //
     }
@@ -83,10 +81,10 @@ class MessageController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Message  $message
+     * @param  \App\MessageDetail  $messageDetail
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Message $message)
+    public function destroy(MessageDetail $messageDetail)
     {
         //
     }
