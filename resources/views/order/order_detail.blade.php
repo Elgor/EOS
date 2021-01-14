@@ -89,20 +89,22 @@
                 <hr>
                 <div>
                     <p class="mb-1 font-weight-bold">Invoice</p>
-                    <p></p>
+                    <p>{{$order->transaction->invoice}}</p>
                 </div>
                 <div>
                     <p class="mb-1 font-weight-bold">Transaction Date</p>
-                    <p></p>
+                    <p>{{$order->transaction->updated_at}}</p>
                 </div>
                 <div>
                     <p class="mb-1 font-weight-bold">Bank</p>
-                    <p></p>
+                    <p>{{$order->transaction->bank}}</p>
                 </div>
-                <div>
+                <!-- <div>
                     <p class="mb-1 font-weight-bold">Type</p>
-                    <p></p>
-                </div>
+                    <p>
+                       
+                    </p>
+                </div> -->
             </section>
         </div>
     </div>
