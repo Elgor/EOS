@@ -26,8 +26,10 @@ Route::get('/seller', 'SellerController@index')->name('seller.index');
 Route::get('/seller-detail/{sellerId}', 'SellerController@detail')->name('seller.detail');
 Route::get('/seller/search', 'SellerController@search')->name('seller-search');
 
-
+//MESSAGE
 Route::get('/message', 'MessageController@index')->name('message.index');
+Route::get('/message/{messageId}', 'MessageController@show')->name('message.show');
+Route::post('messageDetail', 'MessageDetailController@store')->name('message.store');
 
 Route::get('/compare', 'CompareController@index')->name('compare.index');
 
