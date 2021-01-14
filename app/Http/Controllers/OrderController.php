@@ -126,7 +126,7 @@ class OrderController extends Controller
                 ]);
             return redirect('/order')->with('message', 'Successfully Request All Order !');
         } else {
-            return redirect('/order')->with('message', 'No Order to Request !');
+            return redirect('/order')->with('error', 'No Order to Request !');
         }
     }
 

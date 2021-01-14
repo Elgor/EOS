@@ -15,7 +15,7 @@
     </div>
     @endif
     <table class="table">
-        {{-- @if($orderItems->count() >0) --}}
+        @if($transactions->count() >0)
         <thead>
             <tr>
                 <th>Invoice</th>
@@ -25,18 +25,20 @@
             </tr>
         </thead>
         <tbody>
-            {{-- @foreach ($orderItems as $orderItem) --}}
+            @foreach ($transactions as $transaction)
             <tr>
-                <td>Invoice</td>
-                <td>Invoice</td>
-                <td>Invoice</td>
-                <td>Invoice</td>
+                <td>{{ $transaction->invoice }}</td>
+                <td>{{ $transaction->bank }}</td>
+                <td>{{ $transaction->type }}</td>
+                <td> Rp
+                    {{number_format($transaction->order->negotiation_price??$transaction->order->product->price,0,',','.')}}
+                </td>
             </tr>
-            {{-- @endforeach --}}
+            @endforeach
         </tbody>
-        {{-- @else
+        @else
         <h4>No Transaction</h4>
-        @endif --}}
+        @endif
     </table>
 </div>
 @endsection

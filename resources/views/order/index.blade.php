@@ -4,16 +4,6 @@
 <div class="container">
     <h4 class="d-flex">ORDER</h4>
     <hr>
-    @if(session('message'))
-    <div class="alert alert-warning alert-dismissible show fade">
-        <div class="alert-body">
-            <button class="close" data-dismiss="alert">
-                <span>×</span>
-            </button>
-            {{session('message')}}
-        </div>
-    </div>
-    @endif
     <table class="table">
         <thead>
             <tr>
@@ -31,29 +21,35 @@
         <tbody>
             @foreach ($orderItems as $orderItem)
             <tr>
-                <td><a style=" color:#212529" href="{{ route('seller.detail',$orderItem->seller->id) }}">{{$orderItem->seller->business_name}}</a>
+                <td><a style=" color:#212529"
+                        href="{{ route('seller.detail',$orderItem->seller->id) }}">{{$orderItem->seller->business_name}}</a>
                 </td>
                 <td><a style=" color:#212529" href="{{ route('product.detail',$orderItem->product->id) }}">
                         {{$orderItem->product->name}}</a>
                 </td>
                 <td>Rp {{number_format($orderItem->product->price,0,',','.')}}</td>
                 <td>
-                    @if(!is_null($orderItem->negotiation_price))
-                    Rp {{number_format($orderItem->negotiation_price,0,',','.')}}
-                    @endif
+                    Rp {{number_format($orderItem->negotiation_price,0,',','.')??'-'}}
                 </td>
                 <td>{{$orderItem->status}}</td>
                 <td class="text-center">
-                    {{-- <input type="button" value="Pay" <?php if ($orderItem->status != 'Accepted') { ?> disabled <?php   } ?> class="btn btn-success" data-toggle="modal" data-target="#dpModal" /> --}}
-                    <button type="button" class="btn btn-success" data-toggle="modal" data-target="#dpModal{{$orderItem->id}}">
-                        Pay
-                    </button>
+                    <input type="button" value="Pay" <?php if ($orderItem->status != 'Accepted') { ?> disabled
+                        <?php   } ?> class="btn btn-success" data-toggle="modal"
+                        data-target="#dpModal{{$orderItem->id}}" />
+                    {{-- <button type="button" class="btn btn-success" data-toggle="modal"
+                        data-target="#dpModal{{$orderItem->id}}">
+                    Pay
+                    </button> --}}
                 </td>
                 <td class="text-center">
-                    {{-- <input type="button" value="Pay" <?php if ($orderItem->status != 'Accepted') { ?> disabled <?php   } ?> class="btn btn-success" data-toggle="modal" data-target="#fpModal" /> --}}
-                    <button type="button" class="btn btn-success" data-toggle="modal" data-target="#fpModal{{$orderItem->id}}">
-                        Pay
-                    </button>
+                    <input type="button" value="Pay"
+                        <?php if ($orderItem->status == 'Waiting' || $orderItem->status == 'Requested' ||$orderItem->status == 'Completed') { ?>
+                        disabled <?php   } ?> class="btn btn-success" data-toggle="modal"
+                        data-target="#fpModal{{$orderItem->id}}" />
+                    {{-- <button type="button" class="btn btn-success" data-toggle="modal"
+                        data-target="#fpModal{{$orderItem->id}}">
+                    Pay
+                    </button> --}}
                 </td>
                 <td class="text-center">
                     <a class="btn btn-warning" href="{{ route('order.show',$orderItem->id) }}" role="button">
@@ -65,15 +61,20 @@
                     {{-- <input type="button" value="Rate" <?php if ($orderItem->status != 'Completed') { ?> disabled
                             <?php   } ?> class="btn btn-success" href="{{ route('rating.index',$orderItem->seller_id) }}"
                     /> --}}
+                    @if($orderItem->status == 'Completed')
                     <a class="btn btn-success" href="{{ route('rating.index',$orderItem->seller_id) }}" role="button">
                         Rate</a>
+                    @endif
                 </td>
             </tr>
 
-            <div class="modal fade" id="dpModal{{$orderItem->id}}" tabindex="-1" role="dialog" aria-labelledby="paymentModalCenterTitle" aria-hidden="true">
+            <div class="modal fade" id="dpModal{{$orderItem->id}}" tabindex="-1" role="dialog"
+                aria-labelledby="paymentModalCenterTitle" aria-hidden="true">
                 <div class="modal-dialog modal-dialog-centered" role="document">
                     <div class="modal-content">
-                        <form class="form" method="POST" action="{{url('/transaction/'. $orderItem->id . '/Down Payment')}}" enctype="multipart/form-data">
+                        <form class="form" method="POST"
+                            action="{{url('/transaction/'. $orderItem->id . '/Down Payment')}}"
+                            enctype="multipart/form-data">
                             @csrf
 
                             <div class="modal-header">
@@ -84,14 +85,16 @@
                             </div>
 
                             <div class="modal-body">
-                                <h1 class="text-center">NOMOR REKENING</h1>
-                                <p>
+                                <p>No Rekening</p>
+                                <h1 class="text-center">{{ $orderItem->seller->no_rekening }}</h1>
+                                <h4>
                                     @if(!is_null($orderItem->negotiation_price))
                                     Rp {{number_format((float)($orderItem->negotiation_price*0.3),0,',','.')}}
                                     @else
                                     Rp {{number_format((float)($orderItem->product->price*0.3),0,',','.')}}
-                                    @endif ( 30% )
-                                </p>
+                                    @endif
+                                    (30%)
+                                </h4>
                                 <hr>
 
                                 <div class="form-group mb-3">
@@ -124,7 +127,8 @@
                 </div>
             </div>
 
-            <div class="modal fade" id="fpModal{{$orderItem->id}}" tabindex="-1" role="dialog" aria-labelledby="paymentModalCenterTitle" aria-hidden="true">
+            <div class="modal fade" id="fpModal{{$orderItem->id}}" tabindex="-1" role="dialog"
+                aria-labelledby="paymentModalCenterTitle" aria-hidden="true">
                 <div class="modal-dialog modal-dialog-centered" role="document">
                     <div class="modal-content">
                         <div class="modal-header">
@@ -133,18 +137,21 @@
                                 <span aria-hidden="true">&times;</span>
                             </button>
                         </div>
-                        <form class="form" method="POST" action="{{url('/transaction/' . $orderItem->id .'/Full Payment')}} " enctype="multipart/form-data">
+                        <form class="form" method="POST"
+                            action="{{url('/transaction/' . $orderItem->id .'/Full Payment')}} "
+                            enctype="multipart/form-data">
                             @csrf
 
                             <div class="modal-body">
-                                <h1 class="text-center">NOMOR REKENING</h1>
-                                <p>
+                                <p>No Rekening</p>
+                                <h1 class="text-center">{{ $orderItem->seller->no_rekening }}</h1>
+                                <h4>
                                     @if(!is_null($orderItem->negotiation_price))
                                     Rp {{number_format($orderItem->negotiation_price,0,',','.')}}
                                     @else
                                     Rp {{number_format($orderItem->product->price,0,',','.')}}
                                     @endif
-                                </p>
+                                </h4>
                                 <hr>
 
                                 <div class="form-group mb-3">
@@ -182,12 +189,9 @@
     </table>
     <form method="POST" action="{{route('order.request', Auth::user()->id) }}">
         @csrf
-
         <button type="submit" class="btn btn-warning">
             Send All Request Order
         </button>
-
     </form>
-
 </div>
 @endsection
