@@ -66,17 +66,25 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav mr-auto">
-                        <li class="nav-item pt-1">
+                        <li class="nav-item pt-2">
                             <a class="nav-link" href="{{ url('/') }}">Home</a>
                         </li>
-                        <li class="nav-item pt-1">
-                            <a class="nav-link" href="{{ route('seller.index') }}">Seller</a>
+                        <li class="nav-item pt-2">
+                            <a class="nav-link " href="{{ route('seller.index') }}">Seller</a>
                         </li>
-                        <li class="nav-item pt-1">
-                            <a class="nav-link" href="{{ route('compare.index') }}">Compare</a>
+                        <li class="nav-item pt-2">
+                            <a class="nav-link" href="{{ route('compare.index') }}">
+                                <div class="p-0" style="display: inline-block !important">Compare
+                                </div>
+                                @if(Session::get('compare'))
+                                <p class="m-0" style="display: inline-block">
+                                    {{ count(Session::get('compare')) }}
+                                </p>
+                                @endIf
+                            </a>
                         </li>
-                        <li class="nav-item pt-1">
-                            <a class="nav-link" href="{{ route('eventplan.index') }}">Event Plan</a>
+                        <li class="nav-item pt-2">
+                            <a class="nav-link " href=" {{ route('eventplan.index') }}">Event Plan</a>
                         </li>
                     </ul>
 
@@ -178,6 +186,16 @@
             <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
             </button>
+        </div>
+        @endif
+        @if(session('message'))
+        <div class="alert alert-success alert-dismissible show fade">
+            <div class="alert-body">
+                <button class="close" data-dismiss="alert">
+                    <span>×</span>
+                </button>
+                {{session('message')}}
+            </div>
         </div>
         @endif
         <main class="py-4 container">

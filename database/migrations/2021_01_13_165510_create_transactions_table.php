@@ -23,7 +23,7 @@ class CreateTransactionsTable extends Migration
             $table->string('bank');
             $table->string('receipt_downPayment')->nullable();
             $table->string('receipt_fullPayment')->nullable();
-         
+            $table->string('type');
         });
     }
 

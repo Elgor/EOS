@@ -187,4 +187,68 @@ class ProductController extends Controller
             return view('home', compact('products'));
         }
     }
+
+    public function addToCompare($productId)
+    {
+        $product = Product::find($productId);
+        if (!$product) {
+            abort(404);
+        }
+        $compare = session()->get('compare');
+
+        if (!$compare) {
+            $compare = [
+                $productId => [
+                    'product_id'=>$product->id,
+                    'seller_id'=>$product->seller->id,
+                    'image'=> $product->image,
+                    "name" => $product->name,
+                    "seller_name" => $product->seller->business_name,
+                    "price" => $product->price,
+                    "feature" => $product->features,
+                    "city"=>$product->seller->city->name,
+                    "rating"=>$product->seller->final_rating,
+                    "transaction"=>$product->seller->orders
+                ]
+        ];
+            session()->put('compare', $compare);
+            return redirect()->back()->with('message', 'Product added to compare successfully!');
+        }
+
+        if (isset($compare[$productId])) {
+            return redirect()->back()->with('error', 'Product already exist in compare tab!');
+        }
+        if (count($compare) < 3) {
+            $compare[$productId] = [
+            'product_id'=>$product->id,
+            'seller_id'=>$product->seller->id,
+            'image'=> $product->image,
+            "name" => $product->name,
+            "seller_name" => $product->seller->business_name,
+            "price" => $product->price,
+            "feature" => $product->features,
+            "city"=>$product->seller->city->name,
+            "rating"=>$product->seller->final_rating
+        ];
+
+
+            // dd($compare);
+            session()->put('compare', $compare);
+
+            return redirect()->back()->with('message', 'Product added to compare successfully!');
+        }
+        return redirect()->back()->with('error', 'Reach maximum product to compare!');
+    }
+
+    public function remove($productId)
+    {
+        if ($productId) {
+            $compare = session()->get('compare');
+            if (isset($compare[$productId])) {
+                unset($compare[$productId]);
+                session()->put('compare', $compare);
+            }
+        }
+        return redirect()->back()->with('message', 'Product removed successfully');
+    }
 }

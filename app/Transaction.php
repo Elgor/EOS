@@ -7,11 +7,12 @@ use Illuminate\Database\Eloquent\Model;
 class Transaction extends Model
 {
     protected $fillable = [
-        'order_id', 'user_id', 'invoice', 'name', 'bank', 'receipt_downPayment', 'receipt_fullPayment'
+        'order_id', 'user_id', 'invoice', 'name', 'bank', 'receipt_downPayment', 'receipt_fullPayment', 'type'
     ];
 
 
-    public function order(){
+    public function order()
+    {
         return $this->belongsTo('App\Order');
     }
 }
