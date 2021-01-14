@@ -18,6 +18,12 @@ class CreateTransactionsTable extends Migration
             $table->timestamps();
             $table->unsignedBigInteger('order_id');
             $table->unsignedBigInteger('user_id');
+            $table->string('invoice');
+            $table->string('name');
+            $table->string('bank');
+            $table->string('receipt_downPayment')->nullable();
+            $table->string('receipt_fullPayment')->nullable();
+         
         });
     }
 

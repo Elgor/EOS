@@ -72,3 +72,4 @@ Route::get('/register/seller', 'SellerController@showSellerRegisterForm')->name(
 Route::post('/register/seller', 'SellerController@store')->name('register.seller');
 //TRANSACTION
 Route::get('/transaction', 'TransactionController@index')->name('transaction.index');
+Route::post('/transaction/{orderId}/{type}', 'TransactionController@payment')->name('transaction.payment');

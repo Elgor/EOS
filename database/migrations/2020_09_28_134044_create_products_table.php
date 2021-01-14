@@ -22,6 +22,8 @@ class CreateProductsTable extends Migration
             $table->json('features');
             $table->unsignedBigInteger('seller_id');
             $table->timestamps();
+            $table->integer('completed_transaction')->default(0);
+
         });
     }
 
