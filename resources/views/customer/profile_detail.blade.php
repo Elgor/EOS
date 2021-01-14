@@ -7,7 +7,7 @@
       <div class="col-md-4 ">
         <h3 class="ml-3 mt-3">PROFILE</h3>
         <div class="h-45 w-75 ">
-          <img src="{{ asset('storage/'.$image) }}" class="card-img border border-dark rounded-circle mt-3" height="100%" width="100%" alt="Card image cap">
+          <img src="{{ asset('storage/'.$customer->image) }}" class="card-img border border-dark rounded-circle mt-3" height="100%" width="100%" alt="Card image cap">
         </div>
       </div>
       <div class="col-md-8">
@@ -17,7 +17,7 @@
               <label for="name" class="col-md-4 col-form-label ">{{ __('Name') }}</label>
 
               <div class="col-md-6">
-                <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ $name}}" required autocomplete="name" autofocus>
+                <input disabled id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ $customer->name}}" required autocomplete="name" autofocus>
 
                 @error('name')
                 <span class="invalid-feedback" role="alert">
@@ -27,7 +27,7 @@
               </div>
             </div>
 
-            <div class="form-group row">
+            <!-- <div class="form-group row">
               <label for="city" class="col-md-4 col-form-label ">{{ __('City') }}</label>
 
               <div class="col-md-6">
@@ -40,13 +40,13 @@
                   <option value="Depok">Depok</option>
                 </select>
               </div>
-            </div>
+            </div> -->
 
             <div class="form-group row">
               <label for="email" class="col-md-4 col-form-label ">{{ __('E-Mail Address') }}</label>
 
               <div class="col-md-6">
-                <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ $email }}" required autocomplete="email">
+                <input disabled id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ $customer->email }}" required autocomplete="email">
 
                 @error('email')
                 <span class="invalid-feedback" role="alert">
@@ -62,7 +62,7 @@
               <label class="col-md-4 col-form-label ">{{ __('Phone Number') }}</label>
 
               <div class="col-md-6">
-                <input id="phone_number" class="form-control" name="phone_number" value="{{$phone_number}}">
+                <input disabled id="phone_number" class="form-control" name="phone_number" value="{{$customer->phone_number}}">
               </div>
             </div>
 
@@ -71,26 +71,28 @@
               <label class="col-md-4 col-form-label ">{{ __('Address') }}</label>
 
               <div class="col-md-6">
-                <textarea class="form-control" placeholder="Address" name="address" rows="3" >{{$address}}</textarea>
+                <textarea disabled class="form-control" placeholder="Address" name="address" rows="3">{{$customer->address}}</textarea>
               </div>
             </div>
 
-            <div class="form-group row">
+            <!-- <div class="form-group row">
               <label class="col-md-4 col-form-label ">{{ __('Profile Picture') }}</label>
 
               <div class="col-md-6 ml-3">
                 <input type="file" class="custom-file-input" name="image">
                 <label class="custom-file-label" for="image">Browse</label>
               </div>
-            </div>
+            </div> -->
 
-         
+
 
             <div class="form-group row mt-5 mb-0">
               <div class="col-md-6 offset-md-4">
-                <button type="submit" class="btn btn-primary w-50">
+                <!-- <button type="submit" class="btn btn-primary w-50">
                   {{ __('Save') }}
-                </button>
+                </button> -->
+                <a class="btn btn-primary w-50" href="{{ route('customer.edit',Auth::user()->id) }}" role="button">
+                  Edit Profile</a>
               </div>
 
             </div>

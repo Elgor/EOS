@@ -43,6 +43,8 @@ Route::get('/event-plan/delete/{eventPlanId}', 'EventPlanController@destroy')->n
 
 
 Route::get('/customer/profile/{customerId}', 'CustomerController@show')->name('customer.show')->middleware('auth');
+Route::get('/customer/edit/{customerId}', 'CustomerController@edit')->name('customer.edit')->middleware('auth');
+Route::post('/customer/update/{customerId}', 'CustomerController@update')->name('customer.update')->middleware('auth');
 Route::get('/rating', 'RatingController@index')->name('rating.index')->middleware('auth');
 Route::get('/rating/{sellerId}', 'RatingController@index')->name('rating.index')->middleware('auth');
 Route::post('/rating/{sellerId}', 'RatingController@store')->name('rating.store')->middleware('auth');
