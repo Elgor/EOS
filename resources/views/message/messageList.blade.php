@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends(isset(Auth::user()->id) ? 'layouts.app' : 'layouts.seller')
 @section('content')
     @foreach($messages as $message)
         @if(Auth::user())

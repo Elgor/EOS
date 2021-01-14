@@ -68,6 +68,14 @@
                             </button>
                             @endif
                         </form>
+                        <form method="POST" action="{{route('message.store')}}">
+                            @csrf
+                            <button type="submit" class="btn btn-primary">
+                                Message
+                            </button>
+                            <input type="hidden" value="{{Auth::guard('seller')->id()}}" name="seller_id">
+                            <input type="hidden" value="{{$orderItem->user->id}}" name="user_id">
+                        </form>
                     </div>
                 </td>
             </tr>

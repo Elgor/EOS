@@ -42,7 +42,20 @@ class MessageController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validate = Message::where('seller_id', $request->input('seller_id'))->where('user_id', $request->input('user_id'));
+        if($validate)
+            {
+                return $this->index();
+            }
+        else
+        {
+            $message = new Message;
+            $message->seller_id = $request->input('seller_id');
+            $message->user_id = $request->input('user_id');
+            $message->save();
+    
+            return $this->index();    
+        }
     }
 
     /**

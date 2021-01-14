@@ -29,7 +29,8 @@ Route::get('/seller/search', 'SellerController@search')->name('seller-search');
 //MESSAGE
 Route::get('/message', 'MessageController@index')->name('message.index');
 Route::get('/message/{messageId}', 'MessageController@show')->name('message.show');
-Route::post('messageDetail', 'MessageDetailController@store')->name('message.store');
+Route::post('/messageDetail', 'MessageDetailController@store')->name('messageDetail.store');
+Route::post('/message', 'MessageController@store')->name('message.store');
 
 Route::get('/compare', 'CompareController@index')->name('compare.index');
 Route::get('/add-to-compare/{productId}', 'ProductController@addToCompare')->name('compare.add')->middleware('auth');
