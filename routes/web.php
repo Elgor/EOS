@@ -30,12 +30,14 @@ Route::get('/seller/search', 'SellerController@search')->name('seller-search');
 Route::get('/message', 'MessageController@index')->name('message.index');
 
 Route::get('/compare', 'CompareController@index')->name('compare.index');
+Route::get('/add-to-compare/{productId}', 'ProductController@addToCompare')->name('compare.add')->middleware('auth');
+Route::get('/compare/remove/{productId}', 'ProductController@remove')->name('compare.remove')->middleware('auth');
 
 Route::get('/wishlist', 'WishlistController@index')->name('wishlist.index');
 Route::get('/wishlist/{productId}', 'WishlistController@store')->name('wishlist.store')->middleware('auth');
 Route::get('/wishlist/delete/{productId}', 'WishlistController@destroy')->name('wishlist.delete')->middleware('auth');
 
-Route::get('/add-to-cart/{product}', 'CartController@add')->name('cart.add')->middleware('auth');
+// Route::get('/add-to-cart/{product}', 'CartController@add')->name('cart.add')->middleware('auth');
 
 Route::get('/event-plan', 'EventPlanController@index')->name('eventplan.index')->middleware('auth');
 Route::post('/event-plan', 'EventPlanController@store')->name('eventplan.store')->middleware('auth');

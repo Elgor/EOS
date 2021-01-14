@@ -91,7 +91,8 @@
 
                         <div class="mt-3">
                             <button type="submit" class="btn btn-outline-info">Add to Order</button>
-                            <a class="ml-3 btn btn-outline-info" href="" role="button">Compare</a>
+                            <a class="ml-3 btn btn-outline-info" href="{{ route('compare.add',$product->id) }}"
+                                role="button">Compare</a>
                             <a class="ml-3 pt-2" href="{{ route('wishlist.store',$product->id) }}" data-toggle="tooltip"
                                 data-placement="top" title="Wishlist">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor"
