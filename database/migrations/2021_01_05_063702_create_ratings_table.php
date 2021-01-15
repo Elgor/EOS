@@ -16,6 +16,7 @@ class CreateRatingsTable extends Migration
         Schema::create('ratings', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->timestamps();
+            $table->unsignedInteger('order_id');
             $table->unsignedInteger('seller_id');
             $table->integer('user_id');
             $table->string('comment')->nullable();

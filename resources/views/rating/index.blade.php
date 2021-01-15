@@ -90,7 +90,7 @@
         </div>
         <div class="text-center">
             <h5 class="font-weight-bold">Rating</h5>
-            <form method="POST" action="{{ route('rating.store',$seller->id) }}">
+            <form method="POST" action="{{ url('/rating/'.$seller->id.'/'.$order->id) }}">
                 @csrf
 
 

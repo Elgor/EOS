@@ -50,8 +50,8 @@ Route::get('/customer/profile/{customerId}', 'CustomerController@show')->name('c
 Route::get('/customer/edit/{customerId}', 'CustomerController@edit')->name('customer.edit')->middleware('auth');
 Route::post('/customer/update/{customerId}', 'CustomerController@update')->name('customer.update')->middleware('auth');
 Route::get('/rating', 'RatingController@index')->name('rating.index')->middleware('auth');
-Route::get('/rating/{sellerId}', 'RatingController@index')->name('rating.index')->middleware('auth');
-Route::post('/rating/{sellerId}', 'RatingController@store')->name('rating.store')->middleware('auth');
+Route::get('/rating/{sellerId}/{orderId}', 'RatingController@index')->name('rating.index')->middleware('auth');
+Route::post('/rating/{sellerId}/{orderId}', 'RatingController@store')->name('rating.store')->middleware('auth');
 
 //ORDER SELLER
 Route::get('/orders', 'OrderController@sellerOrders')->name('orders.seller');
@@ -80,3 +80,18 @@ Route::post('/register/seller', 'SellerController@store')->name('register.seller
 //TRANSACTION
 Route::get('/transaction', 'TransactionController@index')->name('transaction.index');
 Route::post('/transaction/{orderId}/{type}', 'TransactionController@payment')->name('transaction.payment');
+
+
+// ADMIN
+Route::post('/admin/city/', 'CityController@store')->name('city.store')->middleware('admin');
+Route::get('/admin/city/', 'CityController@index')->name('city.index')->middleware('admin');
+Route::get('/admin/city/{cityId}', 'CityController@edit')->name('city.edit')->middleware('admin');
+Route::post('/admin/city/{cityId}', 'CityController@update')->name('city.update')->middleware('admin');
+Route::get('/admin/city/delete/{cityId}', 'CityController@destroy')->name('city.delete')->middleware('admin');
+
+Route::post('/admin/category/', 'CategoryController@store')->name('category.store')->middleware('admin');
+Route::get('/admin/category/', 'CategoryController@index')->name('category.index')->middleware('admin');
+Route::get('/admin/category/{categoryId}', 'CategoryController@edit')->name('category.edit')->middleware('admin');
+Route::post('/admin/category/{categoryId}', 'CategoryController@update')->name('category.update')->middleware('admin');
+Route::get('/admin/category/delete/{categoryId}', 'CategoryController@destroy')->name('category.delete')->middleware('admin');
+

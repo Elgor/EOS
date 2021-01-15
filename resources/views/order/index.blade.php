@@ -21,8 +21,7 @@
         <tbody>
             @foreach ($orderItems as $orderItem)
             <tr>
-                <td><a style=" color:#212529"
-                        href="{{ route('seller.detail',$orderItem->seller->id) }}">{{$orderItem->seller->business_name}}</a>
+                <td><a style=" color:#212529" href="{{ route('seller.detail',$orderItem->seller->id) }}">{{$orderItem->seller->business_name}}</a>
                 </td>
                 <td><a style=" color:#212529" href="{{ route('product.detail',$orderItem->product->id) }}">
                         {{$orderItem->product->name}}</a>
@@ -33,19 +32,14 @@
                 </td>
                 <td>{{$orderItem->status}}</td>
                 <td class="text-center">
-                    <input type="button" value="Pay" <?php if ($orderItem->status != 'Accepted') { ?> disabled
-                        <?php   } ?> class="btn btn-success" data-toggle="modal"
-                        data-target="#dpModal{{$orderItem->id}}" />
+                    <input type="button" value="Pay" <?php if ($orderItem->status != 'Accepted') { ?> disabled <?php   } ?> class="btn btn-success" data-toggle="modal" data-target="#dpModal{{$orderItem->id}}" />
                     {{-- <button type="button" class="btn btn-success" data-toggle="modal"
                         data-target="#dpModal{{$orderItem->id}}">
                     Pay
                     </button> --}}
                 </td>
                 <td class="text-center">
-                    <input type="button" value="Pay"
-                        <?php if ($orderItem->status == 'Waiting' || $orderItem->status == 'Requested' ||$orderItem->status == 'Completed') { ?>
-                        disabled <?php   } ?> class="btn btn-success" data-toggle="modal"
-                        data-target="#fpModal{{$orderItem->id}}" />
+                    <input type="button" value="Pay" <?php if ($orderItem->status == 'Waiting' || $orderItem->status == 'Requested' || $orderItem->status == 'Completed') { ?> disabled <?php   } ?> class="btn btn-success" data-toggle="modal" data-target="#fpModal{{$orderItem->id}}" />
                     {{-- <button type="button" class="btn btn-success" data-toggle="modal"
                         data-target="#fpModal{{$orderItem->id}}">
                     Pay
@@ -61,20 +55,17 @@
                     {{-- <input type="button" value="Rate" <?php if ($orderItem->status != 'Completed') { ?> disabled
                             <?php   } ?> class="btn btn-success" href="{{ route('rating.index',$orderItem->seller_id) }}"
                     /> --}}
-                    @if($orderItem->status == 'Completed')
-                    <a class="btn btn-success" href="{{ route('rating.index',$orderItem->seller_id) }}" role="button">
+                    @if($orderItem->status = 'Completed')
+                    <a class="btn btn-success" href="{{ url('/rating/'.$orderItem->seller_id.'/'.$orderItem->id) }}" role="button">
                         Rate</a>
                     @endif
                 </td>
             </tr>
 
-            <div class="modal fade" id="dpModal{{$orderItem->id}}" tabindex="-1" role="dialog"
-                aria-labelledby="paymentModalCenterTitle" aria-hidden="true">
+            <div class="modal fade" id="dpModal{{$orderItem->id}}" tabindex="-1" role="dialog" aria-labelledby="paymentModalCenterTitle" aria-hidden="true">
                 <div class="modal-dialog modal-dialog-centered" role="document">
                     <div class="modal-content">
-                        <form class="form" method="POST"
-                            action="{{url('/transaction/'. $orderItem->id . '/Down Payment')}}"
-                            enctype="multipart/form-data">
+                        <form class="form" method="POST" action="{{url('/transaction/'. $orderItem->id . '/Down Payment')}}" enctype="multipart/form-data">
                             @csrf
 
                             <div class="modal-header">
@@ -127,8 +118,7 @@
                 </div>
             </div>
 
-            <div class="modal fade" id="fpModal{{$orderItem->id}}" tabindex="-1" role="dialog"
-                aria-labelledby="paymentModalCenterTitle" aria-hidden="true">
+            <div class="modal fade" id="fpModal{{$orderItem->id}}" tabindex="-1" role="dialog" aria-labelledby="paymentModalCenterTitle" aria-hidden="true">
                 <div class="modal-dialog modal-dialog-centered" role="document">
                     <div class="modal-content">
                         <div class="modal-header">
@@ -137,9 +127,7 @@
                                 <span aria-hidden="true">&times;</span>
                             </button>
                         </div>
-                        <form class="form" method="POST"
-                            action="{{url('/transaction/' . $orderItem->id .'/Full Payment')}} "
-                            enctype="multipart/form-data">
+                        <form class="form" method="POST" action="{{url('/transaction/' . $orderItem->id .'/Full Payment')}} " enctype="multipart/form-data">
                             @csrf
 
                             <div class="modal-body">
