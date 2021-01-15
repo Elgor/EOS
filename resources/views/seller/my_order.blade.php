@@ -42,15 +42,8 @@
                 <td class="font-weight-bold">Rp {{number_format($orderItem->negotiation_price,0,',','.')??'-'}}</td>
                 <td>{{$orderItem->status}}</td>
                 <td>
-                    @if($orderItem->transaction->type=='Down Payment')
-                    <button type=" submit" class="btn btn-danger">
-                        Down Payment
-                    </button>
-                    @elseif($orderItem->transaction->type=='Full Payment')
-                    <button type=" submit" class="btn btn-danger">
-                        Full Payment
-                    </button>
-                    @endif
+                
+                
                 </td>
                 <td class="text-center"><a href="{{ route('orders.show',$orderItem->id) }}" class="btn btn-warning"
                         role="button">
