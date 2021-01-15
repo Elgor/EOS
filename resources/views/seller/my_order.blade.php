@@ -22,8 +22,9 @@
                 <th>Price</th>
                 <th>Negotiation Price</th>
                 <th>Status</th>
+                <th>Confirm Payment</th>
                 <th class="text-center">Event Plan</th>
-                <th>Action</th>
+                <th class="text-center">Action</th>
             </tr>
         </thead>
         <tbody>
@@ -39,6 +40,15 @@
                 <td>Rp {{number_format($orderItem->product->price,0,',','.')??'-'}}</td>
                 <td class="font-weight-bold">Rp {{number_format($orderItem->negotiation_price,0,',','.')??'-'}}</td>
                 <td>{{$orderItem->status}}</td>
+                <td>
+                    <button type=" submit" class="btn btn-danger">
+                        DP
+                    </button>
+                    <button type=" submit" class="btn btn-danger">
+                        Full
+                    </button>
+
+                </td>
                 <td class="text-center"><a href="{{ route('orders.show',$orderItem->id) }}" class="btn btn-warning"
                         role="button">
                         View Event Plan</a></td>
