@@ -32,6 +32,7 @@
             1->Request
             2->Accepted
             3->Down Payment
+            4->Accepted Down Payment
             4->Full Payment
             5->Complete --}}
             @foreach ($orderItems as $orderItem)
@@ -47,7 +48,7 @@
                     </button>
                     @elseif($orderItem->transaction->type=='Full Payment')
                     <button type=" submit" class="btn btn-danger">
-                        Full
+                        Full Payment
                     </button>
                     @endif
                 </td>
