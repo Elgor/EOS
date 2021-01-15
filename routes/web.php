@@ -61,6 +61,9 @@ Route::post('/orders/reject/{orderId}', 'OrderController@rejectOrder')->name('or
 Route::post('/orders/accept/{orderId}', 'OrderController@acceptOrder')->name('orders.seller.accept');
 Route::post('/orders/down-payment/{orderId}', 'OrderController@downPaymentOrder')->name('orders.seller.downPayment');
 Route::post('/orders/full-payment/{orderId}', 'OrderController@fullPaymentOrder')->name('orders.seller.fullPayment');
+Route::post('/orders/accept-down-payment/{orderId}', 'OrderController@acceptDownPayment')->name('orders.seller.acceptDownPayment');
+Route::post('/orders/accept-full-payment/{orderId}', 'OrderController@acceptFullPayment')->name('orders.seller.acceptFullPayment');
+
 
 //ORDER USER
 Route::post('/order', 'OrderController@store')->name('order.store');
