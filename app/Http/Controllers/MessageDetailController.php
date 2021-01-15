@@ -52,7 +52,6 @@ class MessageDetailController extends Controller
      */
     public function show(MessageDetail $messageDetail, $id)
     {
-    
     }
 
     /**
@@ -63,7 +62,6 @@ class MessageDetailController extends Controller
      */
     public function edit($id)
     {
-
     }
 
     /**
