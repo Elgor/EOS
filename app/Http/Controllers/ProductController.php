@@ -199,6 +199,7 @@ class ProductController extends Controller
                 $productId => [
                     'product_id'=>$product->id,
                     'seller_id'=>$product->seller->id,
+                    'completed_transaction'=>$product->order->transaction->count(),
                     'image'=> $product->image,
                     "name" => $product->name,
                     "seller_name" => $product->seller->business_name,
@@ -210,6 +211,7 @@ class ProductController extends Controller
                 ]
         ];
             session()->put('compare', $compare);
+            // dd(session()->get('compare'));
             return redirect()->back()->with('message', 'Product added to compare successfully!');
         }
 

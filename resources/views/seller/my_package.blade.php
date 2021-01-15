@@ -67,10 +67,21 @@
                     <select class="selectpicker" multiple data-width="fit" data-live-search="true" name="features[]">
                         <option value="1 Hour Photoshoot">1 Hour Photoshoot</option>
                         <option value="2 Hour Photoshoot">2 Hour Photoshoot</option>
-                        <option value="3 Hour Photoshoot">3 Hour Photoshoot</option>
-                        <option value="4 Hour Photoshoot">4 Hour Photoshoot</option>
-                        <option value="5 Hour Photoshoot">5 Hour Photoshoot</option>
+                        <option value="1 Photographer">1 Photographer</option>
+                        <option value="2 Photographer">2 Photographer</option>
+                        <option value="1 Videographer">1 Videographer</option>
+                        <option value="2 Videographer">2 Videographer</option>
+                        <option value="Live Streaming">Live streaming</option>
+                        <option value="Photobooth Decoration">Photobooth Decoration </option>
+                        <option value="Make Up Event">Make Up Event</option>
                         <option value="6 Hour Photoshoot">6 Hour Photoshoot</option>
+                        <option value="6 Hour Photoshoot">6 Hour Photoshoot</option>
+                        <option value="6 Hour Photoshoot">6 Hour Photoshoot</option>
+                        <option value="6 Hour Photoshoot">6 Hour Photoshoot</option>
+                        <option value="6 Hour Photoshoot">6 Hour Photoshoot</option>
+
+
+
                     </select>
                 </div>
             </div>

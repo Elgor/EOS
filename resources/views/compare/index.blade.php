@@ -76,9 +76,9 @@
             </tr>
             <tr>
                 <th class="th-borderless" scope="row">Completed Transaction</th>
-                {{-- @foreach (session('compare') as $id) --}}
-                <td class="text-center"></td>
-                {{-- @endforeach --}}
+                @foreach (session('compare') as $id=>$details)
+                <td class="text-center">{{ $details['completed_transaction'] }}</td>
+                @endforeach
             </tr>
             <tr>
                 <th class="th-borderless align-middle" scope="row">Action</th>
