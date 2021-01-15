@@ -27,9 +27,10 @@ Route::get('/seller-detail/{sellerId}', 'SellerController@detail')->name('seller
 Route::get('/seller/search', 'SellerController@search')->name('seller-search');
 
 //MESSAGE
-Route::get('/message', 'MessageController@index')->name('message.index');
+Route::get('/message', 'MessageController@index')->name('message.index')->middleware('auth');
 Route::get('/message/{messageId}', 'MessageController@show')->name('message.show');
-Route::post('messageDetail', 'MessageDetailController@store')->name('message.store');
+Route::post('/messageDetail', 'MessageDetailController@store')->name('messageDetail.store');
+Route::post('/message', 'MessageController@store')->name('message.store');
 
 Route::get('/compare', 'CompareController@index')->name('compare.index');
 Route::get('/add-to-compare/{productId}', 'ProductController@addToCompare')->name('compare.add')->middleware('auth');
@@ -60,6 +61,9 @@ Route::post('/orders/reject/{orderId}', 'OrderController@rejectOrder')->name('or
 Route::post('/orders/accept/{orderId}', 'OrderController@acceptOrder')->name('orders.seller.accept');
 Route::post('/orders/down-payment/{orderId}', 'OrderController@downPaymentOrder')->name('orders.seller.downPayment');
 Route::post('/orders/full-payment/{orderId}', 'OrderController@fullPaymentOrder')->name('orders.seller.fullPayment');
+Route::post('/orders/accept-down-payment/{orderId}', 'OrderController@acceptDownPayment')->name('orders.seller.acceptDownPayment');
+Route::post('/orders/accept-full-payment/{orderId}', 'OrderController@acceptFullPayment')->name('orders.seller.acceptFullPayment');
+
 
 //ORDER USER
 Route::post('/order', 'OrderController@store')->name('order.store');

@@ -24,7 +24,14 @@
                 <div class="row col-12">
                     <h4 class="font-weight-bold">{{ $seller->business_name }}</h4>
                     <div class="ml-auto">
-                        <a class="btn btn-primary" href="{{ route('message.index') }}" role="button"> Message</a>
+                    <form method="POST" action="{{route('message.store')}}">
+                            @csrf
+                            <button type="submit" class="btn btn-primary">
+                                Message
+                            </button>
+                            <input type="hidden" value="{{$seller->id}}" name="seller_id">
+                            <input type="hidden" value="{{Auth::id()}}" name="user_id">
+                        </form>
                     </div>
                 </div>
                 <div>

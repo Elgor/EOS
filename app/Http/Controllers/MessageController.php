@@ -15,13 +15,13 @@ class MessageController extends Controller
      */
     public function index()
     {
-        if(Auth::user())
+        if (Auth::user()) {
             $messages = Message::where('user_id', Auth::id())->get();
-        elseif(Auth::guard('seller'))
+        } elseif (Auth::guard('seller')) {
             $messages = Message::where('seller_id', Auth::guard('seller')->id())->get();
-        
-        return view( 'message.messageList', compact('messages'));
+        }
 
+        return view('message.messageList', compact('messages'));
     }
 
     /**
@@ -42,7 +42,16 @@ class MessageController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validate = Message::where('seller_id', $request->input('seller_id'))->where('user_id', $request->input('user_id'));
+        if ($validate) {
+            return $this->index();
+        }
+        $message = new Message;
+        $message->seller_id = $request->input('seller_id');
+        $message->user_id = $request->input('user_id');
+        $message->save();
+
+        return $this->index();
     }
 
     /**
@@ -54,7 +63,7 @@ class MessageController extends Controller
     public function show($messageId)
     {
         $message = Message::find($messageId);
-        return view('message.chat', compact("message"));       
+        return view('message.chat', compact("message"));
     }
 
     /**

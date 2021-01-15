@@ -19,14 +19,16 @@
             <div class="form-group mr-sm-4">
                 <label class="form-group mr-2" for="price">Rating</label>
                 <select style="width:150px" class="form-control" id="price" name="price">
-                    <option>All</option>
-                </select>
-            </div>
-            <div class="form-group mr-sm-4">
-                <label class="form-group mr-2" for="city">City</label>
-                <select style="width:150px" class="form-control" id="city" name="city">
-                    <option>All</option>
-                </select>
+                    <option>
+                        *1</option>
+                    <option>
+                        <*2</option> <option>
+                            <*3</option> <option>
+                                <*4</option> </select> </div> <div class="form-group mr-sm-4">
+                                    <label class="form-group mr-2" for="city">City</label>
+                                    <select style="width:150px" class="form-control" id="city" name="city">
+                                        <option>All</option>
+                                    </select>
             </div>
             <div class="form-group mr-sm-2">
                 <label class="form-group mr-2" for="city">Category</label>

@@ -22,8 +22,9 @@
                 <th>Price</th>
                 <th>Negotiation Price</th>
                 <th>Status</th>
+                <th>Confirm Payment</th>
                 <th class="text-center">Event Plan</th>
-                <th>Action</th>
+                <th class="text-center">Action</th>
             </tr>
         </thead>
         <tbody>
@@ -31,6 +32,7 @@
             1->Request
             2->Accepted
             3->Down Payment
+            4->Accepted Down Payment
             4->Full Payment
             5->Complete --}}
             @foreach ($orderItems as $orderItem)
@@ -39,6 +41,24 @@
                 <td>Rp {{number_format($orderItem->product->price,0,',','.')??'-'}}</td>
                 <td class="font-weight-bold">Rp {{number_format($orderItem->negotiation_price,0,',','.')??'-'}}</td>
                 <td>{{$orderItem->status}}</td>
+                <td>
+                    @if($orderItem->status == 'Down Payment')
+                    <form method="POST" action="{{route('orders.seller.acceptDownPayment', $orderItem->id)}}">
+                        @csrf
+                        <button type=" submit" class="btn btn-danger">
+                            Down Payment
+                        </button>
+                    </form>
+                    @elseif($orderItem->status =='Full Payment')
+                    <form method="POST" action="{{route('orders.seller.acceptFullPayment', $orderItem->id)}}">
+                        @csrf
+                        <button type=" submit" class="btn btn-danger">
+                            Full Payment
+                        </button>
+                    </form>
+                    @endif
+
+                </td>
                 <td class="text-center"><a href="{{ route('orders.show',$orderItem->id) }}" class="btn btn-warning"
                         role="button">
                         View Event Plan</a></td>
@@ -67,6 +87,14 @@
                                 Accept
                             </button>
                             @endif
+                        </form>
+                        <form method="POST" action="{{route('message.store')}}">
+                            @csrf
+                            <button type="submit" class="btn btn-primary">
+                                Message
+                            </button>
+                            <input type="hidden" value="{{Auth::guard('seller')->id()}}" name="seller_id">
+                            <input type="hidden" value="{{$orderItem->user->id}}" name="user_id">
                         </form>
                     </div>
                 </td>

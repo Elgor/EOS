@@ -103,7 +103,7 @@ class TransactionController extends Controller
                     'name' => $request->name,
                     'bank' => $request->bank,
                     'receipt_downPayment' => $request->file('image')->store('payment', 'public'),
-                    'type'=>'Down Payment'
+                    'type'=>$type
                 ]);
 
                 DB::table('orders')
@@ -127,15 +127,15 @@ class TransactionController extends Controller
                 DB::table('orders')
                     ->where('id', $orderId)
                     ->update([
-                        'status' => 'Completed'
+                        'status' => $type
                     ]);
             }
-        } elseif ($status->status == 'Down Payment') {
+        } elseif ($status->status == 'Accepted Down Payment') {
             // Pay Full Payment
             DB::table('orders')
                 ->where('id', $orderId)
                 ->update([
-                    'status' => 'Completed'
+                    'status' => $type
                 ]);
 
             DB::table('transactions')
@@ -144,7 +144,7 @@ class TransactionController extends Controller
                     'receipt_fullPayment' => $request->file('image')->store('payment', 'public'),
                     'bank' => $request->bank,
                     'name' => $request->name,
-                    'type'=> "Full Payment"
+                    'type'=> $type
                 ]);
         }
 

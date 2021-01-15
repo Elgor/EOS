@@ -178,6 +178,30 @@ class OrderController extends Controller
         return back();
     }
 
+    public function acceptDownPayment($orderId)
+    {
+        $order = Order::find($orderId);
+        if ($order->status == 'Down Payment') {
+            $order->status = 'Accepted Down Payment';
+        } else {
+            return back();
+        }
+        $order->save();
+        return back();
+    }
+
+    public function acceptFullPayment($orderId)
+    {
+        $order = Order::find($orderId);
+        if ($order->status == 'Full Payment') {
+            $order->status = 'Completed';
+        } else {
+            return back();
+        }
+        $order->save();
+        return back();
+    }
+
     public function sellerShow($orderId)
     {
         $order = Order::findOrFail($orderId);
