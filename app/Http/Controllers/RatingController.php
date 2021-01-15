@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Order;
 use App\Rating;
 use App\Seller;
 use DB;
@@ -15,10 +16,12 @@ class RatingController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index($sellerId)
+    public function index($sellerId,$orderId)
     {
         $seller = Seller::findOrFail($sellerId);
-        return view('rating.index', compact('seller'));
+        $order = Order::findOrFail($orderId);
+
+        return view('rating.index', compact('seller','order'));
     }
 
     /**
@@ -37,7 +40,7 @@ class RatingController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request, Seller $seller, $sellerId)
+    public function store(Request $request, $sellerId, $orderId)
     {
         $ratingCount = DB::table('ratings')->where('seller_id', $sellerId)->count();
 
@@ -63,6 +66,7 @@ class RatingController extends Controller
 
         $rating->create([
             'comment'=>$request->comment,
+            'order_id' => $orderId,
             'seller_id' => $sellerId,
             'user_id' => Auth::user()->id,
             'rating' => $request->rating,

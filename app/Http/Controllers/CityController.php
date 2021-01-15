@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\City;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class CityController extends Controller
 {
@@ -14,7 +15,9 @@ class CityController extends Controller
      */
     public function index()
     {
-        //
+        $cities = City::all();
+
+        return view('admin.city', compact('cities'));
     }
 
     /**
@@ -35,7 +38,11 @@ class CityController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $city = new City;
+        $city->name = $request->name;
+        $city->save();
+
+        return redirect()->route('city.index');
     }
 
     /**
@@ -46,7 +53,6 @@ class CityController extends Controller
      */
     public function show(City $city)
     {
-        //
     }
 
     /**
@@ -55,9 +61,10 @@ class CityController extends Controller
      * @param  \App\City  $city
      * @return \Illuminate\Http\Response
      */
-    public function edit(City $city)
+    public function edit($cityId)
     {
-        //
+        $city = City::find($cityId);
+        return view('admin.edit_city', compact('city'));
     }
 
     /**
@@ -67,9 +74,16 @@ class CityController extends Controller
      * @param  \App\City  $city
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, City $city)
+    public function update(Request $request, $cityId)
     {
-        //
+        DB::table('cities')
+            ->where('id', $cityId)
+            ->update([
+                'name' => $request->name
+            ]);
+
+            return redirect()->route('city.index');
+
     }
 
     /**
@@ -78,8 +92,12 @@ class CityController extends Controller
      * @param  \App\City  $city
      * @return \Illuminate\Http\Response
      */
-    public function destroy(City $city)
+    public function destroy($cityId)
     {
-        //
+        $city = City::find($cityId);
+        $city->delete();
+
+        return redirect()->route('city.index');
+
     }
 }
