@@ -9,7 +9,7 @@
     </nav>
 </div>
 <!--Section: Block Content-->
-<section class="mb-2 p-4 round-border">
+<section class="mb-2 p-4 round-border bg-white shadow">
     <div class="row">
         <div class="col-md-6 mb-4 mb-md-0">
             <div class="row">
@@ -41,7 +41,7 @@
         </div>
     </div>
 </section>
-<div class="container col-12">
+<div class="container col-12  bg-white shadow-lg">
     <div class="row">
         <section class="col-5 round-border p-2" style="height: fit-content">
             <h4 class="font-weight-bold">Event Plan</h4>
