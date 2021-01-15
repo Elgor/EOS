@@ -20,11 +20,11 @@ class CreateSellersTable extends Migration
             $table->string('email');
             $table->string('password');
             $table->longText('description');
-            $table->unsignedInteger('category_id')->nullable();
-            $table->unsignedInteger('city_id')->nullable();
+            $table->string('category');
+            $table->string('city');
             $table->string('address');
-            $table->string('profile_picture')->nullable();
-            $table->string('phone_number')->nullable();
+            $table->string('profile_picture');
+            $table->string('phone_number');
             $table->double('final_rating')->default(0.0);
             $table->string('no_rekening');
             $table->rememberToken();

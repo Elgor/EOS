@@ -56,7 +56,8 @@
         <div class="row">
             <div class="col-md-4 text-center m-auto">
                 <figure>
-                    <img class="round-border" src="{{ asset('/storage/'.$seller->profile_picture) }}">
+                    <img style="max-width: 250px; max-height: 500px" class="round-border"
+                        src="{{ asset('/storage/'.$seller->profile_picture) }}">
                 </figure>
                 <!-- <h5 class="font-weight-bold">{{ number_format((float)$seller->final_rating,1,'.','') }} / 5.0 <i class="text-warning fa fa-star" style="font-size: 1.5rem;"></i></h5> -->
                 <div class="col-12">
@@ -69,10 +70,10 @@
                 </div>
             </div>
             <div class="col-md-8">
-                <h4 class="font-weight-bold">Name</h4>
+                <h4 class="font-weight-bold">{{$seller->business_name}}</h4>
                 <div>
                     <p class="mb-1 font-weight-bold">City</p>
-                    <p>{{$seller->bussiness_name}}</p>
+                    <p>{{$seller->city}}</p>
                 </div>
                 <div>
                     <p class="mb-1 font-weight-bold">Address</p>

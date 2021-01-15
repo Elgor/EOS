@@ -48,8 +48,8 @@ class SellerController extends Controller
         $seller->business_name = $request->input('business_name');
         $seller->email = $request->input('email');
         $seller->password = Hash::make($request->input('password'));
-        $seller->category_id = $request->input('category_id');
-        $seller->city_id = $request->input('city_id');
+        $seller->category = $request->input('category');
+        $seller->city = $request->input('city');
         $seller->description = $request->input('description');
         $seller->phone_number = $request->input('phone_number');
         $seller->no_rekening = $request->input('no_rekening');

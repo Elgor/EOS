@@ -21,7 +21,7 @@
                 <td>{{ $item->product->seller->business_name }}</td>
                 <td><a href="{{ route('product.detail',$item->product->id) }}">{{ $item->product->name }}</a></td>
                 <td>{{number_format($item->product->price,0,',','.')}}</td>
-                <td>{{$item->product->seller->city->name}}</td>
+                <td>{{$item->product->seller->city}}</td>
                 <td class="text-center">
                     <a class=" btn btn-danger" href="{{ route('wishlist.delete',$item->id) }}" role="button">
                         Delete</a>

@@ -26,7 +26,7 @@
                 <div class="row col-12">
                     <h4 class="font-weight-bold">{{ $seller->business_name }}</h4>
                     <div class="ml-auto">
-                    <form method="POST" action="{{route('message.store')}}">
+                        <form method="POST" action="{{route('message.store')}}">
                             @csrf
                             <button type="submit" class="btn btn-primary">
                                 Message
@@ -38,7 +38,7 @@
                 </div>
                 <div>
                     <p class="mb-1 font-weight-bold">City</p>
-                    <p>{{ $seller->city['name'] }}</p>
+                    <p>{{ $seller->city}}</p>
                 </div>
                 <div>
                     <p class="mb-1 font-weight-bold">Address</p>

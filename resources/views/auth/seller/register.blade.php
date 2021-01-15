@@ -31,18 +31,18 @@
                         </div>
 
                         <div class="form-group row">
-                            <label for="category_id"
+                            <label for="category"
                                 class="col-md-4 col-form-label text-md-right">{{ __('Category') }}</label>
 
                             <div class="col-md-6">
-                                <select class="form-select form-control" name="category_id"
+                                <select class="form-select form-control" name="category"
                                     aria-label="Default select example">
                                     <option>Select category</option>
-                                    <option value="1">Event Organizer</option>
-                                    <option value="2">Hall</option>
-                                    <option value="3">MC</option>
-                                    <option value="4">Food</option>
-                                    <option value="5">Entertainment</option>
+                                    <option value="Event Organizer">Event Organizer</option>
+                                    <option value="Catering">Catering</option>
+                                    <option value="MC">MC</option>
+                                    <option value="Sound System">Sound System</option>
+                                    <option value="Entertainment">Entertainment</option>
                                 </select>
                             </div>
                         </div>
@@ -94,14 +94,14 @@
                             <label for="city" class="col-md-4 col-form-label text-md-right">{{ __('City') }}</label>
 
                             <div class="col-md-6">
-                                <select class="form-select form-control" name="city_id"
+                                <select class="form-select form-control" name="city"
                                     aria-label="Default select example">
                                     <option>Select city</option>
-                                    <option value="1">Jakarta</option>
-                                    <option value="2">Tanggerang</option>
-                                    <option value="3">Bekasi</option>
-                                    <option value="4">Bogor</option>
-                                    <option value="5">Depok</option>
+                                    <option value="Jakarta">Jakarta</option>
+                                    <option value="Bandung">Bandung</option>
+                                    <option value="Bekasi">Bekasi</option>
+                                    <option value="Bogor">Bogor</option>
+                                    <option value="Depok">Depok</option>
                                 </select>
                             </div>
                         </div>

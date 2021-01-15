@@ -21,7 +21,7 @@ class CreateEventPlansTable extends Migration
             $table->date('date');
             $table->time('startTime');
             $table->time('endTime');
-            $table->unsignedBigInteger('city_id');
+            $table->string('city');
             $table->string('buildingAddress');
             $table->string('description');
             $table->unsignedBigInteger('user_Id');

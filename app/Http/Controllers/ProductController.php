@@ -157,20 +157,18 @@ class ProductController extends Controller
             $min = 0;
             $max += 1;
 
-            $products = Product::where('price', '<', $max)->orderBy('price','asc')->paginate(8);
-
+            $products = Product::where('price', '<', $max)->orderBy('price', 'asc')->paginate(8);
         } elseif (is_null($max) && !is_null($min)) {
             $min -= 1;
             $max = 0;
 
-            $products = Product::where('price', '>', $min)->orderBy('price','asc')->paginate(8);
-
+            $products = Product::where('price', '>', $min)->orderBy('price', 'asc')->paginate(8);
         } elseif (!is_null($min) && !is_null($max)) {
             $min -= 1;
             $max += 1;
-            
-            $products = Product::where([['price', '>', $min], ['price', '<', $max]])->orderBy('price','asc')->paginate(8);
-        }else{
+
+            $products = Product::where([['price', '>', $min], ['price', '<', $max]])->orderBy('price', 'asc')->paginate(8);
+        } else {
             return $this->noDataSearch();
         }
 
@@ -206,7 +204,7 @@ class ProductController extends Controller
                     "seller_name" => $product->seller->business_name,
                     "price" => $product->price,
                     "feature" => $product->features,
-                    "city"=>$product->seller->city->name,
+                    "city"=>$product->seller->city,
                     "rating"=>$product->seller->final_rating,
                     "transaction"=>$product->seller->orders
                 ]
@@ -227,7 +225,7 @@ class ProductController extends Controller
             "seller_name" => $product->seller->business_name,
             "price" => $product->price,
             "feature" => $product->features,
-            "city"=>$product->seller->city->name,
+            "city"=>$product->seller->city,
             "rating"=>$product->seller->final_rating
         ];
 

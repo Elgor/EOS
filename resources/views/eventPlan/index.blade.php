@@ -85,11 +85,11 @@
                     <div class="col-md-4">
                         <select class="form-control" name="city">
                             <option selected>Select city</option>
-                            <option value="1">Jakarta</option>
-                            <option value="2">Tanggerang</option>
-                            <option value="3">Bekasi</option>
-                            <option value="4">Bogor</option>
-                            <option value="5">Depok</option>
+                            <option value="Jakarta">Jakarta</option>
+                            <option value="Bandung">Bandung</option>
+                            <option value="Bekasi">Bekasi</option>
+                            <option value="Bogor">Bogor</option>
+                            <option value="Depok">Depok</option>
                         </select>
                     </div>
                 </div>

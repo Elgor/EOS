@@ -44,7 +44,7 @@ class EventPlanController extends Controller
         $eventPlan->date=$request->input('date');
         $eventPlan->startTime=$request->input('startTime');
         $eventPlan->endTime=$request->input('endTime');
-        $eventPlan->city_id=$request->input('city');
+        $eventPlan->city=$request->input('city');
         $eventPlan->buildingAddress=$request->input('buildingAddress');
         $eventPlan->description=$request->input('description');
         $eventPlan->user_id=Auth::id();

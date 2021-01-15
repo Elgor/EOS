@@ -35,7 +35,8 @@ class Seller extends Authenticatable
 
 
     //HAS MANY
-    public function messages(){
+    public function messages()
+    {
         return $this->hasMany('App\Message');
     }
 
@@ -44,13 +45,14 @@ class Seller extends Authenticatable
         return $this ->hasMany('App\Product');
     }
 
-    public function orders(){
+    public function orders()
+    {
         return $this->hasMany('App\Order');
     }
 
     //BELONGS TO
-    public function city()
-    {
-        return $this ->belongsTo('App\City');
-    }
+    // public function city()
+    // {
+    //     return $this ->belongsTo('App\City');
+    // }
 }
