@@ -30,7 +30,9 @@
                 <td>{{ $transaction->invoice }}</td>
                 <td>{{ $transaction->bank }}</td>
                 <td>{{ $transaction->type }}</td>
-                <td>Rp {{number_format($transaction->order->negotiation_price??$transaction->order->product->price,0,',','.')}}​​</td>
+                <td>Rp
+                    {{number_format($transaction->order->negotiation_price??$transaction->order->product->price,0,',','.')}}​​
+                </td>
             </tr>
             @endforeach
         </tbody>
