@@ -5,9 +5,11 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use App\User;
+use App\Seller;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Http\Request;
 
 class RegisterController extends Controller
 {
@@ -39,6 +41,7 @@ class RegisterController extends Controller
     public function __construct()
     {
         $this->middleware('guest');
+        $this->middleware('guest:seller');
     }
 
     /**
@@ -53,8 +56,8 @@ class RegisterController extends Controller
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
-            'phone_number' => ['required', 'string', 'min:10', 'max:12'],
-            'address' => ['required'],
+            'phone_number' => 'required|regex:/^([0-9\s\-\+\(\)]*)$/|min:10|max:12',
+            'address' => 'required|min:15',
             'image' => ['required','mimes:jpg,jpeg,png'],
         ]);
     }
@@ -73,7 +76,28 @@ class RegisterController extends Controller
             'password' => Hash::make($data['password']),
             'phone_number' => $data['phone_number'],
             'address' => $data['address'],
-            'image' => $data['image']->store('avatar','public'),
+            'image' => $data['image']->store('avatar', 'public'),
         ]);
+    }
+
+    public function showSellerRegisterForm()
+    {
+        return view('auth.seller.register', ['url' => 'seller']);
+        //return view('auth.seller.register');
+    }
+
+    protected function createSeller(Request $request)
+    {
+        $this->validator($request->all())->validate();
+        Seller::create([
+            'bussiness_name' => $request->bussiness_name,
+            'email' => $request->email,
+            'password' => Hash::make($request->password),
+            'description' => $request->description,
+            'address' => $request->addres,
+            'profile_picture' => $request->profile_picture,
+            'phone_number' => $request->phone_number,
+        ]);
+        return redirect()->intended('login/seller');
     }
 }

@@ -1,13 +1,14 @@
-@extends('layouts.app')
+@extends('layouts.seller')
 @section('content')
 <div class="container">
     <h4>My Package</h4>
     <hr>
-    {{-- @if ($cartItems->isEmpty()==false) --}}
+
     <table class="table">
+        @if($products->count()>0)
         <thead>
             <tr>
-                <th>Image</th>
+                <th>Picture</th>
                 <th>Name</th>
                 <th>Price</th>
                 <th>Feature</th>
@@ -15,23 +16,30 @@
             </tr>
         </thead>
         <tbody>
-            {{-- @foreach ($cartItems as $cartItem) --}}
+            @foreach ($products as $product)
             <tr>
-                <td>Image</td>
-                <td>name</td>
-                <td>price</td>
-                <td>feature</td>
-                <td><a class=" btn btn-danger" href=" route('cart.destroy', $cartItem->id)" role="button">
+                <td>
+                    <img src="{{ asset('/storage/'.$product->image) }}" alt="" heigt=100 width=100>
+                <td>{{ $product->name }}</td>
+                <td>{{ $product->price }}</td>
+                <td>@foreach($product->features as $feature)
+                    <p>{{ $feature }}</p>
+                    @endforeach</td>
+                <td><a class=" btn btn-danger" href="{{ route('product.delete',$product->id) }}" role="button">
                         Delete</a>
                 </td>
             </tr>
-            {{-- @endforeach --}}
+            @endforeach
         </tbody>
+        @else
+        <h4>No Package</h4>
+        @endif
     </table>
+    <hr>
     <h5>Create Package</h5>
     <hr>
     <div class="col-md-10">
-        <form method="POST" action="" enctype="multipart/form-data">
+        <form method="POST" action="{{route('product.store')}}" enctype="multipart/form-data">
             @csrf
             <div class="form-group row required">
                 <label class="col-md-3 col-form-label text-md-left control-label" for="packageName">Package
@@ -54,27 +62,37 @@
                 </div>
             </div>
             <div class="form-group row required">
-                <label class="col-md-3 col-form-label text-md-left control-label" for="price">Feature
-                </label>
-                <div class="col-md-7">
-                    <select class="selectpicker" multiple data-width="fit" data-live-search="true" name="contoh[]">
-                        <option>Mustard</option>
-                        <option>Ketchup</option>
-                        <option>Relish</option>
-                        <option>Mustard</option>
-                        <option>Ketchup</option>
-                        <option>Relish</option>
+                <label class="col-md-3 col-form-label text-md-left control-label" for="price">Feature</label>
+                <div class="col-md-7 ">
+                    <select class="selectpicker" multiple data-width="fit" data-live-search="true" name="features[]">
+                        <option value="1 Hour Photoshoot">1 Hour Photoshoot</option>
+                        <option value="2 Hour Photoshoot">2 Hour Photoshoot</option>
+                        <option value="1 Photographer">1 Photographer</option>
+                        <option value="2 Photographer">2 Photographer</option>
+                        <option value="1 Videographer">1 Videographer</option>
+                        <option value="2 Videographer">2 Videographer</option>
+                        <option value="Live Streaming">Live streaming</option>
+                        <option value="Photobooth Decoration">Photobooth Decoration </option>
+                        <option value="Make Up Event">Make Up Event</option>
+                        <option value="6 Hour Photoshoot">6 Hour Photoshoot</option>
+                        <option value="6 Hour Photoshoot">6 Hour Photoshoot</option>
+                        <option value="6 Hour Photoshoot">6 Hour Photoshoot</option>
+                        <option value="6 Hour Photoshoot">6 Hour Photoshoot</option>
+                        <option value="6 Hour Photoshoot">6 Hour Photoshoot</option>
+
+
+
                     </select>
                 </div>
             </div>
-            <div class="form-group row">
-                <label class="col-md-3 col-form-label text-md-left">Package Picture</label>
+            <div class="form-group row required">
+                <label class="col-md-3 col-form-label text-md-left control-label">Package Picture</label>
                 <div class="col-md-7">
-                    <input type="file" name="picture">
+                    <input type="file" name="image">
                 </div>
             </div>
-            <div class="form-group row">
-                <label class="col-md-3 col-form-label text-md-left">Upload Images</label>
+            <div class="form-group row required">
+                <label class="col-md-3 col-form-label text-md-left control-label">Upload Images</label>
                 <div class="col-md-7">
                     <input type="file" name="imageList[]" id="images" multiple="multiple">
                 </div>
@@ -89,5 +107,6 @@
             </div>
         </form>
     </div>
+
 </div>
 @endsection

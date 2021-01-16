@@ -2,7 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Order;
 use App\Rating;
+use App\Seller;
+use DB;
+use Auth;
 use Illuminate\Http\Request;
 
 class RatingController extends Controller
@@ -12,9 +16,12 @@ class RatingController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index($sellerId,$orderId)
     {
-        return view('rating.index');
+        $seller = Seller::findOrFail($sellerId);
+        $order = Order::findOrFail($orderId);
+
+        return view('rating.index', compact('seller','order'));
     }
 
     /**
@@ -33,9 +40,40 @@ class RatingController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request, $sellerId, $orderId)
     {
-        //
+        $ratingCount = DB::table('ratings')->where('seller_id', $sellerId)->count();
+
+        if ($ratingCount > 0) {
+            $ratingSum = DB::table('ratings')
+            ->where('seller_id', $sellerId)
+            ->sum('rating');
+
+            $ratingSum += $request->rating;
+            $ratingFinal = $ratingSum/($ratingCount+1);
+        } else {
+            $ratingFinal = $request->rating;
+        }
+
+        DB::table('sellers')
+        ->where('id', $sellerId)
+        ->update([
+                'final_rating'=> (double)$ratingFinal
+        ]);
+
+
+        $rating = new Rating;
+
+        $rating->create([
+            'comment'=>$request->comment,
+            'order_id' => $orderId,
+            'seller_id' => $sellerId,
+            'user_id' => Auth::user()->id,
+            'rating' => $request->rating,
+            'commentable_id' => $sellerId,
+            'commentable_type' => 'App\Seller',
+            ]);
+        return redirect('/order')->with('message', 'Successfully Rate Seller !');
     }
 
     /**

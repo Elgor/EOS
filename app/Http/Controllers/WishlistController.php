@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Wishlist;
+use Auth;
 use Illuminate\Http\Request;
 
 class WishlistController extends Controller
@@ -14,7 +15,8 @@ class WishlistController extends Controller
      */
     public function index()
     {
-        return view('wishlist.index');
+        $wishlistItems = Wishlist::where('user_id', '=', Auth::id())->get();
+        return view('wishlist.index', compact('wishlistItems'));
     }
 
     /**
@@ -24,18 +26,17 @@ class WishlistController extends Controller
      */
     public function create()
     {
-        //
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
+
+    public function store($productId)
     {
-        //
+        $wishlist=new Wishlist;
+        $wishlist->product_id=$productId;
+        $wishlist->user_id=Auth::id();
+        $wishlist->save();
+
+        return redirect()->route('wishlist.index');
     }
 
     /**
@@ -78,8 +79,10 @@ class WishlistController extends Controller
      * @param  \App\Wishlist  $wishlist
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Wishlist $wishlist)
+    public function destroy($wishlistId)
     {
-        //
+        $item = Wishlist::find($wishlistId);
+        $item->delete();
+        return back();
     }
 }

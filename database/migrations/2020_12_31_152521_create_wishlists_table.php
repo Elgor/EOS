@@ -17,6 +17,7 @@ class CreateWishlistsTable extends Migration
             $table->id();
             $table->timestamps();
             $table->unsignedBigInteger('product_id');
+            $table->unsignedBigInteger('user_id');
         });
     }
 

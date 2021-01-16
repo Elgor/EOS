@@ -1,97 +1,99 @@
 @extends('layouts.app')
 
+@section('title')
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.8.2/css/lightbox.min.css">
+@endsection
 @section('content')
 <div class="container">
     <nav aria-label="breadcrumb">
         <ol class="breadcrumb bg-transparent p-0">
             <li class="breadcrumb-item"><a href="{{ url('/') }}">Home</a></li>
-            <li class="breadcrumb-item active" aria-current="page">{{ $name }}</li>
+            <li class="breadcrumb-item active" aria-current="page">{{ $product->name }}</li>
         </ol>
     </nav>
 </div>
 <!--Section: Block Content-->
-<section class="mb-5 p-4 round-border">
+<section class="mb-5 p-4 round-border bg-white shadow">
     <div class="row">
         <div class="col-md-6 mb-4 mb-md-0">
             <div class="row">
                 <div class="col-12 mb-0">
                     <figure class="text-center">
-                        <img class="round-border" src="{{ asset('img/defaultProduct.jpg') }}"
-                            class="img-fluid z-depth-1">
+                        <img class="round-border" src="{{ asset('/storage/'.$product->image) }}"
+                            style="max-height: 250px; max-width: 300px;">
                     </figure>
                 </div>
                 <div class="col-12">
                     <div class="row">
-                        <div class="col-3">
-                            <div class="view overlay rounded z-depth-1 gallery-item round-border">
-                                <img src="{{ asset('img/defaultProduct.jpg') }}" class="img-fluid">
-                                <div class="mask rgba-white-slight"></div>
+                        @foreach($product->imageList as $image)
+                        <div class="col-4">
+                            <div class="view overlay rounded z-depth-1 gallery-item round-border mb-2">
+                                <a href="{{ asset('/storage/'.$image->path) }}" data-lightbox="photos">
+                                    <img src="{{ asset('/storage/'.$image->path) }}" class="img-fluid"
+                                        style="min-height: 115px">
+                                </a>
                             </div>
                         </div>
-                        <div class="col-3">
-                            <div class="view overlay rounded z-depth-1 gallery-item round-border">
-                                <img src="{{ asset('img/defaultProduct.jpg') }}" class="img-fluid">
-                                <div class="mask rgba-white-slight"></div>
-                            </div>
-                        </div>
-                        <div class="col-3">
-                            <div class="view overlay rounded z-depth-1 gallery-item round-border">
-                                <img src="{{ asset('img/defaultProduct.jpg') }}" class="img-fluid">
-                                <div class="mask rgba-white-slight"></div>
-                            </div>
-                        </div>
-                        <div class="col-3">
-                            <div class="view overlay rounded z-depth-1 gallery-item round-border">
-                                <img src="{{ asset('img/defaultProduct.jpg') }}" class="img-fluid">
-                                <div class="mask rgba-white-slight"></div>
-                            </div>
-                        </div>
+                        @endforeach
                     </div>
                 </div>
             </div>
         </div>
         <div class="col-md-6">
-            <h4 class="font-weight-bold">Fantasy T-shirt</h4>
-            <p class="mb-2 text-muted">by <a href="">Seller Name</a></p>
+            <h4 class="font-weight-bold">{{ $product->name }}</h4>
+            <p class="mb-2 text-muted">by <a
+                    href="{{ route('seller.detail',$product->seller->id) }}">{{ $product->seller->business_name }}</a>
+            </p>
             <div>
                 <p class="mb-1 font-weight-bold">Description</p>
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Numquam, sapiente illo. Sit
-                    error voluptas repellat rerum quidem, soluta enim perferendis voluptates laboriosam. Distinctio,
-                    officia quis dolore quos sapiente tempore alias.</p>
+                <p>{{ $product->description }}</p>
             </div>
             <div>
                 <p class="mb-1 font-weight-bold">Features</p>
                 <ul class="pl-4">
-                    <li>2 Hours Photoshoot</li>
-                    <li>Unlimited Shoot</li>
-                    <li>Edited 20 Photos</li>
+                    @foreach($product->features as $feature)
+                    <li>{{ $feature }}</li>
+                    @endforeach
                 </ul>
             </div>
-            <h5 class="font-weight-bold">Rp {{ number_format($price,0,',','.') }}</h5>
-            <div class="border mt-3 m-1 p-2 row  round-border">
+            <h5 class="font-weight-bold">Rp {{ number_format($product->price,0,',','.') }}</h5>
+            <div class="border mt-3 m-1 p-2 row  round-border border shadow-sm">
                 <div class="col-md-12 pt-2 pb-2">
-                    <form class="form" method="POST">
+                    <form class="form" method="POST" action="{{route('order.store')}}">
+                        @csrf
+                        <input type="hidden" name="product_id" value="{{$product->id}}">
+                        <input type="hidden" name="seller_id" value="{{$product->seller->id}}">
                         <div class="form-group mb-3">
-                            <label class="text-md-right pr-1" for="negotiation_price">Negotiation
+                            <label class="text-md-right pr-1 font-weight-bold" for="negotiation_price">Negotiation
                                 Price</label>
                             <div style="width: 100%">
                                 <input name="negotiation_price" type="text" class="form-control" maxlength="15"
-                                    placeholder="Rp {{ number_format($price,0,',','.') }}">
+                                    placeholder="Rp {{ number_format($product->price,0,',','.') }}">
                             </div>
                         </div>
 
                         <div class="form-group">
-                            <label class="text-md-right pr-1" for="negotiation_price">Event Plan</label>
-                            <select class="form-control" style="width: 100%">
-                                <option>Default select</option>
+                            <label class="text-md-right pr-1 font-weight-bold" for="event_plan">Event
+                                Plan</label>
+                            @if(Auth::user() && Auth::user()->eventPlans->count() !==0)
+                            <select class="form-control" style="width: 100%" name="event_plan_id">
+                                @foreach(Auth::user()->eventPlans as $e)
+                                <option>Select Event Plan</option>
+                                <option value="{{$e->id}}">{{$e->eventName}}</option>
+                                @endforeach
                             </select>
+                            @else
+                            <a class="ml-3 btn btn-outline-info" href="{{ route('eventplan.index') }}"
+                                role="button">Create Event Plan</a>
+                            @endIf
                         </div>
 
                         <div class="mt-3">
-                            <a class="btn btn-outline-info" href="{{ route('order.index') }}" role="button">Add to
-                                Order</a>
-                            <a class="ml-3 btn btn-outline-info" href="" role="button">Compare</a>
-                            <a class="ml-3 pt-2" href=" {{ route('wishlist.index') }}" data-toggle="tooltip"
+                            <button type="submit" class="btn btn-outline-info">Add to Order</button>
+                            <a class="ml-3 btn btn-outline-info" href="{{ route('compare.add',$product->id) }}"
+                                role="button">Compare</a>
+                            <a class="ml-3 pt-2" href="{{ route('wishlist.store',$product->id) }}" data-toggle="tooltip"
                                 data-placement="top" title="Wishlist">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor"
                                     class="bi bi-heart" viewBox="0 0 16 16">
@@ -107,5 +109,4 @@
         </div>
     </div>
 </section>
-<!--Section: Block Content-->
 @endsection

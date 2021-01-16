@@ -16,16 +16,18 @@ class CreateSellersTable extends Migration
         Schema::create('sellers', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->timestamps();
-            $table->string('bussiness_name');
+            $table->string('business_name');
             $table->string('email');
             $table->string('password');
             $table->longText('description');
-            $table->unsignedInteger('category_id');
-            $table->unsignedInteger('city_id');
+            $table->string('category');
+            $table->string('city');
             $table->string('address');
             $table->string('profile_picture');
             $table->string('phone_number');
-            $table->double('final_rating');
+            $table->double('final_rating')->default(0.0);
+            $table->string('no_rekening');
+            $table->rememberToken();
         });
     }
 

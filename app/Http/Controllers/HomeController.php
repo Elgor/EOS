@@ -24,7 +24,5 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $products = Product::paginate(4);
-        return view('home', ['products' => $products]);
     }
 }

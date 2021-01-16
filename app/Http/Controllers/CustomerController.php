@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Customer;
 use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
 
 class CustomerController extends Controller
 {
@@ -48,7 +50,7 @@ class CustomerController extends Controller
     public function show($customerId)
     {
         $customer = User::findOrFail($customerId);
-        return view('customer.profile_detail', $customer);
+        return view('customer.profile_detail', compact('customer'));
     }
 
     /**
@@ -57,9 +59,10 @@ class CustomerController extends Controller
      * @param  \App\Customer  $customer
      * @return \Illuminate\Http\Response
      */
-    public function edit(Customer $customer)
+    public function edit($customerId)
     {
-        //
+        $customer = User::findOrFail($customerId);
+        return view('customer.edit_profile', compact('customer'));
     }
 
     /**
@@ -69,9 +72,35 @@ class CustomerController extends Controller
      * @param  \App\Customer  $customer
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Customer $customer)
+    public function update(Request $request, $customerId)
     {
-        //
+        $request->validate([
+            'name' => ['required', 'string', 'max:255'],
+            'password' => ['required', 'string', 'min:8', 'confirmed'],
+            'phone_number' => 'required|regex:/^([0-9\s\-\+\(\)]*)$/|min:10|max:12',
+            'address' => 'required|min:15',
+            'image' => ['mimes:jpg,jpeg,png'],
+        ]);
+
+        DB::table('users')
+        ->where('id',$customerId)
+        ->update([
+            'name' => $request['name'],  
+            'password' => Hash::make($request['password']),
+            'phone_number' => $request['phone_number'],
+            'address' => $request['address'],
+        ]);
+
+        if (!is_null($request->image)) {
+            DB::table('users')
+            ->where('id',$customerId)
+            ->update([
+                'image' => $request['image']->store('avatar', 'public'),
+            ]);
+        }
+        $customer = User::findOrFail($customerId);
+        return view('customer.profile_detail', compact('customer'));
+
     }
 
     /**
