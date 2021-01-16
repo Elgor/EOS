@@ -199,7 +199,7 @@ class ProductController extends Controller
                 $productId => [
                     'product_id'=>$product->id,
                     'seller_id'=>$product->seller->id,
-                    'completed_transaction'=>$product->order->transaction->count(),
+                    'completed_transaction'=>$product->order->transaction?$product->order->transaction->count():0,
                     'image'=> $product->image,
                     "name" => $product->name,
                     "seller_name" => $product->seller->business_name,

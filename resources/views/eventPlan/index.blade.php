@@ -4,16 +4,16 @@
     <h4>EVENT PLAN</h4>
     <hr>
 
-    <table class="table">
+    <table class="table table-bordered">
         @if($eventPlans->count()>0)
         <thead>
             <tr>
-                <th>Name</th>
-                <th>Type</th>
-                <th>Date</th>
-                <th>Start Time</th>
-                <th>End Time</th>
-                <th>Action</th>
+                <th class="text-center align-middle">Name</th>
+                <th class="text-center align-middle">Type</th>
+                <th class="text-center align-middle">Date</th>
+                <th class="text-center align-middle">Start Time</th>
+                <th class="text-center align-middle">End Time</th>
+                <th class="text-center align-middle">Action</th>
             </tr>
         </thead>
         <tbody>
@@ -24,7 +24,8 @@
                 <td>{{ date('d-m-Y', strtotime($eventPlan->date)) }}</td>
                 <td>{{ date('H:i',strtotime($eventPlan->startTime)) }}</td>
                 <td>{{ date('H:i',strtotime($eventPlan->endTime)) }}</td>
-                <td><a class=" btn btn-danger" href="{{ route('eventPlan.delete',$eventPlan->id) }}" role="button">
+                <td class="text-center align-middle"><a class=" btn btn-danger"
+                        href="{{ route('eventPlan.delete',$eventPlan->id) }}" role="button">
                         Delete</a>
                 </td>
             </tr>
@@ -110,7 +111,7 @@
                 <div class="form-group row mb-0">
                     <div class="col-md-8 offset-md-3">
                         <button type="submit" class="btn btn-success">
-                            Send
+                            Submit
                         </button>
                     </div>
                 </div>

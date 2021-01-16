@@ -1,7 +1,7 @@
 @extends('layouts.seller')
 
 @section('content')
-<div class="container">
+<div class="container p-0">
     <h4 class="d-flex">My ORDER</h4>
     <hr>
     @if(session('message'))
@@ -14,80 +14,69 @@
         </div>
     </div>
     @endif
-    <table class="table">
+    <table class="table table-bordered">
         @if($orderItems->count() >0)
         <thead>
             <tr>
-                <th>Package Name</th>
-                <th>Price</th>
-                <th>Negotiation Price</th>
-                <th>Status</th>
-                <th>Confirm Payment</th>
-                <th class="text-center">Event Plan</th>
-                <th class="text-center">Action</th>
+                <th class="text-center align-middle">Package Name</th>
+                <th class="text-center align-middle">Price</th>
+                <th class="text-center align-middle">Negotiation Price</th>
+                <th class="text-center align-middle" style="width: 130px">Status</th>
+                <th class="text-center align-middle">Confirm Payment</th>
+                <th class="text-center align-middle">Event Plan</th>
+                <th class="text-center align-middle">Action</th>
             </tr>
         </thead>
         <tbody>
-            {{-- 0->waiting
-            1->Request
-            2->Accepted
-            3->Down Payment
-            4->Accepted Down Payment
-            4->Full Payment
-            5->Complete --}}
             @foreach ($orderItems as $orderItem)
             <tr>
                 <td>{{$orderItem->product->name}}</td>
                 <td>Rp {{number_format($orderItem->product->price,0,',','.')??'-'}}</td>
-                <td class="font-weight-bold">Rp {{number_format($orderItem->negotiation_price,0,',','.')??'-'}}</td>
-                <td>{{$orderItem->status}}</td>
                 <td>
-                    @if($orderItem->status == 'Down Payment')
-                    <form method="POST" action="{{route('orders.seller.acceptDownPayment', $orderItem->id)}}">
-                        @csrf
-                        <button type=" submit" class="btn btn-danger">
-                            Down Payment
-                        </button>
-                    </form>
-                    @elseif($orderItem->status =='Full Payment')
-                    <form method="POST" action="{{route('orders.seller.acceptFullPayment', $orderItem->id)}}">
-                        @csrf
-                        <button type=" submit" class="btn btn-danger">
-                            Full Payment
-                        </button>
-                    </form>
+                    @if($orderItem->negotiation_price)
+                    Rp
+                    {{number_format($orderItem->negotiation_price,0,',','.')}}
+                    @else
+                    No Negotiation
                     @endif
-
+                </td>
+                <td>{{$orderItem->status}}</td>
+                <td class="text-center">
+                    @if($orderItem->status =='Down Payment'||$orderItem->status =='Full Payment')
+                    @if($orderItem->status == 'Down Payment')
+                    <input type="button" value="Down Payment" <?php if ($orderItem->status != 'Down Payment') { ?>
+                        disabled <?php   } ?> class="btn btn-success" data-toggle="modal"
+                        data-target="#dpModal{{$orderItem->id}}" />
+                    @elseif($orderItem->status =='Full Payment')
+                    <input type="button" value="Full Payment" <?php if ($orderItem->status != 'Full Payment') { ?>
+                        disabled <?php   } ?> class="btn btn-success" data-toggle="modal"
+                        data-target="#fullModal{{$orderItem->id}}" />
+                    @endif
+                    @elseif($orderItem->status =='Completed')
+                    All Payment Completed
+                    @else
+                    No Payment
+                    @endif
                 </td>
                 <td class="text-center"><a href="{{ route('orders.show',$orderItem->id) }}" class="btn btn-warning"
                         role="button">
                         View Event Plan</a></td>
-                <td>
-                    <div class="row">
+                <td style="padding:19px">
+                    <div class="row d-flex justify-content-around">
+                        @if($orderItem->status == "Requested")
                         <form method="POST" action="{{route('orders.seller.reject', $orderItem->id)}}">
-                            @if($orderItem->status == "Requested")
                             @csrf
                             <button type=" submit" class="btn btn-danger">
                                 Reject
                             </button>
-                            @else
-                            <button type=" submit" class="btn btn-danger" disabled>
-                                Reject
-                            </button>
-                            @endif
                         </form>
                         <form method="POST" action="{{route('orders.seller.accept', $orderItem->id)}}">
-                            @if($orderItem->status == "Requested")
                             @csrf
                             <button type="submit" class="btn btn-success">
                                 Accept
                             </button>
-                            @else
-                            <button type="submit" class="btn btn-success" disabled>
-                                Accept
-                            </button>
-                            @endif
                         </form>
+                        @endif
                         <form method="POST" action="{{route('message.store')}}">
                             @csrf
                             <button type="submit" class="btn btn-primary">
@@ -105,5 +94,63 @@
         <h4>No Order</h4>
         @endif
     </table>
+</div>
+<div class="modal fade" id="dpModal{{$orderItem->id}}" tabindex="-1" role="dialog"
+    aria-labelledby="paymentModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="paymentModalCenterTitle">Confirm Down Payment</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form method="POST" action="{{route('orders.seller.acceptDownPayment', $orderItem->id)}}">
+                @csrf
+                <div class="modal-body text-center">
+                    <p class="mb-1 font-weight-bold">Receipt</p>
+                    <div>
+                        <img class="round-border"
+                            src="{{ asset('/storage/'.$orderItem->transaction->receipt_downPayment) }}" alt=""
+                            style="max-height: 600px; max-width: 300px;">
+                    </div>
+                </div>
+                <div class="modal-footer ">
+                    <button type="submit" class="btn btn-success">
+                        Confirm
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="fullModal{{$orderItem->id}}" tabindex="-1" role="dialog"
+    aria-labelledby="paymentModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="paymentModalCenterTitle">Confirm Full Payment</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form method="POST" action="{{route('orders.seller.acceptFullPayment', $orderItem->id)}}">
+                @csrf
+                <div class="modal-body text-center">
+                    <p class="mb-1 font-weight-bold">Receipt</p>
+                    <div>
+                        <img class="round-border"
+                            src="{{ asset('/storage/'.$orderItem->transaction->receipt_fullPayment) }}" alt=""
+                            style="max-height: 600px; max-width: 300px;">
+                    </div>
+                </div>
+                <div class="modal-footer ">
+                    <button type="submit" class="btn btn-success">
+                        Confirm
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
 </div>
 @endsection

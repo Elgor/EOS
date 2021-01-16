@@ -5,14 +5,14 @@
     <h4 class="d-flex">WISHLIST</h4>
     <hr>
     @if($wishlistItems->count() >0)
-    <table class="table">
+    <table class="table table-bordered">
         <thead>
             <tr>
-                <th>Seller</th>
-                <th>Packages</th>
-                <th>Price</th>
-                <th>City</th>
-                <th class="text-center">Action</th>
+                <th class="text-center align-middle">Seller</th>
+                <th class="text-center align-middle">Packages</th>
+                <th class="text-center align-middle">Price</th>
+                <th class="text-center align-middle">City</th>
+                <th class="text-center align-middle">Action</th>
             </tr>
         </thead>
         <tbody>
@@ -22,7 +22,7 @@
                 <td><a href="{{ route('product.detail',$item->product->id) }}">{{ $item->product->name }}</a></td>
                 <td>{{number_format($item->product->price,0,',','.')}}</td>
                 <td>{{$item->product->seller->city}}</td>
-                <td class="text-center">
+                <td class="text-center align-middle">
                     <a class=" btn btn-danger" href="{{ route('wishlist.delete',$item->id) }}" role="button">
                         Delete</a>
                     <a class=" btn btn-success" href="{{ route('product.detail',$item->product->id) }}" role="button">

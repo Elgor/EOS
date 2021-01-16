@@ -19,6 +19,20 @@
                             class="img-fluid z-depth-1" style="max-height: 250px; max-width: 300px;">
                     </figure>
                 </div>
+                <div class="col-12">
+                    <div class="row">
+                        @foreach($order->product->imageList as $image)
+                        <div class="col-4">
+                            <div class="view overlay rounded z-depth-1 gallery-item round-border mb-2">
+                                <a href="{{ asset('/storage/'.$image->path) }}" data-lightbox="photos">
+                                    <img src="{{ asset('/storage/'.$image->path) }}" class="img-fluid"
+                                        style="min-height: 115px">
+                                </a>
+                            </div>
+                        </div>
+                        @endforeach
+                    </div>
+                </div>
             </div>
         </div>
         <div class="col-md-6">
@@ -41,9 +55,9 @@
         </div>
     </div>
 </section>
-<div class="container col-12  bg-white shadow-lg">
+<div class="container col-12 ">
     <div class="row">
-        <section class="col-5 round-border p-2" style="height: fit-content">
+        <section class="col-5 round-border p-2  bg-white shadow" style="height: fit-content">
             <h4 class="font-weight-bold">Event Plan</h4>
             <hr>
             <div>
@@ -68,11 +82,11 @@
             </div>
             <div>
                 <p class="mb-1 font-weight-bold">Description</p>
-                <p>{{$order->eventPlan->description}}</p>
+                <p style=" word-wrap: break-word; ">{{$order->eventPlan->description}}</p>
             </div>
         </section>
         <div class="col p-0 ml-2">
-            <section class=" round-border p-2 mb-2 " style="height: fit-content">
+            <section class=" round-border p-2 mb-2  bg-white shadow" style="height: fit-content">
                 <h4 class="font-weight-bold">Order Information</h4>
                 <hr>
                 <div>
@@ -84,7 +98,7 @@
                     <p>{{date('d-m-Y', strtotime($order->date))}}</p>
                 </div>
             </section>
-            {{-- Klo bisa dapat informasi transaction, klo tdk di hapus --}}
+            @if($order->transaction)
             <section class=" round-border p-2 " style="height: fit-content">
                 <h4 class="font-weight-bold">Transaction Detail</h4>
                 <hr>
@@ -97,16 +111,15 @@
                     <p>{{$order->transaction->updated_at}}</p>
                 </div>
                 <div>
+                    <p class="mb-1 font-weight-bold">Name on Card</p>
+                    <p>{{$order->transaction->name}}</p>
+                </div>
+                <div>
                     <p class="mb-1 font-weight-bold">Bank</p>
                     <p>{{$order->transaction->bank}}</p>
                 </div>
-                <!-- <div>
-                    <p class="mb-1 font-weight-bold">Type</p>
-                    <p>
-
-                    </p>
-                </div> -->
             </section>
+            @endif
         </div>
     </div>
 

@@ -12,14 +12,14 @@
 </div>
 <div class="container col-10">
     @if($message->messageDetails)
-    <div class="chat overflow-auto" style="height: 70vh;">
+    <div class="chat overflow-auto" style="max-height: 70vh;">
         @foreach($message->messageDetails as $chat)
-        @if($chat->sender==Auth::guard('seller')->user()->business_name)
+        @if($chat->sender==Auth::guard('seller') && $chat->sender==Auth::guard('seller')->user()->business_name)
         <div class="card text-right">
             <div class="card-header">
                 <div>
                     <h5 class="card-title">{{$chat->sender}}</h5>
-                    <div class="">{{\Carbon\Carbon::parse($chat->created_at)->format('l, j F h:i A')}}</div>
+                    <div class="">{{\Carbon\Carbon::parse($chat->created_at)->format('l, j F H:i')}}</div>
                 </div>
             </div>
             <div class="card-body">
@@ -31,7 +31,7 @@
             <div class="card-header">
                 <div>
                     <h5 class="card-title">{{$chat->sender}}</h5>
-                    <div class="">{{\Carbon\Carbon::parse($chat->created_at)->format('l, j F h:i A')}}</div>
+                    <div class="">{{\Carbon\Carbon::parse($chat->created_at)->format('l, j F H:i')}}</div>
                 </div>
             </div>
             <div class="card-body">

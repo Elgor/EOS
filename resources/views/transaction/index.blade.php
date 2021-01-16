@@ -14,10 +14,11 @@
         </div>
     </div>
     @endif
-    <table class="table">
+    <table class="table table-bordered">
         @if($transactions->count() >0)
         <thead>
             <tr>
+                <th>Date</th>
                 <th>Invoice</th>
                 <th>Bank</th>
                 <th>Type</th>
@@ -27,6 +28,7 @@
         <tbody>
             @foreach ($transactions as $transaction)
             <tr>
+                <td>{{\Carbon\Carbon::parse( $transaction->updated_at)->format('l, j F H:i')}}</td>
                 <td>{{ $transaction->invoice }}</td>
                 <td>{{ $transaction->bank }}</td>
                 <td>{{ $transaction->type }}</td>

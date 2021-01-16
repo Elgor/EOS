@@ -4,28 +4,29 @@
     <h4>My Package</h4>
     <hr>
 
-    <table class="table">
+    <table class="table table-bordered">
         @if($products->count()>0)
         <thead>
             <tr>
-                <th>Picture</th>
-                <th>Name</th>
-                <th>Price</th>
-                <th>Feature</th>
-                <th>Action</th>
+                <th class="text-center align-middle">Picture</th>
+                <th class="text-center align-middle">Name</th>
+                <th class="text-center align-middle">Price</th>
+                <th class="text-center align-middle">Feature</th>
+                <th class="text-center align-middle">Action</th>
             </tr>
         </thead>
         <tbody>
             @foreach ($products as $product)
             <tr>
-                <td>
-                    <img src="{{ asset('/storage/'.$product->image) }}" alt="" heigt=100 width=100>
+                <td class="text-center align-middle">
+                    <img src="{{ asset('/storage/'.$product->image) }}" alt="" height=120 width=120>
                 <td>{{ $product->name }}</td>
                 <td>{{ $product->price }}</td>
                 <td>@foreach($product->features as $feature)
                     <p>{{ $feature }}</p>
                     @endforeach</td>
-                <td><a class=" btn btn-danger" href="{{ route('product.delete',$product->id) }}" role="button">
+                <td class="text-center align-middle"><a class=" btn btn-danger"
+                        href="{{ route('product.delete',$product->id) }}" role="button">
                         Delete</a>
                 </td>
             </tr>
@@ -74,14 +75,11 @@
                         <option value="Live Streaming">Live streaming</option>
                         <option value="Photobooth Decoration">Photobooth Decoration </option>
                         <option value="Make Up Event">Make Up Event</option>
-                        <option value="6 Hour Photoshoot">6 Hour Photoshoot</option>
-                        <option value="6 Hour Photoshoot">6 Hour Photoshoot</option>
-                        <option value="6 Hour Photoshoot">6 Hour Photoshoot</option>
-                        <option value="6 Hour Photoshoot">6 Hour Photoshoot</option>
-                        <option value="6 Hour Photoshoot">6 Hour Photoshoot</option>
-
-
-
+                        <option value="100 edited files">100 edited files</option>
+                        <option value="200 edited files">200 edited files</option>
+                        <option value="1 Day Photo Session">1 Day Photo Session</option>
+                        <option value="2 Day Photo Session">2 Day Photo Session</option>
+                        <option value="Dekorasi meja">Dekorasi meja</option>
                     </select>
                 </div>
             </div>

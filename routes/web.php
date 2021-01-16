@@ -53,6 +53,7 @@ Route::post('/customer/update/{customerId}', 'CustomerController@update')->name(
 Route::get('/rating', 'RatingController@index')->name('rating.index')->middleware('auth');
 Route::get('/rating/{sellerId}/{orderId}', 'RatingController@index')->name('rating.index')->middleware('auth');
 Route::post('/rating/{sellerId}/{orderId}', 'RatingController@store')->name('rating.store')->middleware('auth');
+Route::get('/ratings', 'RatingController@sellerRatings')->name('ratings.seller');
 
 //ORDER SELLER
 Route::get('/orders', 'OrderController@sellerOrders')->name('orders.seller');
@@ -85,7 +86,6 @@ Route::post('/register/seller', 'SellerController@store')->name('register.seller
 Route::get('/transaction', 'TransactionController@index')->name('transaction.index');
 Route::post('/transaction/{orderId}/{type}', 'TransactionController@payment')->name('transaction.payment');
 
-
 // ADMIN
 Route::post('/admin/city/', 'CityController@store')->name('city.store')->middleware('admin');
 Route::get('/admin/city/', 'CityController@index')->name('city.index')->middleware('admin');
@@ -98,4 +98,3 @@ Route::get('/admin/category/', 'CategoryController@index')->name('category.index
 Route::get('/admin/category/{categoryId}', 'CategoryController@edit')->name('category.edit')->middleware('admin');
 Route::post('/admin/category/{categoryId}', 'CategoryController@update')->name('category.update')->middleware('admin');
 Route::get('/admin/category/delete/{categoryId}', 'CategoryController@destroy')->name('category.delete')->middleware('admin');
-

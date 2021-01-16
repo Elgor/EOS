@@ -14,16 +14,15 @@
         <div class="col-md-6 mb-4 mb-md-0">
             <div class="row">
                 <div class="col-12 mb-0">
-                    <figure class="text-center">
-                        <img class="round-border" src="{{ asset('/storage/'.$order->product->image) }}"
-                            class="img-fluid z-depth-1">
+                    <figure class="text-center align-middle">
+                        <img class="round-border" style="width: 250px;max-height: 300px;"
+                            src="{{ asset('/storage/'.$order->product->image) }}" class="img-fluid z-depth-1">
                     </figure>
                 </div>
             </div>
         </div>
         <div class="col-md-6">
             <h4 class="font-weight-bold">{{$order->product->name}}</h4>
-            <p class="mb-2 text-muted">by <a href="">{{$order->seller->business_name}}</a></p>
             <div>
                 <p class="mb-1 font-weight-bold">Description</p>
                 <p>{{$order->product->description}}</p>
@@ -43,15 +42,22 @@
                 </div>
                 <div>
                     <p class="mb-1 font-weight-bold">Negotiation Price</p>
-                    <h4>Rp {{number_format($order->negotiation_price,0,',','.')}}</h4>
+                    <h4>
+                        @if($order->negotiation_price)
+                        Rp
+                        {{number_format($order->negotiation_price,0,',','.')}}
+                        @else
+                        No Negotiation
+                        @endif
+                    </h4>
                 </div>
             </div>
         </div>
     </div>
 </section>
 <div class="container col-12">
-    <div class="row">
-        <section class="col-5 round-border p-2" style="height: fit-content">
+    <div class="row ">
+        <section class="col-5 round-border p-2 bg-white shadow" style="height: fit-content">
             <h4 class="font-weight-bold">Event Plan</h4>
             <hr>
             <div>
@@ -81,7 +87,7 @@
             </div>
         </section>
         <div class="col p-0 ml-2">
-            <section class=" round-border p-2 mb-2 " style="height: fit-content">
+            <section class=" round-border p-2 mb-2 bg-white shadow" style="height: fit-content">
                 <h4 class="font-weight-bold">Order Information</h4>
                 <hr>
                 <div>

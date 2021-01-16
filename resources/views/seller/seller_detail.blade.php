@@ -13,8 +13,8 @@
         </ol>
     </nav>
 </div>
-<div class="col-10 mx-auto bg-white shadow">
-    <section class="mb-5 p-4 round-border ">
+<div class="col-10 mx-auto">
+    <section class="mb-5 p-4 round-border bg-white shadow ">
         <div class="row">
             <div class="col-md-6 text-center m-auto">
                 <figure>
@@ -163,28 +163,27 @@
                     </div>
                     <div class="my-5 mx-auto">
                         @forelse($comments as $comment)
-                        <div class="card col-8 mx-auto mb-2">
+                        <div class="card col-10 mx-auto mb-2">
                             <div class="card-body">
                                 <div class="row">
-                                    <div class="col-md-2">
-                                        <img src="{{asset('/storage/'.$comment->user->image)}}"
-                                            class="img img-rounded img-fluid" />
+                                    <div class="col-md-3">
+                                        <img src="{{asset('/storage/'.$comment->order->product->image)}}"
+                                            class="img img-rounded img-fluid round-border" />
                                         <p class="text-secondary text-center" style="font-size: 10px;">Review At :
-                                            {{$comment->created_at}}
+                                            {{\Carbon\Carbon::parse( $comment->created_at)->format('j F H:i')}}
                                         </p>
                                     </div>
-                                    <div class="col-md-10">
-                                        <p>
-                                            <a class="float-left"><strong>{{$comment->user->name}}</strong></a>
-                                            @for($i=0; $i<$comment->rating; $i++)
-                                                <span class="float-right"><i class="text-warning fa fa-star"></i></span>
-                                                @endfor
-
-                                        </p>
-                                        <div class="clearfix"></div>
-                                        <p>{{$comment->comment}}</p>
-                                        <p style="font-size: 10px; margin-top: auto;">(Product
-                                            :{{$comment->order->product->name}})</p>
+                                    <div class="col-md-9">
+                                        <a
+                                            href="{{ route('product.detail',$comment->order->product->id) }}">{{$comment->order->product->name}}</a>
+                                        @for($i=0; $i<$comment->rating; $i++)
+                                            <span class="float-right"><i class="text-warning fa fa-star"></i></span>
+                                            @endfor
+                                            <p>
+                                                <a class="float-left"><strong>{{$comment->user->name}}</strong></a>
+                                            </p>
+                                            <div class="clearfix"></div>
+                                            <p>{{$comment->comment}}</p>
                                     </div>
                                 </div>
                             </div>
@@ -220,8 +219,6 @@
                                                 {{ number_format($package->price,0,',','.') }}
                                             </h6>
                                         </div>
-
-
                                     </div>
                                 </div>
                                 @empty

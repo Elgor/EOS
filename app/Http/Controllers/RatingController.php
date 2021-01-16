@@ -16,12 +16,12 @@ class RatingController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index($sellerId,$orderId)
+    public function index($sellerId, $orderId)
     {
         $seller = Seller::findOrFail($sellerId);
         $order = Order::findOrFail($orderId);
 
-        return view('rating.index', compact('seller','order'));
+        return view('rating.index', compact('seller', 'order'));
     }
 
     /**
@@ -119,5 +119,12 @@ class RatingController extends Controller
     public function destroy(Rating $rating)
     {
         //
+    }
+
+    public function sellerRatings()
+    {
+        $ratings = Rating::where('seller_id', '=', Auth::guard('seller')->id())
+        ->get();
+        return view('seller.ratings', compact('ratings'));
     }
 }
