@@ -14,10 +14,11 @@
         </div>
     </div>
     @endif
-    <table class="table table-bordered">
+    <table class="table table-bordered shadow-sm bg-white">
         @if($transactions->count() >0)
         <thead>
             <tr>
+                <th>Order</th>
                 <th>Date</th>
                 <th>Invoice</th>
                 <th>Bank</th>
@@ -28,12 +29,19 @@
         <tbody>
             @foreach ($transactions as $transaction)
             <tr>
+                <td><a href="{{ route('order.show', $transaction->order->id) }}">Link</a></td>
                 <td>{{\Carbon\Carbon::parse( $transaction->updated_at)->format('l, j F H:i')}}</td>
                 <td>{{ $transaction->invoice }}</td>
                 <td>{{ $transaction->bank }}</td>
                 <td>{{ $transaction->type }}</td>
-                <td>Rp
-                    {{number_format($transaction->order->negotiation_price??$transaction->order->product->price,0,',','.')}}​​
+                <td>
+                    @if($transaction->type == "Down Payment")
+                    Rp
+                    {{number_format((float)($transaction->order->negotiation_price??$transaction->order->product->price)*0.3,0,',','.')}}
+                    @elseif($transaction->type == "Full Payment")​​
+                    Rp
+                    {{number_format($transaction->order->negotiation_price??$transaction->order->product->price,0,',','.')}}
+                    @endif
                 </td>
             </tr>
             @endforeach

@@ -10,39 +10,60 @@
         </ol>
     </nav>
 </div>
-<div class="container col-10">
+<div class="container col-8">
     @if($message->messageDetails)
-    <div class="chat overflow-auto" style="max-height: 70vh;">
-        @foreach($message->messageDetails as $chat)
-        @if($chat->sender==Auth::guard('seller') && $chat->sender==Auth::guard('seller')->user()->business_name)
-        <div class="card text-right">
-            <div class="card-header">
-                <div>
-                    <h5 class="card-title">{{$chat->sender}}</h5>
-                    <div class="">{{\Carbon\Carbon::parse($chat->created_at)->format('l, j F H:i')}}</div>
-                </div>
-            </div>
-            <div class="card-body">
-                <div class="second-part">{{$chat->text}}</div>
-            </div>
-        </div>
-        @else
+    <div class="" style="height: 70vh;display:flex;flex-direction:column-reverse; overflow:auto">
+        {{-- <div> --}}
+        @foreach($message->messageDetails->reverse() as $chat)
         <div class="card">
-            <div class="card-header">
-                <div>
-                    <h5 class="card-title">{{$chat->sender}}</h5>
-                    <div class="">{{\Carbon\Carbon::parse($chat->created_at)->format('l, j F H:i')}}</div>
-                </div>
+            <div class="card-header pb-0 bg-white">
+                {{-- @if(Auth::user())
+                    @if($chat->sender == Auth::user()->name) --}}
+                <p class="card-title  text-primary font-weight-bold float-right">{{$chat->sender}}</p>
+                <p>{{\Carbon\Carbon::parse($chat->created_at)->format('l, j F')}}</p>
+                {{-- @else
+                    <p class="float-right">{{\Carbon\Carbon::parse($chat->created_at)->format('l, j F')}}</p>
+                <p class="card-title  text-primary font-weight-bold">{{$chat->sender}}</p>
+                @endif
+                @elseif(Auth::guard('seller'))
+                @if($chat->sender == Auth::guard('seller')->user()->business_name)
+                <p class="card-title  text-primary font-weight-bold float-right">{{$chat->sender}}</p>
+                <p>{{\Carbon\Carbon::parse($chat->created_at)->format('l, j F')}}</p>
+                @else
+                <p class="float-right">{{\Carbon\Carbon::parse($chat->created_at)->format('l, j F')}}</p>
+                <p class="card-title  text-primary font-weight-bold">{{$chat->sender}}</p>
+                @endif
+                @endif --}}
             </div>
             <div class="card-body">
-                <div class="second-part">{{$chat->text}}</div>
+                {{-- @if(Auth::user())
+                    @if($chat->sender == Auth::user()->name) --}}
+                <p class="mb-2 text-right">{{$chat->text}}</p>
+                <p class="text-secondary mb-0 float-right" style="font-size: 10px">
+                    {{\Carbon\Carbon::parse($chat->created_at)->format('H:i')}}</p>
+                {{-- @else
+                    <p class="mb-2">{{$chat->text}}</p>
+                <p class="text-secondary mb-0" style="font-size: 10px">
+                    {{\Carbon\Carbon::parse($chat->created_at)->format('H:i')}}</p>
+                @endif
+                @elseif(Auth::guard('seller'))
+                @if($chat->sender == Auth::guard('seller')->user()->business_name)
+                <p class="mb-2 text-right">{{$chat->text}}</p>
+                <p class="text-secondary mb-0 float-right" style="font-size: 10px">
+                    {{\Carbon\Carbon::parse($chat->created_at)->format('H:i')}}</p>
+                @else
+                <p class="mb-2">{{$chat->text}}</p>
+                <p class="text-secondary mb-0" style="font-size: 10px">
+                    {{\Carbon\Carbon::parse($chat->created_at)->format('H:i')}}</p>
+                @endif
+                @endif --}}
             </div>
         </div>
-        @endif
+        {{-- </div> --}}
         @endforeach
     </div>
     @endif
-    <div>
+    <div class="container p-0 pt-3 float-right">
         <form method="POST" action="{{ route('messageDetail.store') }}">
             @csrf
             <div class="input-group mb-3">
@@ -54,9 +75,8 @@
                 <input value="{{Auth::guard('seller')->user()->business_name}}" name="sender" type="hidden">
                 @endif
                 <input value="{{$message->id}}" name="message_id" type="hidden">
-
                 <div class="input-group-append">
-                    <button class="btn btn-outline-secondary" type="submit">Submit</button>
+                    <button class="btn btn-outline-secondary text-left" type="submit">Submit</button>
                 </div>
             </div>
         </form>

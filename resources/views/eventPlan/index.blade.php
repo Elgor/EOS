@@ -3,8 +3,7 @@
 <div class="container">
     <h4>EVENT PLAN</h4>
     <hr>
-
-    <table class="table table-bordered">
+    <table class="table table-bordered shadow-sm bg-white">
         @if($eventPlans->count()>0)
         <thead>
             <tr>

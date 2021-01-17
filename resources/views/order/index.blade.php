@@ -4,20 +4,24 @@
 <div class="container p-0">
     <h4 class="d-flex">ORDER</h4>
     <hr>
-    <table class="table table-bordered">
+    <table class="table table-bordered shadow-sm bg-white">
+        @if($orderItems->count() >0)
         <thead>
             <tr>
-                <th class="text-center align-middle">Seller</th>
-                <th class="text-center align-middle">Packages</th>
-                <th class="text-center align-middle">Price</th>
-                {{-- <th class="text-center align-middle">Negotiation Price</th> --}}
-                <th class="text-center align-middle">Status</th>
+                <th class="text-center align-middle" rowspan="2">Seller</th>
+                <th class="text-center align-middle" rowspan="2">Package</th>
+                <th class="text-center align-middle" colspan="2">Price</th>
+                <th class="text-center align-middle" rowspan="2">Status</th>
+                <th class="text-center align-middle" colspan="2">Payment</th>
+                <th class="text-center align-middle" rowspan="2">Action</th>
+            </tr>
+            <tr>
+                <th class="text-center align-middle">Normal</th>
+                <th class="text-center align-middle">Negotiation</th>
                 <th class="text-center align-middle">Down Payment</th>
                 <th class="text-center align-middle">Full Payment</th>
-                <th class="text-center align-middle">Action</th>
             </tr>
         </thead>
-        @if($orderItems->count() >0)
         <tbody>
             @foreach ($orderItems as $orderItem)
             <tr>
@@ -27,23 +31,33 @@
                 <td><a style=" color:#212529" href="{{ route('product.detail',$orderItem->product->id) }}">
                         {{$orderItem->product->name}}</a>
                 </td>
-                <td>Rp {{number_format($orderItem->negotiation_price??$orderItem->product->price,0,',','.')}}</td>
+                <td>Rp {{number_format($orderItem->product->price,0,',','.')}}</td>
+                <td>Rp {{number_format($orderItem->negotiation_price,0,',','.')}}</td>
                 <td>{{$orderItem->status}}</td>
                 <td class="text-center">
-                    <input type="button" value="Pay" <?php if ($orderItem->status != 'Accepted') { ?> disabled
-                        <?php   } ?> class="btn btn-success" data-toggle="modal"
+                    <input type="button" value="Pay"
+                        <?php if ($orderItem->status != 'Accepted' && $orderItem->status != 'Down Payment') { ?>
+                        disabled <?php   } ?> class="btn btn-success" data-toggle="modal"
                         data-target="#dpModal{{$orderItem->id}}" />
                 </td>
                 <td class="text-center">
                     <input type="button" value="Pay"
-                        <?php if ($orderItem->status != 'Accepted' && $orderItem->status != 'Accepted Down Payment') { ?>
+                        <?php if ($orderItem->status != 'Accepted' && $orderItem->status != 'Accepted Down Payment' && $orderItem->status != 'Full Payment') { ?>
                         disabled <?php   } ?> class="btn btn-success" data-toggle="modal"
                         data-target="#fpModal{{$orderItem->id}}" />
                 </td>
-                <td>
-                    <div class="row p-3 d-flwx justify-content-around">
-                        <a class="btn btn-warning" href="{{ route('order.show',$orderItem->id) }}" role="button">
+                <td class="text-center align-middle">
+                    <div class="d-inline-flex">
+                        <a class="btn btn-warning mr-2" href="{{ route('order.show',$orderItem->id) }}" role="button">
                             View</a>
+                        <form class="mr-2" method="POST" action="{{route('message.store')}}">
+                            @csrf
+                            <button type="submit" class="btn btn-primary">
+                                Message
+                            </button>
+                            <input type="hidden" value="{{$orderItem->seller->id}}" name="seller_id">
+                            <input type="hidden" value="{{Auth::id()}}" name="user_id">
+                        </form>
                         @if($orderItem->status == 'Waiting' || $orderItem->status == 'Rejected' )
                         <a class="btn btn-danger" href="{{route('order.delete', $orderItem->id) }}" role="button">
                             Delete</a>
@@ -53,14 +67,6 @@
                             role="button">
                             Rate</a>
                         @endif
-                        <form method="POST" action="{{route('message.store')}}">
-                            @csrf
-                            <button type="submit" class="btn btn-primary">
-                                Message
-                            </button>
-                            <input type="hidden" value="{{$orderItem->seller->id}}" name="seller_id">
-                            <input type="hidden" value="{{Auth::id()}}" name="user_id">
-                        </form>
                     </div>
                 </td>
             </tr>
@@ -81,9 +87,8 @@
                             </div>
 
                             <div class="modal-body">
-                                <p>No Rekening</p>
-                                <h1 class="text-center">{{ $orderItem->seller->no_rekening }}</h1>
-                                <h4>
+                                Account Number:<h1 class="text-center">{{ $orderItem->seller->no_rekening }}</h1>
+                                Price to Pay:<h4 class="text-center">
                                     @if(!is_null($orderItem->negotiation_price))
                                     Rp {{number_format((float)($orderItem->negotiation_price*0.3),0,',','.')}}
                                     @else
@@ -122,7 +127,6 @@
                     </div>
                 </div>
             </div>
-
             <div class="modal fade" id="fpModal{{$orderItem->id}}" tabindex="-1" role="dialog"
                 aria-labelledby="paymentModalCenterTitle" aria-hidden="true">
                 <div class="modal-dialog modal-dialog-centered" role="document">
@@ -139,9 +143,8 @@
                             @csrf
 
                             <div class="modal-body">
-                                <p>Account Number</p>
-                                <h1 class="text-center">{{ $orderItem->seller->no_rekening }}</h1>
-                                <h4>
+                                Account Number:<h1 class="text-center">{{ $orderItem->seller->no_rekening }}</h1>
+                                Price to Pay:<h4 class="text-center">
                                     @if($orderItem->status == 'Accepted Down Payment')
                                     Rp
                                     {{number_format(((float)($orderItem->negotiation_price??$orderItem->product->price)-($orderItem->negotiation_price??$orderItem->product->price)*0.3),0,',','.')}}
@@ -181,15 +184,19 @@
             </div>
             @endforeach
         </tbody>
+
         @else
         <h4>No Order</h4>
         @endif
     </table>
+    @if($orderItems->count()>0)
     <form method="POST" action="{{route('order.request', Auth::user()->id) }}">
         @csrf
         <button type="submit" class="btn btn-warning">
             Send All Request Order
         </button>
     </form>
+    @endif
 </div>
+
 @endsection

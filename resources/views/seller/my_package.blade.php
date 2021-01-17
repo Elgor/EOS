@@ -4,7 +4,7 @@
     <h4>My Package</h4>
     <hr>
 
-    <table class="table table-bordered">
+    <table class="table table-bordered shadow-sm bg-white">
         @if($products->count()>0)
         <thead>
             <tr>
@@ -21,13 +21,14 @@
                 <td class="text-center align-middle">
                     <img src="{{ asset('/storage/'.$product->image) }}" alt="" height=120 width=120>
                 <td>{{ $product->name }}</td>
-                <td>{{ $product->price }}</td>
+                <td>Rp {{number_format($product->price,0,',','.')}}</td>
                 <td>@foreach($product->features as $feature)
                     <p>{{ $feature }}</p>
                     @endforeach</td>
-                <td class="text-center align-middle"><a class=" btn btn-danger"
-                        href="{{ route('product.delete',$product->id) }}" role="button">
-                        Delete</a>
+                <td class="text-center align-middle">
+                    <a class=" btn btn-danger" href="{{ route('product.delete',$product->id) }}" role="button">
+                        Delete
+                    </a>
                 </td>
             </tr>
             @endforeach

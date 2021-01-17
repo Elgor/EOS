@@ -133,11 +133,7 @@ class OrderController extends Controller
     public function rejectOrder($orderId)
     {
         $order = Order::find($orderId);
-        if ($order->status == 'Requested') {
-            $order->status = 'Rejected';
-        } else {
-            return back();
-        }
+        $order->status = 'Rejected';
         $order->save();
         return back();
     }

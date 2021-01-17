@@ -20,7 +20,7 @@
         </div>
     </div>
     @endif
-    <table class="table table-bordered">
+    <table class="table table-bordered shadow-sm bg-white">
         @if($ratings->count() >0)
         <thead>
             <tr>

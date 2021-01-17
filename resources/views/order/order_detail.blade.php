@@ -51,7 +51,23 @@
                     @endforeach
                 </ul>
             </div>
-
+            <div class="row m-1">
+                <div class="mr-5">
+                    <p class="mb-1 font-weight-bold">Price</p>
+                    <h5>Rp {{number_format($order->product->price,0,',','.')}}</h5>
+                </div>
+                <div>
+                    <p class="mb-1 font-weight-bold">Negotiation Price</p>
+                    <h5>
+                        @if($order->negotiation_price)
+                        Rp
+                        {{number_format($order->negotiation_price,0,',','.')}}
+                        @else
+                        No Negotiation
+                        @endif
+                    </h5>
+                </div>
+            </div>
         </div>
     </div>
 </section>
@@ -86,7 +102,7 @@
             </div>
         </section>
         <div class="col p-0 ml-2">
-            <section class=" round-border p-2 mb-2  bg-white shadow" style="height: fit-content">
+            <section class=" round-border p-2 mb-2 bg-white shadow" style="height: fit-content">
                 <h4 class="font-weight-bold">Order Information</h4>
                 <hr>
                 <div>
@@ -99,7 +115,7 @@
                 </div>
             </section>
             @if($order->transaction)
-            <section class=" round-border p-2 " style="height: fit-content">
+            <section class=" round-border p-2 bg-white shadow" style="height: fit-content">
                 <h4 class="font-weight-bold">Transaction Detail</h4>
                 <hr>
                 <div>

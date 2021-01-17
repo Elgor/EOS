@@ -27,7 +27,7 @@ Route::get('/seller-detail/{sellerId}', 'SellerController@detail')->name('seller
 Route::get('/seller/search', 'SellerController@search')->name('seller-search');
 
 //MESSAGE
-Route::get('/message', 'MessageController@index')->name('message.index')->middleware('auth');
+Route::get('/message', 'MessageController@index')->name('message.index');
 Route::get('/message/{messageId}', 'MessageController@show')->name('message.show');
 Route::post('/messageDetail', 'MessageDetailController@store')->name('messageDetail.store');
 Route::post('/message', 'MessageController@store')->name('message.store');

@@ -1,6 +1,8 @@
 @extends(isset(Auth::user()->id) ? 'layouts.app' : 'layouts.seller')
 @section('content')
 <div class="container col-10">
+    <h4 class="d-flex">MESSAGE</h4>
+    <hr>
     @foreach($messages as $message)
     @if(Auth::user())
     <ul class="list-group">

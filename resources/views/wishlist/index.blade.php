@@ -5,7 +5,7 @@
     <h4 class="d-flex">WISHLIST</h4>
     <hr>
     @if($wishlistItems->count() >0)
-    <table class="table table-bordered">
+    <table class="table table-bordered shadow-sm bg-white">
         <thead>
             <tr>
                 <th class="text-center align-middle">Seller</th>

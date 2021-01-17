@@ -38,18 +38,18 @@
             <div class="row m-1">
                 <div class="mr-5">
                     <p class="mb-1 font-weight-bold">Price</p>
-                    <h4>Rp {{number_format($order->product->price,0,',','.')}}</h4>
+                    <h5>Rp {{number_format($order->product->price,0,',','.')}}</h5>
                 </div>
                 <div>
                     <p class="mb-1 font-weight-bold">Negotiation Price</p>
-                    <h4>
+                    <h5>
                         @if($order->negotiation_price)
                         Rp
                         {{number_format($order->negotiation_price,0,',','.')}}
                         @else
                         No Negotiation
                         @endif
-                    </h4>
+                    </h5>
                 </div>
             </div>
         </div>

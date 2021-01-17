@@ -90,13 +90,15 @@ class TransactionController extends Controller
 
     public function payment(Request $request, $orderId, $type)
     {
-        $status = Order::where('id', '=', $orderId)
+        $transaction = Transaction::where('orderId', '=', $orderId);
+        if (!$orderId) {
+            $status = Order::where('id', '=', $orderId)
             ->first();
 
-        if ($status->status == 'Accepted') {
-            //Pay down payment when accepted status
-            if ($type == 'Down Payment') {
-                Transaction::create([
+            if ($status->status == 'Accepted') {
+                //Pay down payment when accepted status
+                if ($type == 'Down Payment') {
+                    Transaction::create([
                     'order_id' => $orderId,
                     'user_id' => Auth::user()->id,
                     'invoice' => 'INV/' . Carbon::now()->toDateString() . '/' . $orderId . '/' . Auth::user()->id,
@@ -106,16 +108,16 @@ class TransactionController extends Controller
                     'type'=>$type
                 ]);
 
-                DB::table('orders')
+                    DB::table('orders')
                 ->where('id', $orderId)
                 ->update([
                 'status' => $type
             ]);
-            } elseif ($type == 'Full Payment') {
-                // dd($request);
+                } elseif ($type == 'Full Payment') {
+                    // dd($request);
 
-                //Pay full payment when accepted status
-                Transaction::create([
+                    //Pay full payment when accepted status
+                    Transaction::create([
                     'order_id' => $orderId,
                     'user_id' => Auth::user()->id,
                     'invoice' => 'INV/' . Carbon::now()->toDateString() . '/' . $orderId . '/' . Auth::user()->id,
@@ -124,21 +126,21 @@ class TransactionController extends Controller
                     'receipt_fullPayment' => $request->file('image')->store('payment', 'public'),
                     'type'=>"Full Payment"
                 ]);
-                DB::table('orders')
+                    DB::table('orders')
                     ->where('id', $orderId)
                     ->update([
                         'status' => $type
                     ]);
-            }
-        } elseif ($status->status == 'Accepted Down Payment') {
-            // Pay Full Payment
-            DB::table('orders')
+                }
+            } elseif ($status->status == 'Accepted Down Payment') {
+                // Pay Full Payment
+                DB::table('orders')
                 ->where('id', $orderId)
                 ->update([
                     'status' => $type
                 ]);
 
-            DB::table('transactions')
+                DB::table('transactions')
                 ->where('order_id', $orderId)
                 ->update([
                     'receipt_fullPayment' => $request->file('image')->store('payment', 'public'),
@@ -146,8 +148,23 @@ class TransactionController extends Controller
                     'name' => $request->name,
                     'type'=> $type
                 ]);
-        }
+            }
+        } else {
+            DB::table('transactions')
+            ->where('order_id', $orderId)
+            ->update([
+                'receipt_fullPayment' => $request->file('image')->store('payment', 'public'),
+                'bank' => $request->bank,
+                'name' => $request->name,
+                'type'=> $type
+            ]);
 
+            DB::table('orders')
+            ->where('id', $orderId)
+            ->update([
+                'status' => $type
+            ]);
+        }
         return redirect('/order')->with('message', 'Successfully Pay Order !');
     }
 }
