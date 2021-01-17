@@ -80,7 +80,7 @@
         </div>
         @endforeach
         @else
-        <h4 class="p-4">No Seller</h4>
+        <h4 class="p-3">No Seller</h4>
         @endif
     </div>
     <div class="d-flex justify-content-center">

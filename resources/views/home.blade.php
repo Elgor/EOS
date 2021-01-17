@@ -42,6 +42,7 @@
     <h4 class="d-flex">PACKAGES</h4>
     <hr>
     <div class="row">
+        @if ($products->isEmpty()==false)
         @foreach ($products as $product)
         <div class="col-3 d-flex" style="min-height: 400px">
             <div class="card mb-4">
@@ -67,10 +68,12 @@
             </div>
         </div>
         @endforeach
+        @else
+        <h4 class="p-3">No Package</h4>
+        @endif
     </div>
     <div class="d-flex justify-content-center">
         {{ $products->links() }}
-
     </div>
 </div>
 
