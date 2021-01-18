@@ -63,7 +63,6 @@
                         </div>
                         <div class="form-group row mt-5 mb-0">
                             <div class="col-md-6 offset-md-4">
-                                {{ __('Save') }}
                                 <a class="btn btn-primary w-50" href="{{ route('customer.edit',Auth::user()->id) }}"
                                     role="button">
                                     Edit Profile</a>

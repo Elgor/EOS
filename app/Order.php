@@ -25,4 +25,8 @@ class Order extends Model
     public function transaction(){
         return $this->hasOne('App\Transaction');
     }
+
+    public function rating(){
+        return $this->hasOne('App\Rating');
+    }
 }

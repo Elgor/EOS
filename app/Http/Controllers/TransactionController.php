@@ -91,10 +91,10 @@ class TransactionController extends Controller
     public function payment(Request $request, $orderId, $type)
     {
         $transaction = Transaction::where('orderId', '=', $orderId);
-        if (!$orderId) {
-            $status = Order::where('id', '=', $orderId)
-            ->first();
+        $status = Order::where('id', '=', $orderId)
+        ->first();
 
+            //Kondisi awal bayar accepted
             if ($status->status == 'Accepted') {
                 //Pay down payment when accepted status
                 if ($type == 'Down Payment') {
@@ -109,13 +109,11 @@ class TransactionController extends Controller
                 ]);
 
                     DB::table('orders')
-                ->where('id', $orderId)
-                ->update([
-                'status' => $type
+                    ->where('id', $orderId)
+                    ->update([
+                    'status' => $type
             ]);
                 } elseif ($type == 'Full Payment') {
-                    // dd($request);
-
                     //Pay full payment when accepted status
                     Transaction::create([
                     'order_id' => $orderId,
@@ -132,6 +130,7 @@ class TransactionController extends Controller
                         'status' => $type
                     ]);
                 }
+            //Kondisi setelah di confirm pembayaran down payment
             } elseif ($status->status == 'Accepted Down Payment') {
                 // Pay Full Payment
                 DB::table('orders')
@@ -148,23 +147,29 @@ class TransactionController extends Controller
                     'name' => $request->name,
                     'type'=> $type
                 ]);
-            }
-        } else {
-            DB::table('transactions')
-            ->where('order_id', $orderId)
-            ->update([
-                'receipt_fullPayment' => $request->file('image')->store('payment', 'public'),
-                'bank' => $request->bank,
-                'name' => $request->name,
-                'type'=> $type
-            ]);
+                //Pay again
+            }elseif($transaction){
+                if ($type == 'Down Payment') {
+                    DB::table('transactions')
+                    ->where('order_id', $orderId)
+                    ->update([
+                        'receipt_downPayment' => $request->file('image')->store('payment', 'public'),
+                        'bank' => $request->bank,
+                        'name' => $request->name,
+                        'type'=> $type
+                    ]);
 
-            DB::table('orders')
-            ->where('id', $orderId)
-            ->update([
-                'status' => $type
-            ]);
-        }
+                }else{
+                    DB::table('transactions')
+                    ->where('order_id', $orderId)
+                    ->update([
+                        'receipt_fullPayment' => $request->file('image')->store('payment', 'public'),
+                        'bank' => $request->bank,
+                        'name' => $request->name,
+                        'type'=> $type
+                    ]);
+                }
+            }
         return redirect('/order')->with('message', 'Successfully Pay Order !');
     }
 }

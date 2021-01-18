@@ -50,8 +50,8 @@
                 </td>
                 <td>{{$orderItem->status}}</td>
                 <td class="text-center">
-                    @if($orderItem->status !='Waiting'&&$orderItem->status !='Accepted'&&$orderItem->status
-                    !='Requested')
+                    @if($orderItem->status =='Down Payment' || $orderItem->status =='Accepted Down Payment'||
+                    $orderItem->status =='Full Payment'||$orderItem->status =='Completed')
                     <input type="button" value="Confirm" class="btn btn-success" data-toggle="modal"
                         data-target="#dpModal{{$orderItem->id}}" />
                     @else
@@ -108,12 +108,14 @@
                         </div>
                         <div class="modal-body text-center">
                             <p class="mb-1 font-weight-bold">Receipt</p>
-                            @if($orderItem->transaction)
+                            @if($orderItem->transaction->receipt_downPayment)
                             <div>
                                 <img class="round-border"
                                     src="{{ asset('/storage/'.$orderItem->transaction->receipt_downPayment) }}" alt=""
                                     style="max-height: 600px; max-width: 300px;">
                             </div>
+                            @else
+                            <p>No Payment</p>
                             @endif
                         </div>
                         <div class="modal-footer ">
@@ -148,12 +150,14 @@
                         @csrf
                         <div class="modal-body text-center">
                             <p class="mb-1 font-weight-bold">Receipt</p>
-                            @if($orderItem->transaction)
+                            @if($orderItem->transaction->receipt_fullPayment)
                             <div>
                                 <img class="round-border"
                                     src="{{ asset('/storage/'.$orderItem->transaction->receipt_fullPayment) }}" alt=""
                                     style="max-height: 600px; max-width: 300px;">
                             </div>
+                            @else
+                            <p>No Payment</p>
                             @endif
                         </div>
                         <div class="modal-footer ">

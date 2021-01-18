@@ -6,6 +6,7 @@ use App\Product;
 use App\Seller;
 use Auth;
 use App\ImageList;
+use App\Order;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use phpDocumentor\Reflection\Types\Null_;
@@ -194,12 +195,14 @@ class ProductController extends Controller
         }
         $compare = session()->get('compare');
 
+        $transaction=Order::where('product_id',$product->id)->where('status','Completed')->count();
+
         if (!$compare) {
             $compare = [
                 $productId => [
                     'product_id'=>$product->id,
                     'seller_id'=>$product->seller->id,
-                    'completed_transaction'=>$product->order->transaction?$product->order->transaction->count():0,
+                    'completed_transaction'=>$transaction,
                     'image'=> $product->image,
                     "name" => $product->name,
                     "seller_name" => $product->seller->business_name,
@@ -207,11 +210,9 @@ class ProductController extends Controller
                     "feature" => $product->features,
                     "city"=>$product->seller->city,
                     "rating"=>$product->seller->final_rating,
-                    "transaction"=>$product->seller->orders
                 ]
         ];
             session()->put('compare', $compare);
-            // dd(session()->get('compare'));
             return redirect()->back()->with('message', 'Product added to compare successfully!');
         }
 
@@ -222,6 +223,7 @@ class ProductController extends Controller
             $compare[$productId] = [
             'product_id'=>$product->id,
             'seller_id'=>$product->seller->id,
+            'completed_transaction'=>$transaction,
             'image'=> $product->image,
             "name" => $product->name,
             "seller_name" => $product->seller->business_name,

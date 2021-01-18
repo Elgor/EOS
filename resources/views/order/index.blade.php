@@ -62,7 +62,7 @@
                         <a class="btn btn-danger" href="{{route('order.delete', $orderItem->id) }}" role="button">
                             Delete</a>
                         @endif
-                        @if($orderItem->status == 'Completed')
+                        @if($orderItem->status == 'Completed' && !$orderItem->rating)
                         <a class="btn btn-success" href="{{ url('/rating/'.$orderItem->seller_id.'/'.$orderItem->id) }}"
                             role="button">
                             Rate</a>
