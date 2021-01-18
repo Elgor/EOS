@@ -203,8 +203,8 @@ class SellerController extends Controller
     }
 
     public function filter(Request $request){
-        $sellers = Seller::where('city', 'like', $request->city)
-        ->where('final_rating', '<', $request->rating)
+        $sellers = Seller::where('final_rating', '<', $request->rating)
+        ->where('city', 'like', $request->city)
         ->where('category', 'like', $request->category)
         ->paginate(4);
 

@@ -29,6 +29,7 @@
             <div class="form-group mr-sm-4">
                 <label class="form-group mr-2" for="city">City</label>
                 <select style="width:150px" class="form-control" id="city" name="city">
+                    <option value="%">Any</option>
                     <option value="Jakarta">Jakarta</option>
                     <option value="Bandung">Bandung</option>
                     <option value="Bekasi">Bekasi</option>
@@ -39,6 +40,7 @@
             <div class="form-group mr-sm-2">
                 <label class="form-group mr-2" for="city">Category</label>
                 <select style="width:150px" class="form-control" id="category" name="category">
+                    <option value="%">Any</option>
                     <option value="Event Organizer">Event Organizer</option>
                     <option value="Catering">Catering</option>
                     <option value="MC">MC</option>
