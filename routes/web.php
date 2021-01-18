@@ -25,6 +25,7 @@ Route::get('/home/filter', 'ProductController@filter')->name('product-filter');
 Route::get('/seller', 'SellerController@index')->name('seller.index');
 Route::get('/seller-detail/{sellerId}', 'SellerController@detail')->name('seller.detail');
 Route::get('/seller/search', 'SellerController@search')->name('seller-search');
+Route::get('/seller/filter', 'SellerController@filter')->name('seller.filter');
 
 //MESSAGE
 Route::get('/message', 'MessageController@index')->name('message.index');

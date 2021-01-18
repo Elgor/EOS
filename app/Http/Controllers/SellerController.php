@@ -201,4 +201,17 @@ class SellerController extends Controller
             return view('seller.index', compact('sellers'));
         }
     }
+
+    public function filter(Request $request){
+        $sellers = Seller::where('city', 'like', $request->city)
+        ->where('final_rating', '<', $request->rating)
+        ->where('category', 'like', $request->category)
+        ->paginate(4);
+
+        if ($sellers->isEmpty()) {
+            return $this->noDataSearch();
+        } else {
+            return view('seller.index', compact('sellers'));
+        }
+    }
 }

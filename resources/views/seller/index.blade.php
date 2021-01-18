@@ -15,23 +15,35 @@
         </form>
     </div>
     <div class="d-flex flex-row-reverse m-3 justify-content-between">
-        <form class="form-inline">
+        <form class="form-inline" action="{{ route('seller.filter') }}" method="GET">
             <div class="form-group mr-sm-4">
-                <label class="form-group mr-2" for="price">Rating</label>
-                <select style="width:150px" class="form-control" id="price" name="price">
-                    <option>All</option>
+                <label class="form-group mr-2" for="rating">Rating</label>
+                <select style="width:150px" class="form-control" id="rating" name="rating">
+                    <option value="5">5</option>
+                    <option value="4">4</option>
+                    <option value="3">3</option>
+                    <option value="2">2</option>
+                    <option value="1">1</option>
                 </select>
             </div>
             <div class="form-group mr-sm-4">
                 <label class="form-group mr-2" for="city">City</label>
                 <select style="width:150px" class="form-control" id="city" name="city">
-                    <option>All</option>
+                    <option value="Jakarta">Jakarta</option>
+                    <option value="Bandung">Bandung</option>
+                    <option value="Bekasi">Bekasi</option>
+                    <option value="Bogor">Bogor</option>
+                    <option value="Depok">Depok</option>
                 </select>
             </div>
             <div class="form-group mr-sm-2">
                 <label class="form-group mr-2" for="city">Category</label>
                 <select style="width:150px" class="form-control" id="category" name="category">
-                    <option>All</option>
+                    <option value="Event Organizer">Event Organizer</option>
+                    <option value="Catering">Catering</option>
+                    <option value="MC">MC</option>
+                    <option value="Sound System">Sound System</option>
+                    <option value="Entertainment">Entertainment</option>
                 </select>
             </div>
             <button class="btn btn-outline-success mt-2 mt-md-0" type="submit">Filter</button>
