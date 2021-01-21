@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\EventPlan;
 use Auth;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class EventPlanController extends Controller
 {
@@ -29,6 +30,26 @@ class EventPlanController extends Controller
         //
     }
 
+     /**
+     * Get a validator for an incoming registration request.
+     *
+     * @param  array  $data
+     * @return \Illuminate\Contracts\Validation\Validator
+     */
+    protected function validator(array $data)
+    {
+        return Validator::make($data, [
+            'eventName' => ['required', 'string', 'max:255', 'min:3'],
+            'eventType' => ['required', 'string'],
+            'date' => ['required'],
+            'startTime' => ['required'],
+            'endTime' => ['required','after:startTime'],
+            'city'=>['required'],
+            'buildingAddress'=>['max:255'],
+            'description'=>['required','max:255', 'min:3']
+        ]);
+    }
+
     /**
      * Store a newly created resource in storage.
      *
@@ -37,11 +58,12 @@ class EventPlanController extends Controller
      */
     public function store(Request $request)
     {
-        // dd($request);
+        // dd();
+        $this->validator($request->all())->validate();
         $eventPlan= new Eventplan;
         $eventPlan->eventname=$request->input('eventName');
         $eventPlan->eventType=$request->input('eventType');
-        $eventPlan->date=$request->input('date');
+        $eventPlan->date=\Carbon\Carbon::createFromFormat('d/m/Y', $request->input('date'))->format('Y-m-d');
         $eventPlan->startTime=$request->input('startTime');
         $eventPlan->endTime=$request->input('endTime');
         $eventPlan->city=$request->input('city');

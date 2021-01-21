@@ -22,7 +22,7 @@ class CreateEventPlansTable extends Migration
             $table->time('startTime');
             $table->time('endTime');
             $table->string('city');
-            $table->string('buildingAddress');
+            $table->string('buildingAddress')->nullable();
             $table->string('description');
             $table->unsignedBigInteger('user_Id');
         });

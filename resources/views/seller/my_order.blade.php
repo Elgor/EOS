@@ -108,12 +108,16 @@
                         </div>
                         <div class="modal-body text-center">
                             <p class="mb-1 font-weight-bold">Receipt</p>
+                            @if($orderItem->transaction)
                             @if($orderItem->transaction->receipt_downPayment)
                             <div>
                                 <img class="round-border"
                                     src="{{ asset('/storage/'.$orderItem->transaction->receipt_downPayment) }}" alt=""
                                     style="max-height: 600px; max-width: 300px;">
                             </div>
+                            @else
+                            <p>No Down Payment</p>
+                            @endif
                             @else
                             <p>No Payment</p>
                             @endif
@@ -150,12 +154,16 @@
                         @csrf
                         <div class="modal-body text-center">
                             <p class="mb-1 font-weight-bold">Receipt</p>
+                            @if($orderItem->transaction)
                             @if($orderItem->transaction->receipt_fullPayment)
                             <div>
                                 <img class="round-border"
                                     src="{{ asset('/storage/'.$orderItem->transaction->receipt_fullPayment) }}" alt=""
                                     style="max-height: 600px; max-width: 300px;">
                             </div>
+                            @else
+                            <p>No Full Payment</p>
+                            @endif
                             @else
                             <p>No Payment</p>
                             @endif

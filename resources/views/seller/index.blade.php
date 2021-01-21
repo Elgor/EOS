@@ -57,15 +57,16 @@
         @if ($sellers->isEmpty()==false)
         @foreach ($sellers as $seller)
         <div class="col-3 d-flex p-2">
-
             <div class="card mb-4" style="height: 450px">
                 <a href="{{route('seller.detail',$seller->id)}}"><img class="card-img-top"
                         style="width: 100%; height:210px" src="{{ asset('/storage/'.$seller->profile_picture) }}"
                         alt="Card image cap"></a>
                 <div class="card-body pb-0">
                     <div class="card-title">
-                        <h4>{{ $seller->business_name }}</h4>
+                        <h4 class="m-0">{{ $seller->business_name }}</h4>
                         <div class="text-secondary">
+                            <p class="m-0">{{ $seller->category }}</p>
+
                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                                 class="bi bi-geo-alt" viewBox="0 0 16 16">
                                 <path
@@ -80,8 +81,6 @@
                     </div>
                 </div>
                 <div class="card-footer d-flex justify-content-center">
-                    <!-- <span class="float-left pr-2"><i class="text-warning fa fa-star"
-                            style="font-size: 20px;"></i></span>{{ $seller->final_rating }} -->
                     <div class="">
                         <p class="d-inline font-weight-bold" style="font-size: 18px;">
                             {{ number_format((float)$seller->final_rating,1,'.','') }}

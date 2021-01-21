@@ -124,7 +124,8 @@
                 </div>
                 <div>
                     <p class="mb-1 font-weight-bold">Transaction Date</p>
-                    <p>{{$order->transaction->updated_at}}</p>
+                    <p>{{date('d-m-Y, H:i:s', strtotime($order->transaction->updated_at))}}</p>
+
                 </div>
                 <div>
                     <p class="mb-1 font-weight-bold">Name on Card</p>

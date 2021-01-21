@@ -24,6 +24,7 @@
         @if($ratings->count() >0)
         <thead>
             <tr>
+                <th>Order</th>
                 <th class="text-center align-middle">Date</th>
                 <th style="max-width: 50px" class="text-center align-middle">Customer</th>
                 <th style="max-width: 50px" class="text-center align-middle">Rating</th>
@@ -33,7 +34,8 @@
         <tbody>
             @foreach ($ratings as $rating)
             <tr>
-                <td class="text-center align-middle" style="max-width: 70px">
+                <td><a href="{{ route('orders.show',$rating->order->id) }}">Link</a></td>
+                <td style="max-width: 110px">
                     {{\Carbon\Carbon::parse( $rating->created_at)->format('l, j F H:i')}}
                 </td>
                 <td>{{$rating->user->name }}</td>
