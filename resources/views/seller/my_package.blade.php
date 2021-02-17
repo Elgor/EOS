@@ -24,7 +24,8 @@
                 <td>Rp {{number_format($product->price,0,',','.')}}</td>
                 <td>@foreach($product->features as $feature)
                     <p>{{ $feature }}</p>
-                    @endforeach</td>
+                    @endforeach
+                </td>
                 <td class="text-center align-middle">
                     <a class=" btn btn-danger" href="{{ route('product.delete',$product->id) }}" role="button">
                         Delete
@@ -47,26 +48,41 @@
                 <label class="col-md-3 col-form-label text-md-left control-label" for="packageName">Package
                     Name</label>
                 <div class="col-md-7">
-                    <input class="form-control" type="text" name="packageName">
+                    <input class="form-control  @error('packageName') is-invalid @enderror" type="text" name="packageName" value="{{ old('packageName') }}" required autocomplete="packageName" autofocus>
+                    @error('packageName')
+                    <span class="invalid-feedback" role="alert">
+                        <strong>{{ $message }}</strong>
+                    </span>
+                    @enderror
                 </div>
             </div>
             <div class="form-group row required">
                 <label class="col-md-3 col-form-label text-md-left control-label" for="price">Price
                 </label>
                 <div class="col-md-7">
-                    <input class="form-control" type="text" name="price">
+                    <input class="form-control @error('price') is-invalid @enderror" type="text" name="price" value="{{ old('price') }}" required autocomplete="price" autofocus>
+                    @error('price')
+                    <span class="invalid-feedback" role="alert">
+                        <strong>{{ $message }}</strong>
+                    </span>
+                    @enderror
                 </div>
             </div>
             <div class="form-group row required">
                 <label class="col-md-3 col-form-label text-md-left control-label" for="description">Description</label>
                 <div class="col-md-7">
-                    <textarea class="form-control" placeholder="Description" name="description" rows="3"></textarea>
+                    <textarea class="form-control @error('description') is-invalid @enderror" placeholder="Description" name="description" rows="3" required autocomplete="description" autofocus>{{ old('description') }}</textarea>
+                    @error('description')
+                    <span class="invalid-feedback" role="alert">
+                        <strong>{{ $message }}</strong>
+                    </span>
+                    @enderror
                 </div>
             </div>
             <div class="form-group row required">
                 <label class="col-md-3 col-form-label text-md-left control-label" for="price">Feature</label>
                 <div class="col-md-7 ">
-                    <select class="selectpicker" multiple data-width="fit" data-live-search="true" name="features[]">
+                    <select class="selectpicker @error('features') is-invalid @enderror" multiple data-width="fit" data-live-search="true" name="features[]" required>
                         <option value="1 Hour Photoshoot">1 Hour Photoshoot</option>
                         <option value="2 Hour Photoshoot">2 Hour Photoshoot</option>
                         <option value="1 Photographer">1 Photographer</option>
@@ -82,18 +98,33 @@
                         <option value="2 Day Photo Session">2 Day Photo Session</option>
                         <option value="Dekorasi meja">Dekorasi meja</option>
                     </select>
+                    @error('features')
+                    <span class="invalid-feedback" role="alert">
+                        <strong>{{ $message }}</strong>
+                    </span>
+                    @enderror
                 </div>
             </div>
             <div class="form-group row required">
                 <label class="col-md-3 col-form-label text-md-left control-label">Package Picture</label>
                 <div class="col-md-7">
-                    <input type="file" name="image">
+                    <input type="file" name="image" class="@error('image') is-invalid @enderror" required>
+                    @error('image')
+                    <span class="invalid-feedback" role="alert">
+                        <strong>{{ $message }}</strong>
+                    </span>
+                    @enderror
                 </div>
             </div>
             <div class="form-group row required">
                 <label class="col-md-3 col-form-label text-md-left control-label">Upload Images</label>
                 <div class="col-md-7">
-                    <input type="file" name="imageList[]" id="images" multiple="multiple">
+                    <input type="file" name="imageList[]" id="images" multiple="multiple" class="@error('imageList') is-invalid @enderror" required>
+                    @error('imageList')
+                    <span class="invalid-feedback" role="alert">
+                        <strong>{{ $message }}</strong>
+                    </span>
+                    @enderror
                 </div>
             </div>
 

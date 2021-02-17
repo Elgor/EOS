@@ -47,6 +47,15 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
+          $this->validate($request,[
+            'packageName' => 'required|string|min:5|max:255',
+            'price' => 'required|regex:/^([0-9\s\-\+\(\)]*)$/|min:4',
+            'description' => 'required|string|min:15',
+            'image' => 'required',
+            'features' => 'required',
+            'imageList' => 'required',
+        ]);
+
         $product = new Product;
         $product->name = $request->input('packageName');
         $product->price = $request->input('price');

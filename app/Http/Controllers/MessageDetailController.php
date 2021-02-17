@@ -35,6 +35,13 @@ class MessageDetailController extends Controller
      */
     public function store(Request $request)
     {
+
+        $this->validate($request, [
+            'text' => 'required',
+        ], [
+            'text.required' => 'Please Insert Your Message !',
+        ]);
+
         $messageDetail = new MessageDetail;
         $messageDetail->text = $request->input('text');
         $messageDetail->sender = $request->input('sender');

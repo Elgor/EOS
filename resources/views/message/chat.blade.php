@@ -6,7 +6,8 @@
         <ol class="breadcrumb bg-transparent p-0">
             <li class="breadcrumb-item"><a href="{{ url('/message') }}">Message</a></li>
             <li class="breadcrumb-item active" aria-current="page">
-                {{isset(Auth::user()->id) ? $message->seller->business_name: $message->user->name}}</li>
+                {{isset(Auth::user()->id) ? $message->seller->business_name: $message->user->name}}
+            </li>
         </ol>
     </nav>
 </div>
@@ -40,21 +41,25 @@
                     @if($chat->sender == Auth::user()->name) --}}
                 <p class="mb-2 text-right">{{$chat->text}}</p>
                 <p class="text-secondary mb-0 float-right" style="font-size: 10px">
-                    {{\Carbon\Carbon::parse($chat->created_at)->format('H:i')}}</p>
+                    {{\Carbon\Carbon::parse($chat->created_at)->format('H:i')}}
+                </p>
                 {{-- @else
                     <p class="mb-2">{{$chat->text}}</p>
                 <p class="text-secondary mb-0" style="font-size: 10px">
-                    {{\Carbon\Carbon::parse($chat->created_at)->format('H:i')}}</p>
+                    {{\Carbon\Carbon::parse($chat->created_at)->format('H:i')}}
+                </p>
                 @endif
                 @elseif(Auth::guard('seller'))
                 @if($chat->sender == Auth::guard('seller')->user()->business_name)
                 <p class="mb-2 text-right">{{$chat->text}}</p>
                 <p class="text-secondary mb-0 float-right" style="font-size: 10px">
-                    {{\Carbon\Carbon::parse($chat->created_at)->format('H:i')}}</p>
+                    {{\Carbon\Carbon::parse($chat->created_at)->format('H:i')}}
+                </p>
                 @else
                 <p class="mb-2">{{$chat->text}}</p>
                 <p class="text-secondary mb-0" style="font-size: 10px">
-                    {{\Carbon\Carbon::parse($chat->created_at)->format('H:i')}}</p>
+                    {{\Carbon\Carbon::parse($chat->created_at)->format('H:i')}}
+                </p>
                 @endif
                 @endif --}}
             </div>
@@ -68,7 +73,7 @@
             @csrf
             <div class="input-group mb-3">
                 {{-- <input type="text" class="form-control" type="text"> --}}
-                <textarea class="form-control" name="text" rows="2"></textarea>
+                <textarea class="form-control  @error('text') is-invalid @enderror" name="text" rows="2" required></textarea>
                 @if(Auth::user())
                 <input value="{{Auth::user()->name}}" name="sender" type="hidden">
                 @elseif(Auth::guard('seller'))
@@ -78,6 +83,11 @@
                 <div class="input-group-append">
                     <button class="btn btn-outline-secondary text-left" type="submit">Submit</button>
                 </div>
+                @error('text')
+                <span class="invalid-feedback" role="alert">
+                    <strong>{{ $message }}</strong>
+                </span>
+                @enderror
             </div>
         </form>
     </div>

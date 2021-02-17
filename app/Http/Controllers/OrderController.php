@@ -39,13 +39,30 @@ class OrderController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
+  
     public function store(Request $request)
     {
+        if ($request->negotiation_price) {
+            $this->validate($request, [
+                'event_plan_id' => 'required',
+                'negotiation_price' => 'regex:/^([0-9\s\-\+\(\)]*)$/|min:4',
+            ], [
+                'event_plan_id.required' => 'Please Select Event Plan or Create Event Plan First !',
+            ]);
+        } else {
+            $this->validate($request, [
+                'event_plan_id' => 'required',
+
+            ], [
+                'event_plan_id.required' => 'Please Select Event Plan or Create Event Plan First !',
+            ]);
+        }
+
         $order = new Order;
         $order->date = Carbon::now();
         $order->negotiation_price = $request->input('negotiation_price');
         $order->product_id = $request->input('product_id');
-        $order->event_plan_id =$request->input('event_plan_id');
+        $order->event_plan_id = $request->input('event_plan_id');
         $order->seller_id = $request->input('seller_id');
         $order->user_id = Auth::id();
         $order->save();
@@ -104,8 +121,8 @@ class OrderController extends Controller
     public function sellerOrders()
     {
         $orderItems = Order::where('seller_id', '=', Auth::guard('seller')->id())
-        ->where('status', '!=', 'Waiting')
-        ->get();
+            ->where('status', '!=', 'Waiting')
+            ->get();
         return view('seller.my_order', compact('orderItems'));
     }
 

@@ -53,7 +53,7 @@
                         Name</label>
                     <div class="col-md-4">
                         <input class="form-control @error('eventName') is-invalid @enderror" type="text"
-                            name="eventName">
+                            name="eventName" required>
                         @error('eventName')
                         <span class="invalid-feedback" role="alert">
                             <strong>{{ $message }}</strong>
@@ -65,7 +65,7 @@
                     <label class="col-md-3 col-form-label text-md-left control-label" for="eventType">Event
                         Type</label>
                     <div class="col-md-4">
-                        <select class="form-control @error('eventType') is-invalid @enderror" name="eventType">
+                        <select class="form-control @error('eventType') is-invalid @enderror" name="eventType" required>
                             <option value="">Select event type</option>
                             <option value="Business">Business</option>
                             <option value="Pentas Seni">Pentas Seni</option>
@@ -83,7 +83,7 @@
                     <label class="col-md-3 col-form-label text-md-left control-label" for="date">Date</label>
                     <div class="col-md-4">
                         <input id="datepicker" class="form-control @error('date') is-invalid @enderror" type="text"
-                            name='date' placeholder="DD/MM/YYYY">
+                            name='date' placeholder="DD/MM/YYYY" required>
                         @error('date')
                         <span class="invalid-feedback" role="alert">
                             <strong>{{ $message }}</strong>
@@ -96,7 +96,7 @@
                         Time</label>
                     <div class="col-md-4">
                         <input class="form-control startTime @error('startTime') is-invalid @enderror" type="text"
-                            name="startTime" placeholder="hh/mm" id="startTime">
+                            name="startTime" placeholder="hh/mm" id="startTime" required>
                         @error('startTime')
                         <span class="invalid-feedback" role="alert">
                             <strong>{{ $message }}</strong>
@@ -109,7 +109,7 @@
                         Time</label>
                     <div class="col-md-4">
                         <input class="form-control endTime @error('endTime') is-invalid @enderror" type="text"
-                            name="endTime" placeholder="hh/mm" id="endTime" disabled />
+                            name="endTime" placeholder="hh/mm" id="endTime" disabled required/>
                         @error('endTime')
                         <span class="invalid-feedback" role="alert">
                             <strong>{{ $message }}</strong>
@@ -120,7 +120,7 @@
                 <div class="form-group row required">
                     <label class="col-md-3 col-form-label text-md-left control-label" for="city">City</label>
                     <div class="col-md-4">
-                        <select class="form-control @error('city') is-invalid @enderror" name="city">
+                        <select class="form-control @error('city') is-invalid @enderror" name="city" required>
                             <option value="">Select city</option>
                             <option value="Jakarta">Jakarta</option>
                             <option value="Bandung">Bandung</option>
@@ -153,7 +153,7 @@
                         for="description">Description</label>
                     <div class="col-md-7">
                         <textarea class="form-control @error('description') is-invalid @enderror"
-                            placeholder="Description" name="description" rows="3"></textarea>
+                            placeholder="Description" name="description" rows="3" required></textarea>
                         @error('description')
                         <span class="invalid-feedback" role="alert">
                             <strong>{{ $message }}</strong>
