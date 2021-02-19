@@ -168,7 +168,7 @@ class SellerController extends Controller
     public function authenticate(Request $request)
     {
         $findSeller = Seller::where('email', $request->email)->first();
-        if ($findSeller) {
+        if(Hash::check($request->password, $findSeller->password)) {
             // Authentication passed...
             Auth::guard('seller')->login($findSeller);
 
