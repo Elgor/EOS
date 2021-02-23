@@ -44,6 +44,25 @@ class SellerController extends Controller
      */
     public function store(Request $request)
     {
+        $validator = Validator::make($request->all(), array(
+            'business_name' => 'required|string|max:255|unique:sellers',
+            'email' => 'required|string|email|max:255|unique:sellers',
+            'password' => 'required|string|min:8|confirmed',
+            'category' => 'required',
+            'city' => 'required',
+            'description' => 'required|min:15',
+            'address' => 'required|min:15',
+            'profile_picture' => 'required|mimes:jpg,jpeg,png',
+            'phone_number' => 'required|regex:/^([0-9\s\-\+\(\)]*)$/|min:10|max:12',
+            'no_rekening' => 'required|regex:/^([0-9\s\-\+\(\)]*)$/|min:10',
+
+        ));
+        if ($validator->fails()) {
+            return redirect('/register/seller')
+                ->withErrors($validator)
+                ->withInput();
+        }
+
         $seller = new Seller;
         $seller->business_name = $request->input('business_name');
         $seller->email = $request->input('email');

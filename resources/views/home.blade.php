@@ -13,27 +13,10 @@
         <form class="form-inline" action="{{ route('product-filter') }}" method="GET">
             <div class="form-group mr-sm-4">
                 <label class="form-group mr-2" for="price">Price</label>
-                <!-- <select style="width:150px" class="form-control" id="price" name="price" placehol>
-                    <option value="0">Min</option>
-                    <option value="1">1 Jt</option>
-                    <option value="2">10 - 50 Jt</option>
-                    <option value="3">50-100 Jt</option>
-                    <option value="4">> 100 Jt</option>
-                </select> -->
-                <input class="form-control mr-2" type="search" placeholder="Min" aria-label="Min" name="min">
+                <input class="form-control mr-2" placeholder="Min" aria-label="Min" name="min" type="number">
 
-                <!-- </div>
-            <div class="form-group mr-sm-2"> -->
                 <label class="form-group mx-2">-</label>
-                <!-- <select style="width:150px" class="form-control" id="city" name="city">
-                    <option value="0">All</option>
-                    <option value="Jakarta">Jakarta</option>
-                    <option value="Tanggerang">Tanggerang</option>
-                    <option value="Bekasi">Bekasi</option>
-                    <option value="Bogor">Bogor</option>
-                    <option value="Depok">Depok</option>
-                </select> -->
-                <input class="form-control" type="search" placeholder="Max" aria-label="Max" name="max">
+                <input class="form-control" placeholder="Max" aria-label="Max" name="max" type="number">
 
             </div>
             <button class="btn btn-outline-success mt-2 mt-md-0" type="submit">Filter</button>
@@ -69,6 +52,7 @@
         </div>
         @endforeach
         @else
+        <a href="{{ route('home') }}">Back</a>
         <h4 class="p-3">No Package</h4>
         @endif
     </div>
@@ -131,7 +115,6 @@
 
     </div>
 </div>
-
 @else
 <div class="container">
     <h2>Welcome, Admin !</h2>

@@ -19,11 +19,11 @@
             <div class="form-group mr-sm-4">
                 <label class="form-group mr-2" for="rating">Rating</label>
                 <select style="width:150px" class="form-control" id="rating" name="rating">
-                    <option value="5">5</option>
-                    <option value="4">4</option>
-                    <option value="3">3</option>
-                    <option value="2">2</option>
-                    <option value="1">1</option>
+                    <option value="5">{{"<5"}}</option>
+                    <option value="4">{{"<4"}}</option>
+                    <option value="3">{{"<3"}}</option>
+                    <option value="2">{{"<2"}}</option>
+                    <option value="1">{{"1"}}</option>
                 </select>
             </div>
             <div class="form-group mr-sm-4">
@@ -54,7 +54,7 @@
     <h4 class="d-flex">SELLER</h4>
     <hr>
     <div class="row">
-        @if ($sellers->isEmpty()==false)
+        @if ($sellers->isEmpty()==false )
         @foreach ($sellers as $seller)
         <div class="col-3 d-flex p-2">
             <div class="card mb-4" style="height: 450px">
@@ -93,12 +93,12 @@
         </div>
         @endforeach
         @else
+        <a href="{{ route('seller.index') }}">Back</a>
         <h4 class="p-3">No Seller</h4>
         @endif
     </div>
     <div class="d-flex justify-content-center">
         {{ $sellers->links() }}
-
     </div>
 </div>
 @endsection
