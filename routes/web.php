@@ -45,7 +45,7 @@ Route::get('/wishlist/delete/{productId}', 'WishlistController@destroy')->name('
 
 Route::get('/event-plan', 'EventPlanController@index')->name('eventplan.index')->middleware('auth');
 Route::post('/event-plan', 'EventPlanController@store')->name('eventplan.store')->middleware('auth');
-Route::get('/event-plan/delete/{eventPlanId}', 'EventPlanController@destroy')->name('eventPlan.delete');
+Route::post('/event-plan/delete/{eventPlanId}', 'EventPlanController@destroy')->name('eventPlan.delete');
 
 
 Route::get('/customer/profile/{customerId}', 'CustomerController@show')->name('customer.show')->middleware('auth');

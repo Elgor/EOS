@@ -1,9 +1,7 @@
 @extends('layouts.app')
 @section('content')
-<script type="text/javascript"
-    src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/js/bootstrap-datepicker.min.js"></script>
-<link rel="stylesheet"
-    href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/css/bootstrap-datepicker3.css" />
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/js/bootstrap-datepicker.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/css/bootstrap-datepicker3.css" />
 
 <script src="//cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.js"></script>
 <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.css">
@@ -25,15 +23,21 @@
         </thead>
         <tbody>
             @foreach ($eventPlans as $eventPlan)
+
             <tr>
                 <td>{{ $eventPlan->eventName }}</td>
                 <td>{{ $eventPlan->eventType }}</td>
                 <td>{{ date('d-m-Y', strtotime($eventPlan->date)) }}</td>
                 <td>{{ date('H:i',strtotime($eventPlan->startTime)) }}</td>
                 <td>{{ date('H:i',strtotime($eventPlan->endTime)) }}</td>
-                <td class="text-center align-middle"><a class=" btn btn-danger"
+                <td class="text-center align-middle">
+                    <!-- <a class=" btn btn-danger"
                         href="{{ route('eventPlan.delete',$eventPlan->id) }}" role="button">
-                        Delete</a>
+                        Delete</a> -->
+                    <form action="{{ route('eventPlan.delete',$eventPlan->id) }}" method="POST">
+                        @csrf
+                        <input type="submit" value="Delete" class=" btn btn-danger" <?php if ($eventPlan->orders->count() > 0) { ?> disabled <?php   } ?> />
+                    </form>
                 </td>
             </tr>
             @endforeach
@@ -52,8 +56,7 @@
                     <label class="col-md-3 col-form-label text-md-left control-label" for="eventName">Event
                         Name</label>
                     <div class="col-md-4">
-                        <input class="form-control @error('eventName') is-invalid @enderror" type="text"
-                            name="eventName" required>
+                        <input class="form-control @error('eventName') is-invalid @enderror" type="text" name="eventName" required>
                         @error('eventName')
                         <span class="invalid-feedback" role="alert">
                             <strong>{{ $message }}</strong>
@@ -82,8 +85,7 @@
                 <div class="form-group row required">
                     <label class="col-md-3 col-form-label text-md-left control-label" for="date">Date</label>
                     <div class="col-md-4">
-                        <input id="datepicker" class="form-control @error('date') is-invalid @enderror" type="text"
-                            name='date' placeholder="DD/MM/YYYY" required>
+                        <input id="datepicker" class="form-control @error('date') is-invalid @enderror" type="text" name='date' placeholder="DD/MM/YYYY" required>
                         @error('date')
                         <span class="invalid-feedback" role="alert">
                             <strong>{{ $message }}</strong>
@@ -95,8 +97,7 @@
                     <label class="col-md-3 col-form-label text-md-left control-label" for="startTime">Start
                         Time</label>
                     <div class="col-md-4">
-                        <input class="form-control startTime @error('startTime') is-invalid @enderror" type="text"
-                            name="startTime" placeholder="hh/mm" id="startTime" required>
+                        <input class="form-control startTime @error('startTime') is-invalid @enderror" type="text" name="startTime" placeholder="hh/mm" id="startTime" required>
                         @error('startTime')
                         <span class="invalid-feedback" role="alert">
                             <strong>{{ $message }}</strong>
@@ -108,8 +109,7 @@
                     <label class="col-md-3 col-form-label text-md-left control-label" for="endTime">End
                         Time</label>
                     <div class="col-md-4">
-                        <input class="form-control endTime @error('endTime') is-invalid @enderror" type="text"
-                            name="endTime" placeholder="hh/mm" id="endTime" disabled required/>
+                        <input class="form-control endTime @error('endTime') is-invalid @enderror" type="text" name="endTime" placeholder="hh/mm" id="endTime" disabled required />
                         @error('endTime')
                         <span class="invalid-feedback" role="alert">
                             <strong>{{ $message }}</strong>
@@ -139,8 +139,7 @@
                     <label class="col-md-3 col-form-label text-md-left" for="Building Adress">Building
                         Adress</label>
                     <div class="col-md-7">
-                        <textarea class="form-control @error('buildingAddress') is-invalid @enderror"
-                            placeholder="Address" name="buildingAddress" rows="3"></textarea>
+                        <textarea class="form-control @error('buildingAddress') is-invalid @enderror" placeholder="Address" name="buildingAddress" rows="3"></textarea>
                         @error('buildingAddress')
                         <span class="invalid-feedback" role="alert">
                             <strong>{{ $message }}</strong>
@@ -149,11 +148,9 @@
                     </div>
                 </div>
                 <div class="form-group row required">
-                    <label class="col-md-3 col-form-label text-md-left control-label"
-                        for="description">Description</label>
+                    <label class="col-md-3 col-form-label text-md-left control-label" for="description">Description</label>
                     <div class="col-md-7">
-                        <textarea class="form-control @error('description') is-invalid @enderror"
-                            placeholder="Description" name="description" rows="3" required></textarea>
+                        <textarea class="form-control @error('description') is-invalid @enderror" placeholder="Description" name="description" rows="3" required></textarea>
                         @error('description')
                         <span class="invalid-feedback" role="alert">
                             <strong>{{ $message }}</strong>
@@ -173,12 +170,12 @@
     </div>
 </div>
 <script>
-    $(document).ready(function(){
+    $(document).ready(function() {
         var date = new Date();
-        date.setDate(date.getDate()-1);
-        var date_input=$('input[name="date"]');
-        var container=$('.bootstrap-iso form').length>0 ? $('.bootstrap-iso form').parent() : "body";
-        var options={
+        date.setDate(date.getDate() - 1);
+        var date_input = $('input[name="date"]');
+        var container = $('.bootstrap-iso form').length > 0 ? $('.bootstrap-iso form').parent() : "body";
+        var options = {
             format: 'dd/mm/yyyy',
             container: container,
             todayHighlight: true,
@@ -187,19 +184,19 @@
         };
         date_input.datepicker(options);
 
-        function time(){
+        function time() {
             $('input[name=endTime]').val("")
-            if($('input[name=startTime]').val()){
-                var minTime=$('input[name=startTime]').val();
+            if ($('input[name=startTime]').val()) {
+                var minTime = $('input[name=startTime]').val();
                 console.log(minTime);
                 document.getElementById('endTime').disabled = false;
                 $('.endTime').timepicker({
                     timeFormat: 'HH:mm',
                     scrollbar: true,
                     interval: 60,
-                    minTime:minTime+1
+                    minTime: minTime + 1
                 });
-            }else{
+            } else {
                 document.getElementById('endTime').disabled = true;
             }
         }
@@ -207,7 +204,7 @@
             timeFormat: 'HH:mm',
             scrollbar: true,
             interval: 60,
-            change:time
+            change: time
         });
     })
 </script>
